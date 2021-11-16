@@ -1,2 +1,0 @@
-com/miaps/Application.java
- com.miaps.Application
