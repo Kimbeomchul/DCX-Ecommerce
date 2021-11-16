@@ -23,12 +23,26 @@ class ItemServicelmp implements ItemService {
         return userMapper.getItemIdList(item_code);
     }
 
-
     // 아이템 삭제
     @Override
-    public List<ItemDTO> deleteItem(String item_code) {
-        return userMapper.deleteItem(item_code);
+    public void deleteItem(String item_code) {
+        try{
+            userMapper.deleteItem(item_code);
+        }catch(Exception e){
+            System.out.println("Delete Error : " + e );
+        }
+
     }
 
+    //아이템 등록
+    @Override
+    public void addItem(String item_section, String item_title, String item_image, String item_content, String item_writer, String item_date, int item_price) {
+
+        try{
+            userMapper.addItem(item_section,item_title,item_image,item_content,item_writer,item_date,item_price);
+        }catch (Exception e){
+            System.out.println("Insert Error : "+ e);
+        }
+    }
 }
 

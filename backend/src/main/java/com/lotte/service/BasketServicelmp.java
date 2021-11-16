@@ -22,13 +22,23 @@ class BasketServicelmp implements BasketService {
     }
 
     @Override
-    public List<BasketDTO> deletebasket(String item_code, String member_id) {
-        return UserMapper.deletebasket(item_code, member_id);
+    public void deletebasket(String item_code, String member_id) {
+
+        try{
+            UserMapper.deletebasket(item_code, member_id);
+        }catch(Exception e){
+            System.out.println("Delete Error : " + e );
+        }
     }
 
     @Override
-    public List<BasketDTO> deleteAllbasket(String member_id) {
-        return UserMapper.deleteAllbasket(member_id);
+    public void deleteAllbasket(String member_id) {
+
+        try{
+            UserMapper.deleteAllbasket(member_id);
+        }catch(Exception e){
+            System.out.println("Delete Error : " + e );
+        }
     }
 
 

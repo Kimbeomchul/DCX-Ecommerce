@@ -20,7 +20,8 @@ public interface UserMapper {
     // 제목으로 책 검색
     List<ItemDTO> getItemIdList(String item_code);
     // 책 삭제
-    List<ItemDTO> deleteItem(String item_code);
+    void deleteItem(String item_code);
+    void addItem(String item_section, String item_title, String item_image, String item_content, String item_writer, String item_date, int item_price);
 
     //======================== 장바구니 ==============================//
 
@@ -29,8 +30,8 @@ public interface UserMapper {
     // 장바구니리스트 검색 ( id )
     List<BasketDTO> getBasketList(String member_id);
     // 장바구니 특정 아이템 삭제 ( id )
-    List<BasketDTO> deletebasket(String item_code , String member_id);
+    void deletebasket(String item_code , String member_id);
     // 장바구니 전체삭제
-    List<BasketDTO> deleteAllbasket(String member_id);
+    void deleteAllbasket(String member_id);
 
 }

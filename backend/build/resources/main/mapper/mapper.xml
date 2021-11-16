@@ -22,16 +22,21 @@
         SELECT * FROM basket WHERE member_id = #{member_id}
     </select>
 
+    <insert id="addItem">
+        INSERT INTO  item(item_section, item_title, item_image, item_content, item_writer, item_date, item_price)
+        VALUES       (#{item_section}, #{item_title}, #{item_image}, #{item_content}, #{item_writer} , #{item_date} ,#{item_price})
+    </insert>
+
     <delete id="deleteItem">
         DELETE FROM item WHERE item_code = #{item_code}
     </delete>
 
-    <delete id="deletebasket">
+    <delete id="deleteAllbasket">
         DELETE FROM basket WHERE member_id = #{member_id}
     </delete>
 
-    <delete id="deleteAllbasket">
-        DELETE FROM basket WHERE item_code = #{item_code}
+    <delete id="deletebasket">
+        DELETE FROM basket WHERE member_id = #{member_id} AND item_code = #{item_code}
     </delete>
 
 

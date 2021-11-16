@@ -30,14 +30,14 @@ public class BasketController {
 
     // 장바구니 특정 아이템 삭제
     @RequestMapping(value = "/dbasket", method = RequestMethod.DELETE)
-    public List<BasketDTO> deletebasket(@RequestParam(value="item_code") String item_code, @RequestParam(value="member_id") String member_id) {
-        return basketService.deletebasket(item_code,member_id);
+    public void deletebasket(@RequestParam(value="item_code") String item_code, @RequestParam(value="member_id") String member_id) {
+        basketService.deletebasket(item_code,member_id);
     }
 
     // 장바구니 전체 삭제
     @RequestMapping(value = "/dabasket", method = RequestMethod.DELETE)
-    public List<BasketDTO> deleteAllbasket(@RequestParam(value="member_id") String member_id) {
-        return basketService.deleteAllbasket(member_id);
+    public void deleteAllbasket(@RequestParam(value="member_id") String member_id) {
+        basketService.deleteAllbasket(member_id);
     }
 
     // 장바구니 아이템 추가 ?!?!?

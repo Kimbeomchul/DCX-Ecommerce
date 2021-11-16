@@ -31,14 +31,22 @@ public class ItemController {
     // 관리자용
     // 특정 아이템 삭제
     @RequestMapping(value = "/ditem", method = RequestMethod.DELETE)
-    public List<ItemDTO> deleteItem(@RequestParam(value="item_code") String item_code) {
-        return itemService.deleteItem(item_code);
+    public void deleteItem(@RequestParam(value="item_code") String item_code) {
+        itemService.deleteItem(item_code);
     }
 
-//    // 특정 아이템 등록
-//    @RequestMapping(value = "/aitem", method = RequestMethod.POST)
-//    public List<ItemDTO> addItem(@RequestParam(value="item_code") String item_code) {
-//        return itemService.addItem(item_code);
-//    }
+    // 특정 아이템 등록
+    @RequestMapping(value = "/aitem", method = RequestMethod.POST)
+    public void addItem(
+            @RequestParam(value="item_section") String item_section,
+            @RequestParam(value="item_title") String item_title,
+            @RequestParam(value="item_image") String item_image,
+            @RequestParam(value="item_content") String item_content,
+            @RequestParam(value="item_writer") String item_writer,
+            @RequestParam(value="item_date") String item_date,
+            @RequestParam(value="item_price") int item_price) {
+
+        itemService.addItem(item_section,item_title,item_image,item_content,item_writer,item_date,item_price);
+    }
 
 }
