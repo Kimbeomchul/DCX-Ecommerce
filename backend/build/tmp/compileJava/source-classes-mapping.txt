@@ -6,16 +6,14 @@ com/lotte/dto/UserDTO.java
  com.lotte.dto.UserDTO
 com/lotte/service/UserService.java
  com.lotte.service.UserService
-com/lotte/service/ItemService.java
- com.lotte.service.ItemService
-com/lotte/controller/UserController.java
- com.lotte.controller.UserController
 com/lotte/dto/ItemDTO.java
  com.lotte.dto.ItemDTO
-com/lotte/controller/ItemController.java
- com.lotte.controller.ItemController
 com/lotte/dto/BasketDTO.java
  com.lotte.dto.BasketDTO
+com/lotte/controller/UserController.java
+ com.lotte.controller.UserController
+com/lotte/service/ItemService.java
+ com.lotte.service.ItemService
 com/lotte/service/ItemServicelmp.java
  com.lotte.service.ItemServicelmp
 com/lotte/controller/BasketController.java
@@ -26,5 +24,7 @@ com/lotte/service/UserServicelmp.java
  com.lotte.service.UserServicelmp
 com/lotte/service/BasketService.java
  com.lotte.service.BasketService
+com/lotte/controller/ItemController.java
+ com.lotte.controller.ItemController
 com/lotte/mapper/UserMapper.java
  com.lotte.mapper.UserMapper

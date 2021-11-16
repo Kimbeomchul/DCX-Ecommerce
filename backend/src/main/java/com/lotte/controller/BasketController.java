@@ -1,9 +1,7 @@
 package com.lotte.controller;
 
 import com.lotte.dto.BasketDTO;
-import com.lotte.dto.ItemDTO;
 import com.lotte.service.BasketService;
-import com.lotte.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,15 +18,29 @@ public class BasketController {
 
     // 모든 장바구니정보 불러오기
     @RequestMapping(value = "/allbasket", method = RequestMethod.GET)
-    public List<BasketDTO> getBasketList() {
+    public List<BasketDTO> getAllBasketList() {
         return basketService.getAllBasketList();
     }
 
     // 장바구니 검색 ( key = member_id )
-    @RequestMapping(value = "/basket", method = RequestMethod.GET)
+    @RequestMapping(value = "/searchbasket", method = RequestMethod.GET)
     public List<BasketDTO> getBasketList(@RequestParam(value="member_id") String member_id) {
         return basketService.getBasketList(member_id);
     }
+
+    // 장바구니 특정 아이템 삭제
+    @RequestMapping(value = "/dbasket", method = RequestMethod.DELETE)
+    public List<BasketDTO> deletebasket(@RequestParam(value="item_code") String item_code, @RequestParam(value="member_id") String member_id) {
+        return basketService.deletebasket(item_code,member_id);
+    }
+
+    // 장바구니 전체 삭제
+    @RequestMapping(value = "/dabasket", method = RequestMethod.DELETE)
+    public List<BasketDTO> deleteAllbasket(@RequestParam(value="member_id") String member_id) {
+        return basketService.deleteAllbasket(member_id);
+    }
+
+    // 장바구니 아이템 추가 ?!?!?
 
 
 }

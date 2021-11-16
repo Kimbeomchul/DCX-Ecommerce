@@ -21,6 +21,16 @@ class BasketServicelmp implements BasketService {
         return UserMapper.getAllBasketList();
     }
 
+    @Override
+    public List<BasketDTO> deletebasket(String item_code, String member_id) {
+        return UserMapper.deletebasket(item_code, member_id);
+    }
+
+    @Override
+    public List<BasketDTO> deleteAllbasket(String member_id) {
+        return UserMapper.deleteAllbasket(member_id);
+    }
+
 
 }
 
