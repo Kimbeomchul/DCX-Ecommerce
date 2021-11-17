@@ -23,7 +23,7 @@ public class KakaoPayController {
 
     //카카오페이 결제시스템 개발
     @RequestMapping(value = "/pay")
-    public void KakaoPay() {
+    public String KakaoPay() {
 
         RestTemplate rt = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -59,8 +59,8 @@ public class KakaoPayController {
         // Pay 리다이렉트 링크 가져오기
         JSONObject jo = new JSONObject(response.getBody());
         System.out.println(jo.get("tid"));
-        System.out.println(jo.get("next_redirect_pc_url"));
-        
 
+        String redirect_url = (String) jo.get("next_redirect_pc_url");
+        return redirect_url;
     }
 }

@@ -22,6 +22,10 @@
         SELECT * FROM basket WHERE member_id = #{member_id}
     </select>
 
+    <select id="getAllZzim" resultType="com.lotte.dto.ZzimDTO">
+        SELECT * FROM zzim WHERE member_id = #{member_id}
+    </select>
+
     <insert id="setUserInfo">
         INSERT INTO  members(member_id, member_social, member_name, member_logintime, member_image, member_email)
         VALUES       (#{id}, #{Kakao}, #{nickname}, #{login_time}, #{profile_image} , #{email})
@@ -37,9 +41,19 @@
         VALUES       (#{member_id}, #{item_code}, #{basket_date})
     </insert>
 
+    <insert id="addZzim">
+        INSERT INTO  zzim(member_id, item_code)
+        VALUES       (#{member_id}, #{item_code})
+    </insert>
+
+    <delete id="delZzim">
+        DELETE FROM zzim WHERE item_code = #{item_code} AND member_id = #{member_id}
+    </delete>
+
     <delete id="deleteItem">
         DELETE FROM item WHERE item_code = #{item_code}
     </delete>
+
 
     <delete id="deleteAllbasket">
         DELETE FROM basket WHERE member_id = #{member_id}

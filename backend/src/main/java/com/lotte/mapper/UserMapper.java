@@ -3,6 +3,7 @@ package com.lotte.mapper;
 import com.lotte.dto.BasketDTO;
 import com.lotte.dto.ItemDTO;
 import com.lotte.dto.UserDTO;
+import com.lotte.dto.ZzimDTO;
 import com.lotte.login.Login;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
@@ -38,6 +39,14 @@ public interface UserMapper {
     void deleteAllbasket(String member_id);
     // 장바구니에 항목추가
     void addbasket(String member_id, int item_code, String basket_date);
+
+
+    //======================== 찜 ==============================//
+
+    //전체 찜 리스트
+    List<ZzimDTO> getAllZzim(String member_id);
+    void addZzim(String member_id, int item_code);
+    void delZzim(String member_id, int item_code);
 
 
 }
