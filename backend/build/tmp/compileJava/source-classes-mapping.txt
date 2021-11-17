@@ -1,7 +1,7 @@
 com/lotte/dto/ItemDTO.java
  com.lotte.dto.ItemDTO
-com/lotte/controller/BasketController.java
- com.lotte.controller.BasketController
+com/lotte/service/ZzimServicelmp.java
+ com.lotte.service.ZzimServicelmp
 com/lotte/Application.java
  com.lotte.Application
 com/lotte/service/ItemService.java
@@ -14,31 +14,31 @@ com/lotte/comm/SwaggerConfig.java
  com.lotte.comm.SwaggerConfig
 com/lotte/dto/BasketDTO.java
  com.lotte.dto.BasketDTO
-com/lotte/controller/ItemController.java
- com.lotte.controller.ItemController
+com/lotte/service/ZzimService.java
+ com.lotte.service.ZzimService
 com/lotte/login/Login.java
  com.lotte.login.Login
 com/lotte/service/UserService.java
  com.lotte.service.UserService
-com/lotte/controller/UserController.java
- com.lotte.controller.UserController
-com/lotte/controller/LoginController.java
- com.lotte.controller.LoginController
-com/lotte/service/ItemServicelmp.java
- com.lotte.service.ItemServicelmp
-com/lotte/service/ZzimService.java
- com.lotte.service.ZzimService
-com/lotte/service/BasketServicelmp.java
- com.lotte.service.BasketServicelmp
 com/lotte/service/UserServicelmp.java
  com.lotte.service.UserServicelmp
-com/lotte/controller/KakaoPayController.java
- com.lotte.controller.KakaoPayController
-com/lotte/mapper/UserMapper.java
- com.lotte.mapper.UserMapper
 com/lotte/dto/ZzimDTO.java
  com.lotte.dto.ZzimDTO
-com/lotte/service/ZzimServicelmp.java
- com.lotte.service.ZzimServicelmp
+com/lotte/service/ItemServicelmp.java
+ com.lotte.service.ItemServicelmp
+com/lotte/mapper/UserMapper.java
+ com.lotte.mapper.UserMapper
+com/lotte/service/BasketServicelmp.java
+ com.lotte.service.BasketServicelmp
+com/lotte/controller/BasketController.java
+ com.lotte.controller.BasketController
+com/lotte/controller/UserController.java
+ com.lotte.controller.UserController
+com/lotte/controller/KakaoPayController.java
+ com.lotte.controller.KakaoPayController
+com/lotte/controller/LoginController.java
+ com.lotte.controller.LoginController
+com/lotte/controller/ItemController.java
+ com.lotte.controller.ItemController
 com/lotte/controller/ZzimController.java
  com.lotte.controller.ZzimController

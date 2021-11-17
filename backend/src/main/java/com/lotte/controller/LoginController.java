@@ -28,8 +28,9 @@ public class LoginController {
     // test URL : https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://localhost/auth/kakao/callback
     private final UserService userService;
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping(value = "auth/kakao/callback")
-    public void FindAuthCode(@RequestParam("code") String code){
+    public String FindAuthCode(@RequestParam("code") String code){
         System.out.println(code);
 
         RestTemplate rt = new RestTemplate();
@@ -91,9 +92,10 @@ public class LoginController {
 
         try {
             userService.setUserInfo(kakao.getId(), "Kakao", kakao.getEmail(), kakao.getConnected_time(), kakao.getProfile_image(), kakao.getNickname());
-            System.out.println("Login Success");
+            System.out.println("DB saved");
         }catch(Exception e){
-            System.out.println("Login DB sv Error");
+            System.out.println("Already In DB");
         }
+        return response2.getBody();
     }
 }

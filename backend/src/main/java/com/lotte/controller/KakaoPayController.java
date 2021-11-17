@@ -1,20 +1,12 @@
 package com.lotte.controller;
 
-
-import com.lotte.dto.BasketDTO;
-import com.lotte.login.Login;
-import com.lotte.service.BasketService;
-import com.lotte.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.http.*;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +14,7 @@ public class KakaoPayController {
 
 
     //카카오페이 결제시스템 개발
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/pay")
     public String KakaoPay() {
 
@@ -54,8 +47,7 @@ public class KakaoPayController {
 
         System.out.println(response);
 
-
-
+        
         // Pay 리다이렉트 링크 가져오기
         JSONObject jo = new JSONObject(response.getBody());
         System.out.println(jo.get("tid"));

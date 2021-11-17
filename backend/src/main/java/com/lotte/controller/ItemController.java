@@ -3,10 +3,7 @@ package com.lotte.controller;
 import com.lotte.dto.ItemDTO;
 import com.lotte.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,12 +14,14 @@ public class ItemController {
     private final ItemService itemService;
 
     // 모든 item정보 불러오기
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/allitem", method = RequestMethod.GET)
     public List<ItemDTO> getAllItem() {
         return itemService.getAllItemList();
     }
 
     // 특정 아이템 제목으로 검색
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/searchid", method = RequestMethod.GET)
     public List<ItemDTO> getItemWithId(@RequestParam(value="item_code") int item_code) {
         return itemService.getItemIdList(item_code);
@@ -30,12 +29,14 @@ public class ItemController {
 
     // 관리자용
     // 특정 아이템 삭제
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/ditem", method = RequestMethod.DELETE)
     public void deleteItem(@RequestParam(value="item_code") int item_code) {
         itemService.deleteItem(item_code);
     }
 
     // 특정 아이템 등록
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/aitem", method = RequestMethod.POST)
     public void addItem(
             @RequestParam(value="item_section") String item_section,
