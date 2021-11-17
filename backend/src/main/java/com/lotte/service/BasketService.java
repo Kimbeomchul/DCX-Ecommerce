@@ -11,10 +11,13 @@ public interface BasketService {
     List<BasketDTO> getBasketList(String member_id);
 
     // 장바구니에서 특정 아이템 삭제
-    void  deletebasket(String item_code, String member_id);
+    void  deletebasket(int item_code, String member_id);
 
     // 장바구니에서 특정 아이템 삭제
     void deleteAllbasket(String member_id);
+
+    // 장바구니에 아이템추가
+    void addbasket(String member_id, int item_code, String basket_date);
 
 
 }

@@ -30,7 +30,7 @@ public class BasketController {
 
     // 장바구니 특정 아이템 삭제
     @RequestMapping(value = "/dbasket", method = RequestMethod.DELETE)
-    public void deletebasket(@RequestParam(value="item_code") String item_code, @RequestParam(value="member_id") String member_id) {
+    public void deletebasket(@RequestParam(value="item_code") int item_code, @RequestParam(value="member_id") String member_id) {
         basketService.deletebasket(item_code,member_id);
     }
 
@@ -41,6 +41,9 @@ public class BasketController {
     }
 
     // 장바구니 아이템 추가 ?!?!?
-
+    @RequestMapping(value = "/abasket", method = RequestMethod.POST)
+    public void addbasket(@RequestParam(value="member_id") String member_id, @RequestParam(value="item_code") int item_code, @RequestParam(value="basket_date") String basket_date) {
+        basketService.addbasket(member_id, item_code, basket_date);
+    }
 
 }

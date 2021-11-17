@@ -24,14 +24,14 @@ public class ItemController {
 
     // 특정 아이템 제목으로 검색
     @RequestMapping(value = "/searchid", method = RequestMethod.GET)
-    public List<ItemDTO> getItemWithId(@RequestParam(value="item_code") String item_code) {
+    public List<ItemDTO> getItemWithId(@RequestParam(value="item_code") int item_code) {
         return itemService.getItemIdList(item_code);
     }
 
     // 관리자용
     // 특정 아이템 삭제
     @RequestMapping(value = "/ditem", method = RequestMethod.DELETE)
-    public void deleteItem(@RequestParam(value="item_code") String item_code) {
+    public void deleteItem(@RequestParam(value="item_code") int item_code) {
         itemService.deleteItem(item_code);
     }
 
@@ -48,5 +48,6 @@ public class ItemController {
 
         itemService.addItem(item_section,item_title,item_image,item_content,item_writer,item_date,item_price);
     }
+
 
 }

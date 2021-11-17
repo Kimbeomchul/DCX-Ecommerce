@@ -22,7 +22,7 @@ class BasketServicelmp implements BasketService {
     }
 
     @Override
-    public void deletebasket(String item_code, String member_id) {
+    public void deletebasket(int item_code, String member_id) {
 
         try{
             UserMapper.deletebasket(item_code, member_id);
@@ -41,6 +41,15 @@ class BasketServicelmp implements BasketService {
         }
     }
 
+    @Override
+    public void addbasket(String member_id, int item_code, String basket_date) {
+
+        try{
+            UserMapper.addbasket(member_id, item_code ,basket_date);
+        }catch(Exception e){
+            System.out.println("Insert Error : " + e );
+        }
+    }
 
 }
 

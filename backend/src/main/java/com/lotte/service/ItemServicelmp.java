@@ -19,13 +19,13 @@ class ItemServicelmp implements ItemService {
 
     // Item_id로 아이템 검색
     @Override
-    public List<ItemDTO> getItemIdList(String item_code) {
+    public List<ItemDTO> getItemIdList(int item_code) {
         return userMapper.getItemIdList(item_code);
     }
 
     // 아이템 삭제
     @Override
-    public void deleteItem(String item_code) {
+    public void deleteItem(int item_code) {
         try{
             userMapper.deleteItem(item_code);
         }catch(Exception e){

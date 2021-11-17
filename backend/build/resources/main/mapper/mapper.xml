@@ -22,9 +22,19 @@
         SELECT * FROM basket WHERE member_id = #{member_id}
     </select>
 
+    <insert id="setUserInfo">
+        INSERT INTO  members(member_id, member_social, member_name, member_logintime, member_image, member_email)
+        VALUES       (#{id}, #{Kakao}, #{nickname}, #{login_time}, #{profile_image} , #{email})
+    </insert>
+
     <insert id="addItem">
         INSERT INTO  item(item_section, item_title, item_image, item_content, item_writer, item_date, item_price)
         VALUES       (#{item_section}, #{item_title}, #{item_image}, #{item_content}, #{item_writer} , #{item_date} ,#{item_price})
+    </insert>
+
+    <insert id="addbasket">
+        INSERT INTO  basket(member_id, item_code, basket_date)
+        VALUES       (#{member_id}, #{item_code}, #{basket_date})
     </insert>
 
     <delete id="deleteItem">
