@@ -28,7 +28,6 @@ public class LoginController {
     // test URL : https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://localhost/auth/kakao/callback
     private final UserService userService;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping(value = "auth/kakao/callback")
     public String FindAuthCode(@RequestParam("code") String code){
         System.out.println(code);

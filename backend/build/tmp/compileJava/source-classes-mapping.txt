@@ -34,11 +34,11 @@ com/lotte/controller/BasketController.java
  com.lotte.controller.BasketController
 com/lotte/controller/UserController.java
  com.lotte.controller.UserController
-com/lotte/controller/KakaoPayController.java
- com.lotte.controller.KakaoPayController
-com/lotte/controller/LoginController.java
- com.lotte.controller.LoginController
-com/lotte/controller/ItemController.java
- com.lotte.controller.ItemController
 com/lotte/controller/ZzimController.java
  com.lotte.controller.ZzimController
+com/lotte/controller/KakaoPayController.java
+ com.lotte.controller.KakaoPayController
+com/lotte/controller/ItemController.java
+ com.lotte.controller.ItemController
+com/lotte/controller/LoginController.java
+ com.lotte.controller.LoginController

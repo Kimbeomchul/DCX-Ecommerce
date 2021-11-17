@@ -27,9 +27,9 @@ public class KakaoPayController {
         params.add("cid", "TC0ONETIME");
         params.add("partner_order_id", "1001");
         params.add("partner_user_id", "gorany");
-        params.add("item_name", "책이다책");
+        params.add("item_name", "두깨바보");
         params.add("quantity", "1");
-        params.add("total_amount", "2200");
+        params.add("total_amount", "999999");
         params.add("tax_free_amount", "0");
         params.add("approval_url", "http://localhost");
         params.add("cancel_url", "http://localhost");
@@ -47,7 +47,7 @@ public class KakaoPayController {
 
         System.out.println(response);
 
-        
+
         // Pay 리다이렉트 링크 가져오기
         JSONObject jo = new JSONObject(response.getBody());
         System.out.println(jo.get("tid"));
