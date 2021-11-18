@@ -29,7 +29,7 @@ class ItemServicelmp implements ItemService {
         try{
             userMapper.deleteItem(item_code);
         }catch(Exception e){
-            System.out.println("Delete Error : " + e );
+            System.out.println("Item Delete Error : " + e + " Item_code : " + item_code);
         }
 
     }
@@ -41,7 +41,7 @@ class ItemServicelmp implements ItemService {
         try{
             userMapper.addItem(item_section,item_title,item_image,item_content,item_writer,item_date,item_price);
         }catch (Exception e){
-            System.out.println("Insert Error : "+ e);
+            System.out.println("Item Insert Error : "+ e);
         }
     }
 }

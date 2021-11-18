@@ -21,12 +21,21 @@ class ZzimServicelmp implements ZzimService{
 
     @Override
     public void addZzim(String member_id, int item_code) {
-        UserMapper.addZzim(member_id,item_code);
+        try{
+            UserMapper.addZzim(member_id,item_code);
+        }catch (Exception e){
+            System.out.println("zzim add fail : ( member_id , item_code ) "+ member_id + " " + item_code );
+        }
+
     }
 
     @Override
     public void delZzim(String member_id, int item_code) {
-        UserMapper.delZzim(member_id, item_code);
+        try{
+            UserMapper.delZzim(member_id, item_code);
+        }catch (Exception e){
+            System.out.println("zzim delete fail : ( member_id , item_code ) "+ member_id + " " + item_code );
+        }
     }
 }
 
