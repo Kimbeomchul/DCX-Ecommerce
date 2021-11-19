@@ -25,7 +25,9 @@ public class LoginController {
 
     // 카카오 로그인
     // Docs : https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api
-    // test URL : https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://localhost/auth/kakao/callback
+    // test URL : https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://3.36.39.51/auth/kakao/callback
+    // AWS LINK : 3.36.39.51
+    
     private final UserService userService;
 
     @GetMapping(value = "auth/kakao/callback")
@@ -39,7 +41,7 @@ public class LoginController {
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         params.add("grant_type","authorization_code");
         params.add("client_id","0283e78b831185c25b7ed36ea030a098");
-        params.add("redirect_uri","http://localhost/auth/kakao/callback");
+        params.add("redirect_uri","http://3.36.39.51/auth/kakao/callback");
         params.add("code",code);
 
         HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest = new HttpEntity<>(params,httpHeaders);
