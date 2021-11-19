@@ -3,13 +3,10 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
-import './style.css'
-
-Vue.use(VueMaterial)
+import vuetify from './plugins/vuetify'
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  el: '#app',
+  vuetify,
+  render: h => h(App)
+});

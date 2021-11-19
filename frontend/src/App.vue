@@ -1,208 +1,145 @@
 <template>
-  <div class="page-container">
-    <md-app>
-      <md-app-toolbar class="md-primary">
-        <span class="md-title">My Title</span>
-          <md-button class="md-icon-button">
-            <md-icon>person</md-icon>
-          </md-button>
-          <md-badge md-content="1" md-dense>
-            <md-button class="md-icon-button">
-              <md-icon>shopping_basket</md-icon>
-            </md-button>
-          </md-badge>
-      </md-app-toolbar>
+<div id="app">
+  <v-app id="inspire">
+    <v-card>
+      <v-app-bar
+        absolute
+        color="white"
+        elevate-on-scroll
+        scroll-target="#scrolling-techniques-7"
+      >
+        <v-toolbar-title>Title</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon>
+          <v-icon>person</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>shopping_bag</v-icon>
+        </v-btn>
+      </v-app-bar>
+    </v-card>
 
-      <md-app-content>
-        <h2 class="main-title md-alignment-top" style="padding-top:10px;" onclick="location.href='hot-list.html'">hot item<a href="#a"></a></h2>
-        <div class="md-layout-item md-layout md-gutter">
-          <div class="md-layout-item">
-            <img src="./images/main-list-g-04.png" alt="">
-            <span>1위</span>
-          </div>
-          <div class="md-layout-item">
-            <img src="./images/main-list-g-06.png" alt="">
-            <span>2위</span>
-          </div>
-          <div class="md-layout-item">
-            <img src="./images/main-list-g-03.png" alt="">
-            <span>3위</span>
-          </div>
-        </div>
+    <v-sheet
+      id="scrolling-techniques-7"
+      class="overflow-y-auto"
+      max-height="700"
+    >
+      <v-container fluid style="padding-top:60px;">
+        <h1 class="font-weight-black">
+          인기 많은 책
+        </h1>
+        <v-row>
+          <v-col>
+            <v-card
+              class="pa-2"
+              outlined
+            >
+              <div>1위</div>
+              <v-img
+                :src="ranked.src"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="200px"
+              >
+              </v-img>
+              <v-card-title v-text="ranked.title"></v-card-title>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card
+              class="pa-2"
+              outlined
+              tile
+            >
+              <div>2위</div>
+              <v-img
+                :src="ranked.src"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="200px"
+              >
+              </v-img>
+              <v-card-title v-text="ranked.title"></v-card-title>
+            </v-card>
+          </v-col>
+          <v-col>
+            <v-card
+              class="pa-2"
+              outlined
+              tile
+            >
+              <div>3위</div>
+              <v-img
+                :src="ranked.src"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="200px"
+              >
+              </v-img>
+              <v-card-title v-text="ranked.title"></v-card-title>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
 
-        <div class="md-alignment-space-around">
-          <section class = "category">
-            <md-button class="md-raised">카테고리1</md-button>
-            <md-button class="md-raised">카테고리2</md-button>
-            <md-button class="md-raised">카테고리3</md-button>
-          </section>
-
-          <section class="hot-content">
-            <div class="hot-inner">
-              <input type="radio" name="type" id="hot-gl" checked>
-              <input type="radio" name="type" id="hot-sun">
-              
-              <div class="hot">
-                <div class="hot-box hot-gl">
-                  
-                  <div class="hot-item" onclick="location.href='item-info.html'">
-                    <div class="test" style="position:relative">
-                      <span><img src="./images/main-list-g-04.png" alt=""></span>
-                      <div class="like-button">
-                        <md-card-actions md-alignment="right">
-                          <md-button class="md-icon-button"> 
-                            <md-icon>favorite</md-icon>
-                          </md-button>
-                        </md-card-actions>
-                      </div>
-                      <p>
-                        마마무 베타티타늄 안경 DAON 4910
-                        <strong>49,000원</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="hot-item" onclick="location.href='item-info.html'">
-                    <div class="test" style="position:relative">
-                      <span><img src="./images/main-list-g-06.png" alt=""></span>
-                      <div class="like-button">
-                        <md-card-actions md-alignment="right">
-                          <md-button class="md-icon-button"> 
-                            <md-icon>favorite</md-icon>
-                          </md-button>
-                        </md-card-actions>
-                      </div>
-                      <p>
-                        마마무 베타티타늄 안경 DAON 4909
-                        <strong>99,000원</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="hot-item" onclick="location.href='item-info.html'">
-                    <div class="test" style="position:relative">
-                      <span><img src="./images/main-list-g-03.png" alt=""></span>
-                      <div class="like-button">
-                        <md-card-actions md-alignment="right">
-                          <md-button class="md-icon-button"> 
-                            <md-icon>favorite</md-icon>
-                          </md-button>
-                        </md-card-actions>
-                      </div>
-                      <p>
-                        마마무 솔라 착용 BLUE VB 01_블루 브이비 01
-                        <strong>155,000원</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="hot-item" onclick="location.href='item-info.html'">
-                    <div class="test" style="position:relative">
-                      <span><img src="./images/main-list-g-07.png" alt=""></span>
-                      <div class="like-button">
-                          <md-card-actions md-alignment="right">
-                            <md-button class="md-icon-button"> 
-                              <md-icon>favorite</md-icon>
-                            </md-button>
-                          </md-card-actions>
-                        </div>
-                      <p>
-                        마마무 휘인 착용 BLUE VB 01_블루 브이비 03
-                        <strong>155,000원</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="hot-item" onclick="location.href='item-info.html'">
-                    <div class="test" style="position:relative">
-                      <span><img src="./images/main-list-g-04.png" alt=""></span>
-                      <div class="like-button">
-                        <md-card-actions md-alignment="right">
-                          <md-button class="md-icon-button"> 
-                            <md-icon>favorite</md-icon>
-                          </md-button>
-                        </md-card-actions>
-                      </div>
-                      <p>
-                        마마무 베타티타늄 안경 DAON 4910
-                        <strong>49,000원</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="hot-item" onclick="location.href='item-info.html'">
-                    <div class="test" style="position:relative">
-                      <span><img src="./images/main-list-g-06.png" alt=""></span>
-                      <div class="like-button">
-                        <md-card-actions md-alignment="right">
-                          <md-button class="md-icon-button"> 
-                            <md-icon>favorite</md-icon>
-                          </md-button>
-                        </md-card-actions>
-                      </div>
-                      <p>
-                        마마무 베타티타늄 안경 DAON 4909
-                        <strong>99,000원</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="hot-item" onclick="location.href='item-info.html'">
-                    <div class="test" style="position:relative">
-                      <span><img src="./images/main-list-g-03.png" alt=""></span>
-                      <div class="like-button">
-                        <md-card-actions md-alignment="right">
-                          <md-button class="md-icon-button"> 
-                            <md-icon>favorite</md-icon>
-                          </md-button>
-                        </md-card-actions>
-                      </div>
-                      <p>
-                        마마무 솔라 착용 BLUE VB 01_블루 브이비 01
-                        <strong>155,000원</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="hot-item" onclick="location.href='item-info.html'">
-                    <div class="test" style="position:relative">
-                      <span><img src="./images/main-list-g-07.png" alt=""></span>
-                      <div class="like-button">
-                          <md-card-actions md-alignment="right">
-                            <md-button class="md-icon-button"> 
-                              <md-icon>favorite</md-icon>
-                            </md-button>
-                          </md-card-actions>
-                        </div>
-                      <p>
-                        마마무 휘인 착용 BLUE VB 01_블루 브이비 03
-                        <strong>155,000원</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-          </section>
-	</div>
-      </md-app-content>
-    </md-app>
-  </div>
+      <v-container>
+        <h1 class="font-weight-black" style="margin-bottom:10px">
+          전체 목록
+        </h1>
+        <v-row
+          align="center"
+          justify="space-around"
+        >
+          <v-col
+            v-for="category in categories"
+            :key="category.name"
+          >
+            <v-btn depressed>
+              <v-card-title v-text="category.name"></v-card-title>
+            </v-btn>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            v-for="book in books"
+            :key="book.title"
+            :cols="book.flex"
+          >
+            <v-card>
+              <v-img
+                :src="book.src"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="200px"
+              >
+                <v-btn icon>
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+              </v-img>
+              <v-card-title v-text="book.title"></v-card-title>
+              <v-card-text v-text="book.price"></v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-sheet>
+    
+  </v-app>
+</div>
 </template>
 
 <style lang="scss" scoped>
-
-  .md-app {
-    border: 0.5px solid rgba(#000, .12);
-  }
-
   .test {
     position: relative;
   }
 
-  .like-button {
+  .like-button {    
     position:absolute;
     width:100%;
   }
@@ -211,6 +148,28 @@
 
 <script>
 export default {
-  name: 'MaterialIcons'
-}
+    data: () => ({
+      books: [
+        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+      ],
+      ranked: [
+        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+      ],
+      categories: [
+        { name: '소설' },
+        { name: '시' },
+        { name: '인문학' },
+        { name: '종교' },
+      ]
+    }),
+  }
 </script>
