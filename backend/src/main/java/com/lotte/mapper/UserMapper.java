@@ -15,14 +15,15 @@ public interface UserMapper {
     // 유저리스트
     List<UserDTO> getUserList();
 
-    void setUserInfo(int id, String Kakao , String email, String nickname, String login_time, String profile_image);
+    // 유저 등록 < 소셜로그인 >
+    void setUserInfo(int id, String Kakao , String nickname, String login_time, String profile_image  , String email);
 
     //======================== 아이템 ==============================//
 
     // 전체 책리스트
     List<ItemDTO> getAllItemList();
     // 제목으로 책 검색
-    List<ItemDTO> getItemIdList(int item_code);
+    List<ItemDTO> getItemIdList(String item_title);
     // 책 삭제
     void deleteItem(int item_code);
     void addItem(String item_section, String item_title, String item_image, String item_content, String item_writer, String item_date, int item_price);
@@ -45,7 +46,11 @@ public interface UserMapper {
 
     //전체 찜 리스트
     List<ZzimDTO> getAllZzim(String member_id);
+
+    //찜 추가
     void addZzim(String member_id, int item_code);
+
+    //찜 삭제
     void delZzim(String member_id, int item_code);
 
 

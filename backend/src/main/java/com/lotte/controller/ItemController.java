@@ -23,8 +23,8 @@ public class ItemController {
     // 특정 아이템 제목으로 검색
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/searchid", method = RequestMethod.GET)
-    public List<ItemDTO> getItemWithId(@RequestParam(value="item_code") int item_code) {
-        return itemService.getItemIdList(item_code);
+    public List<ItemDTO> getItemWithId(@RequestParam(value="item_title") String item_title) {
+        return itemService.getItemIdList(item_title);
     }
 
     // 관리자용

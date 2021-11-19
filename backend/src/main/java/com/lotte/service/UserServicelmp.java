@@ -15,8 +15,8 @@ class UserServicelmp implements UserService{
         return UserMapper.getUserList();
     }
 
-    @Override public void setUserInfo(int id, String Kakao, String email, String login_time, String nickname, String profile_image) {
-         UserMapper.setUserInfo(id, Kakao , email,login_time,nickname, profile_image);
+    @Override public void setUserInfo(int id, String Kakao, String nickname, String login_time, String profile_image, String email) {
+         UserMapper.setUserInfo(id, Kakao , nickname, login_time, profile_image , email);
     }
 
 

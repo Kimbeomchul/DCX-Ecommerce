@@ -24,17 +24,17 @@ public class KakaoPayController {
         httpHeaders.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+
         params.add("cid", "TC0ONETIME");
         params.add("partner_order_id", "1001");
         params.add("partner_user_id", "gorany");
-        params.add("item_name", "두깨바보");
+        params.add("item_name", "lotte_malang");
         params.add("quantity", "1");
         params.add("total_amount", "999999");
         params.add("tax_free_amount", "0");
         params.add("approval_url", "http://localhost");
         params.add("cancel_url", "http://localhost");
         params.add("fail_url", "http://localhost");
-
 
         HttpEntity<MultiValueMap<String, String>> kakaopay = new HttpEntity<>(params, httpHeaders);
 

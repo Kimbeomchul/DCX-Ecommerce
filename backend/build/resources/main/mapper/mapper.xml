@@ -11,7 +11,7 @@
     </select>
 
     <select id="getItemIdList" resultType="com.lotte.dto.ItemDTO">
-        SELECT * FROM item WHERE item_code = #{item_code}
+        SELECT * FROM item WHERE item_title = #{item_title}
     </select>
 
     <select id="getAllBasketList" resultType="com.lotte.dto.BasketDTO">

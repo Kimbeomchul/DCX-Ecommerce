@@ -90,10 +90,10 @@ public class LoginController {
         kakao.setProfile_image((String) jo2.getJSONObject("properties").get("profile_image"));
 
         try {
-            userService.setUserInfo(kakao.getId(), "Kakao", kakao.getEmail(), kakao.getConnected_time(), kakao.getProfile_image(), kakao.getNickname());
+            userService.setUserInfo(kakao.getId(), "Kakao", kakao.getNickname(), kakao.getConnected_time(), kakao.getProfile_image(), kakao.getEmail());
             System.out.println("DB saved");
         }catch(Exception e){
-            System.out.println("Already In DB");
+            System.out.println("Already In DB ");
         }
         return response2.getBody();
     }
