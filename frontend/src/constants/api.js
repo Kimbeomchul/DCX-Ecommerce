@@ -1,7 +1,7 @@
 export default Object.freeze({
     // 로컬
     // BASE_URL: 'http://192.168.114.110/',
-    // 개발 
+    // 클라우드 
     BASE_URL: 'http://3.36.39.51/',
 
     // 로그인
