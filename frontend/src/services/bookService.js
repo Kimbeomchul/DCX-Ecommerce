@@ -25,7 +25,7 @@ export async function getBook(itemCode) {
  */
 export async function registerBook(book) {
     const params = utils.cameltoSnake(book);
-    params[item_date] = utils.nowDate();
+    params['item_date'] = utils.nowDate();
     return await apiService.toPost(api.ADD_BOOK, params);
 }
 

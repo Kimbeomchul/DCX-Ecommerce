@@ -1,10 +1,10 @@
-const week = ['일', '월', '화', '수', '목', '금', '토'];
+// const week = ['일', '월', '화', '수', '목', '금', '토'];
 
 const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth();
 const date = today.getDate();
-const day = week[today.getDay()];
+// const day = week[today.getDay()];
 
 /**
  * 오늘 날짜

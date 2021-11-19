@@ -2,6 +2,7 @@ import apiService from "../api/apiService";
 import api from '../constants/api'
 
 // 사용자 정보 전역변수로 사용
+// getter setter를 이용해 접근
 let user;
 
 /**
