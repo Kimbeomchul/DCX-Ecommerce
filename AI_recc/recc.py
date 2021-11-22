@@ -5,6 +5,10 @@ from flask import Flask ,request,jsonify
 app = Flask(__name__)
 ## [0,0,0,0,0,0,3,0,0,2] <<= data input
 
+## Ex) localhost:5000/rec/0000003002
+## return cluster 1,2,3,4 spring에서 분기처리
+
+
 @app.route('/rec/<data>')
 def commerce(data):
     # 데이터 변환작업
