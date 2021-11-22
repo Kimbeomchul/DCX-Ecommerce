@@ -50,4 +50,4 @@ df_cluster_pairplot = df_csv[
     ["sosul", "essay", "column", "misul", "gungang", "hobby", "children", "gojun", "science", "manhwa", 'cluster']]
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='3.36.39.51', port=5000, debug=True)
