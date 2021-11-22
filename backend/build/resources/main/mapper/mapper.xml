@@ -2,13 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotte.mapper.UserMapper">
 
-
     <select id="getUserList" resultType="com.lotte.dto.UserDTO">
         SELECT * FROM members
     </select>
 
-    <select id="getItemList" resultType="com.lotte.dto.ItemDTO">
+    <select id="getAllItemList" resultType="com.lotte.dto.ItemDTO">
         SELECT * FROM item
+    </select>
+
+    <select id="getItemIdList" resultType="com.lotte.dto.ItemDTO">
+        SELECT * FROM item WHERE item_title = #{item_title}
     </select>
 
     <select id="getAllBasketList" resultType="com.lotte.dto.BasketDTO">
@@ -18,6 +21,47 @@
     <select id="getBasketList" resultType="com.lotte.dto.BasketDTO">
         SELECT * FROM basket WHERE member_id = #{member_id}
     </select>
+
+    <select id="getAllZzim" resultType="com.lotte.dto.ZzimDTO">
+        SELECT * FROM zzim WHERE member_id = #{member_id}
+    </select>
+
+    <insert id="setUserInfo">
+        INSERT INTO  members(member_id, member_social, member_name, member_logintime, member_image, member_email)
+        VALUES       (#{id}, #{Kakao}, #{nickname}, #{login_time}, #{profile_image} , #{email})
+    </insert>
+
+    <insert id="addItem">
+        INSERT INTO  item(item_section, item_title, item_image, item_content, item_writer, item_date, item_price)
+        VALUES       (#{item_section}, #{item_title}, #{item_image}, #{item_content}, #{item_writer} , #{item_date} ,#{item_price})
+    </insert>
+
+    <insert id="addbasket">
+        INSERT INTO  basket(member_id, item_code, basket_date)
+        VALUES       (#{member_id}, #{item_code}, #{basket_date})
+    </insert>
+
+    <insert id="addZzim">
+        INSERT INTO  zzim(member_id, item_code)
+        VALUES       (#{member_id}, #{item_code})
+    </insert>
+
+    <delete id="delZzim">
+        DELETE FROM zzim WHERE item_code = #{item_code} AND member_id = #{member_id}
+    </delete>
+
+    <delete id="deleteItem">
+        DELETE FROM item WHERE item_code = #{item_code}
+    </delete>
+
+
+    <delete id="deleteAllbasket">
+        DELETE FROM basket WHERE member_id = #{member_id}
+    </delete>
+
+    <delete id="deletebasket">
+        DELETE FROM basket WHERE member_id = #{member_id} AND item_code = #{item_code}
+    </delete>
 
 
 </mapper>
