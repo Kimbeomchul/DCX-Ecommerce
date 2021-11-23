@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 com/lotte/Application.java
  com.lotte.Application
 com/lotte/controller/KakaoPayController.java
@@ -11,27 +10,12 @@ com/lotte/controller/ZzimController.java
  com.lotte.controller.ZzimController
 com/lotte/dto/PayDTO.java
  com.lotte.dto.PayDTO
-=======
-com/lotte/dto/ItemDTO.java
- com.lotte.dto.ItemDTO
-com/lotte/controller/ZzimController.java
- com.lotte.controller.ZzimController
-com/lotte/Application.java
- com.lotte.Application
-com/lotte/controller/BasketController.java
- com.lotte.controller.BasketController
-com/lotte/service/BasketService.java
- com.lotte.service.BasketService
-com/lotte/dto/UserDTO.java
- com.lotte.dto.UserDTO
->>>>>>> main
 com/lotte/comm/SwaggerConfig.java
  com.lotte.comm.SwaggerConfig
 com/lotte/service/PayService.java
  com.lotte.service.PayService
 com/lotte/service/ZzimService.java
  com.lotte.service.ZzimService
-<<<<<<< HEAD
 com/lotte/dto/UserDTO.java
  com.lotte.dto.UserDTO
 com/lotte/dto/BasketDTO.java
@@ -48,18 +32,6 @@ com/lotte/controller/BasketController.java
  com.lotte.controller.BasketController
 com/lotte/service/BasketService.java
  com.lotte.service.BasketService
-=======
-com/lotte/login/Login.java
- com.lotte.login.Login
-com/lotte/controller/ItemController.java
- com.lotte.controller.ItemController
-com/lotte/controller/KakaoPayController.java
- com.lotte.controller.KakaoPayController
-com/lotte/dto/ZzimDTO.java
- com.lotte.dto.ZzimDTO
-com/lotte/service/ItemService.java
- com.lotte.service.ItemService
->>>>>>> main
 com/lotte/service/ItemServicelmp.java
  com.lotte.service.ItemServicelmp
 com/lotte/service/UserService.java
@@ -68,7 +40,6 @@ com/lotte/service/BasketServicelmp.java
  com.lotte.service.BasketServicelmp
 com/lotte/service/UserServicelmp.java
  com.lotte.service.UserServicelmp
-<<<<<<< HEAD
 com/lotte/controller/ReccController.java
  com.lotte.controller.ReccController
 com/lotte/controller/UserController.java
@@ -81,13 +52,3 @@ com/lotte/mapper/UserMapper.java
  com.lotte.mapper.UserMapper
 com/lotte/service/ZzimServicelmp.java
  com.lotte.service.ZzimServicelmp
-=======
-com/lotte/controller/UserController.java
- com.lotte.controller.UserController
-com/lotte/service/ZzimServicelmp.java
- com.lotte.service.ZzimServicelmp
-com/lotte/mapper/UserMapper.java
- com.lotte.mapper.UserMapper
-com/lotte/controller/LoginController.java
- com.lotte.controller.LoginController
->>>>>>> main

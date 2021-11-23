@@ -14,11 +14,8 @@ public interface UserMapper {
 
     // 유저 등록 < 소셜로그인 >
     void setUserInfo(int id, String Kakao , String nickname, String login_time, String profile_image  , String email);
-<<<<<<< HEAD
 
     void addrecc(String recc, String member_id);
-=======
->>>>>>> main
 
     //======================== 아이템 ==============================//
 
