@@ -89,12 +89,22 @@ public class LoginController {
         kakao.setNickname((String) jo2.getJSONObject("properties").get("nickname"));
         kakao.setProfile_image((String) jo2.getJSONObject("properties").get("profile_image"));
 
+        String Flag = "";
         try {
-            userService.setUserInfo(kakao.getId(), "Kakao", kakao.getEmail(), kakao.getConnected_time(), kakao.getProfile_image(), kakao.getNickname());
+            userService.setUserInfo(kakao.getId(), "Kakao", kakao.getNickname(), kakao.getConnected_time(), kakao.getProfile_image(), kakao.getEmail());
+            Flag = "Y";
             System.out.println("DB saved");
         }catch(Exception e){
-            System.out.println("Already In DB");
+            Flag = "N";
+            System.out.println("Already In DB ");
         }
-        return response2.getBody();
+
+        if("Y".equals(Flag)){
+            return "Y " + response2.getBody();
+        }else{
+            return "N " + response2.getBody();
+        }
+
+
     }
 }

@@ -32,9 +32,9 @@ public class KakaoPayController {
         params.add("quantity", "1");
         params.add("total_amount", "999999");
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost");
-        params.add("cancel_url", "http://localhost");
-        params.add("fail_url", "http://localhost");
+        params.add("approval_url", "http://localhost/user");
+        params.add("cancel_url", "http://localhost/allitem");
+        params.add("fail_url", "http://localhost/allbasket");
 
         HttpEntity<MultiValueMap<String, String>> kakaopay = new HttpEntity<>(params, httpHeaders);
 
@@ -51,6 +51,10 @@ public class KakaoPayController {
         // Pay 리다이렉트 링크 가져오기
         JSONObject jo = new JSONObject(response.getBody());
         System.out.println(jo.get("tid"));
+
+        // tid : 결제고유번호 = 결제내역 확인용 코드
+        // DB에 tid , member_id , item_code 저장해야함
+
 
         String redirect_url = (String) jo.get("next_redirect_pc_url");
         return redirect_url;

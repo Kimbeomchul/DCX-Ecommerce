@@ -6,7 +6,7 @@ public interface ItemService {
 
     List<ItemDTO> getAllItemList();
 
-    List<ItemDTO> getItemIdList(int item_code);
+    List<ItemDTO> getItemIdList(String item_title);
 
     void deleteItem(int item_code);
 

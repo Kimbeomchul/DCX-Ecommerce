@@ -19,8 +19,8 @@ class ItemServicelmp implements ItemService {
 
     // Item_id로 아이템 검색
     @Override
-    public List<ItemDTO> getItemIdList(int item_code) {
-        return userMapper.getItemIdList(item_code);
+    public List<ItemDTO> getItemIdList(String item_title) {
+        return userMapper.getItemIdList(item_title);
     }
 
     // 아이템 삭제
