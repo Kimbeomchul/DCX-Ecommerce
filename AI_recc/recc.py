@@ -24,7 +24,7 @@ def commerce(data, id):
     cluster_result = kmeans.predict(x)
 
 
-    API_HOST = "http://3.36.39.51//addrecc"
+    API_HOST = "http://3.36.39.51/addrecc"
     url = API_HOST
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8', 'Accept': '*/*'}
     body = {
