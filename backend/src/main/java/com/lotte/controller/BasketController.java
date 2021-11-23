@@ -44,8 +44,8 @@ public class BasketController {
     // 장바구니 아이템 추가 ?!?!?
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/abasket", method = RequestMethod.POST)
-    public void addbasket(@RequestParam(value="member_id") String member_id, @RequestParam(value="item_code") int item_code, @RequestParam(value="basket_date") String basket_date) {
-        basketService.addbasket(member_id, item_code, basket_date);
+    public void addbasket(@RequestParam(value="member_id") String member_id, @RequestParam(value="item_code") int item_code) {
+        basketService.addbasket(member_id, item_code);
     }
 
 }

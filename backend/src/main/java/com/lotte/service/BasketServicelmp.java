@@ -40,10 +40,10 @@ class BasketServicelmp implements BasketService {
     }
 
     @Override
-    public void addbasket(String member_id, int item_code, String basket_date) {
+    public void addbasket(String member_id, int item_code) {
 
         try{
-            UserMapper.addbasket(member_id, item_code ,basket_date);
+            UserMapper.addbasket(member_id, item_code);
         }catch(Exception e){
             System.out.println("Basket Insert Error : " + e);
         }
