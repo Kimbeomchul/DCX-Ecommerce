@@ -1,5 +1,7 @@
 import pandas as pd
 from flask import Flask ,request,jsonify
+import requests
+import json
 
 
 app = Flask(__name__)
@@ -9,8 +11,9 @@ app = Flask(__name__)
 ## return cluster 1,2,3,4 spring에서 분기처리
 
 
-@app.route('/rec/<data>')
-def commerce(data):
+# 머신러닝 API 리턴
+@app.route('/rec/<data>/<id>')
+def commerce(data, id):
     # 데이터 변환작업
     str_data = []
     for i in data:
@@ -20,7 +23,20 @@ def commerce(data):
     x = [str_data]
     cluster_result = kmeans.predict(x)
 
-    return str(cluster_result[0])
+
+    API_HOST = "http://3.36.39.51//addrecc"
+    url = API_HOST
+    headers = {'Content-Type': 'application/json', 'charset': 'UTF-8', 'Accept': '*/*'}
+    body = {
+        "recc" : str(cluster_result[0]),
+        "member_id" : id
+    }
+    response = requests.post(url, data = body)
+    print("response status %r" % response.status_code)
+    print("response text %r" % response.text)
+
+    return ''
+
 
 
 ## 머신러닝 모델생성
