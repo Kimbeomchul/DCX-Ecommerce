@@ -1,82 +1,36 @@
 <template>
 <div id="app">
   <v-app id="inspire">
-    <v-card>
-      <v-app-bar
-        absolute
-        color="white"
-        elevate-on-scroll
-        scroll-target="#scrolling-techniques-7"
-      >
-        <v-toolbar-title>Title</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon>
-          <v-icon>person</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>shopping_bag</v-icon>
-        </v-btn>
-      </v-app-bar>
-    </v-card>
+    <HeaderWrapper />
 
     <v-sheet
       id="scrolling-techniques-7"
       class="overflow-y-auto"
-      max-height="700"
+      max-height="2000"
     >
       <v-container fluid style="padding-top:60px;">
         <h1 class="font-weight-black">
           인기 많은 책
         </h1>
         <v-row>
-          <v-col>
+          <v-col
+            v-for="r in ranked"
+            :key="r.rank"
+            :cols="r.flex"
+          >
             <v-card
               class="pa-2"
               outlined
             >
-              <div>1위</div>
+              <div>{{ r.rank }}위</div>
               <v-img
-                :src="ranked.src"
+                :src="r.src"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                 height="200px"
               >
               </v-img>
-              <v-card-title v-text="ranked.title"></v-card-title>
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card
-              class="pa-2"
-              outlined
-              tile
-            >
-              <div>2위</div>
-              <v-img
-                :src="ranked.src"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                height="200px"
-              >
-              </v-img>
-              <v-card-title v-text="ranked.title"></v-card-title>
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card
-              class="pa-2"
-              outlined
-              tile
-            >
-              <div>3위</div>
-              <v-img
-                :src="ranked.src"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                height="200px"
-              >
-              </v-img>
-              <v-card-title v-text="ranked.title"></v-card-title>
+              <v-card-title v-text="r.title"></v-card-title>
             </v-card>
           </v-col>
         </v-row>
@@ -129,17 +83,13 @@
         </v-row>
       </v-container>
     </v-sheet>
-    
+
   </v-app>
 </div>
 </template>
 
 <style lang="scss" scoped>
-  .test {
-    position: relative;
-  }
-
-  .like-button {    
+  .like-button {
     position:absolute;
     width:100%;
   }
@@ -147,7 +97,12 @@
 </style>
 
 <script>
+import HeaderWrapper from "@/components/Header";
+
 export default {
+    components: {
+      HeaderWrapper
+    },
     data: () => ({
       books: [
         { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', price: '10,000 원', flex: 6 },
@@ -160,9 +115,9 @@ export default {
         { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
       ],
       ranked: [
-        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', rank: '1', flex: 4},
+        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', rank: '2', flex: 4},
+        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', rank: '3', flex: 4},
       ],
       categories: [
         { name: '소설' },
