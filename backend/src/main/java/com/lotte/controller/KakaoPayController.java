@@ -54,7 +54,11 @@ public class KakaoPayController {
 
         // tid : 결제고유번호 = 결제내역 확인용 코드
         // DB에 tid , member_id , item_code 저장해야함
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> main
 
         String redirect_url = (String) jo.get("next_redirect_pc_url");
         return redirect_url;
