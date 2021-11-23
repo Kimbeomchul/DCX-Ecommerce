@@ -19,10 +19,6 @@ class UserServicelmp implements UserService{
          UserMapper.setUserInfo(id, Kakao , nickname, login_time, profile_image , email);
     }
 
-    @Override
-    public void addrecc(String recc , String member_id) {
-        UserMapper.addrecc(recc, member_id);
-    }
 
 
 }

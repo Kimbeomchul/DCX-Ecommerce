@@ -1,6 +1,9 @@
 package com.lotte.mapper;
 
-import com.lotte.dto.*;
+import com.lotte.dto.BasketDTO;
+import com.lotte.dto.ItemDTO;
+import com.lotte.dto.UserDTO;
+import com.lotte.dto.ZzimDTO;
 import com.lotte.login.Login;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
@@ -14,8 +17,6 @@ public interface UserMapper {
 
     // 유저 등록 < 소셜로그인 >
     void setUserInfo(int id, String Kakao , String nickname, String login_time, String profile_image  , String email);
-
-    void addrecc(String recc, String member_id);
 
     //======================== 아이템 ==============================//
 
@@ -38,7 +39,7 @@ public interface UserMapper {
     // 장바구니 전체삭제
     void deleteAllbasket(String member_id);
     // 장바구니에 항목추가
-    void addbasket(String member_id, int item_code);
+    void addbasket(String member_id, int item_code, String basket_date);
 
 
     //======================== 찜 ==============================//
@@ -52,8 +53,5 @@ public interface UserMapper {
     //찜 삭제
     void delZzim(String member_id, int item_code);
 
-    //======================== 구매 ==============================//
 
-    void addPay(String member_id, int item_code, String pay_kakao);
-    List<PayDTO> showPay(String member_id);
 }

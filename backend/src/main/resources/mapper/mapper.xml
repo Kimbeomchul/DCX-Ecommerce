@@ -26,10 +26,6 @@
         SELECT * FROM zzim WHERE member_id = #{member_id}
     </select>
 
-    <select id="showPay" resultType="com.lotte.dto.BasketDTO">
-        SELECT * FROM payment WHERE member_id = #{member_id}
-    </select>
-
     <insert id="setUserInfo">
         INSERT INTO  members(member_id, member_social, member_name, member_logintime, member_image, member_email)
         VALUES       (#{id}, #{Kakao}, #{nickname}, #{login_time}, #{profile_image} , #{email})
@@ -40,14 +36,9 @@
         VALUES       (#{item_section}, #{item_title}, #{item_image}, #{item_content}, #{item_writer} , #{item_date} ,#{item_price})
     </insert>
 
-    <insert id="addPay">
-        INSERT INTO  payment(member_id, item_code , pay_kakao)
-        VALUES       (#{member_id}, #{item_code}, #{pay_kakao})
-    </insert>
-
     <insert id="addbasket">
-        INSERT INTO  basket(member_id, item_code)
-        VALUES       (#{member_id}, #{item_code})
+        INSERT INTO  basket(member_id, item_code, basket_date)
+        VALUES       (#{member_id}, #{item_code}, #{basket_date})
     </insert>
 
     <insert id="addZzim">
@@ -72,8 +63,5 @@
         DELETE FROM basket WHERE member_id = #{member_id} AND item_code = #{item_code}
     </delete>
 
-    <update id="addrecc">
-        UPDATE members SET member_recc = #{recc} WHERE member_id = #{member_id}
-    </update>
 
 </mapper>

@@ -17,7 +17,7 @@ public interface BasketService {
     void deleteAllbasket(String member_id);
 
     // 장바구니에 아이템추가
-    void addbasket(String member_id, int item_code);
+    void addbasket(String member_id, int item_code, String basket_date);
 
 
 }
