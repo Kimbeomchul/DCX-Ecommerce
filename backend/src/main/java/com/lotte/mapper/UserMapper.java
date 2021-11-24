@@ -23,6 +23,8 @@ public interface UserMapper {
     List<ItemDTO> getAllItemList();
     // 제목으로 책 검색
     List<ItemDTO> getItemIdList(String item_title);
+    // 추천하기위해 아이템 선택
+    List<ItemDTO> selectItem();
     // 책 삭제
     void deleteItem(int item_code);
     void addItem(String item_section, String item_title, String item_image, String item_content, String item_writer, String item_date, int item_price);
@@ -56,4 +58,12 @@ public interface UserMapper {
 
     void addPay(String member_id, int item_code, String pay_kakao);
     List<PayDTO> showPay(String member_id);
+
+
+    //======================== 추천 ==============================//
+
+    String getReccItem(String member_id);
+
+    List<ItemDTO> getItemWithRecc(String recc_code);
+
 }

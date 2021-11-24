@@ -28,6 +28,13 @@ public class ItemController {
         return itemService.getItemIdList(item_title);
     }
 
+    // 추천하기위한 아이템 10개 픽
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/selectitem", method = RequestMethod.GET)
+    public List<ItemDTO> selectItem() {
+        return itemService.selectItem();
+    }
+
     // 관리자용
     // 특정 아이템 삭제
     @CrossOrigin(origins = "*", allowedHeaders = "*")

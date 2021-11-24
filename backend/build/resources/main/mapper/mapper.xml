@@ -18,6 +18,18 @@
         SELECT * FROM basket
     </select>
 
+    <select id="getItemWithRecc" resultType="com.lotte.dto.ItemDTO">
+        SELECT * FROM item WHERE item_section = #{recc_code} ORDER BY RAND() LIMIT 3;
+    </select>
+
+    <select id="selectItem" resultType="com.lotte.dto.ItemDTO">
+        SELECT * FROM item ORDER BY RAND() LIMIT 10;
+    </select>
+
+    <select id="getReccItem" resultType="String">
+        SELECT member_recc FROM members WHERE member_id = #{member_id}
+    </select>
+
     <select id="getBasketList" resultType="com.lotte.dto.BasketDTO">
         SELECT * FROM basket WHERE member_id = #{member_id}
     </select>
@@ -26,7 +38,7 @@
         SELECT * FROM zzim WHERE member_id = #{member_id}
     </select>
 
-    <select id="showPay" resultType="com.lotte.dto.BasketDTO">
+    <select id="showPay" resultType="com.lotte.dto.PayDTO">
         SELECT * FROM payment WHERE member_id = #{member_id}
     </select>
 

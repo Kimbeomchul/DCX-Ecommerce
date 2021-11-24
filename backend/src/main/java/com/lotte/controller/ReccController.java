@@ -17,7 +17,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReccController {
 
+
     private final UserService userService;
+    private final ItemService itemService;
 
 
     // 추천알고리즘
@@ -28,6 +30,28 @@ public class ReccController {
         System.out.println(recc);
         // 0 : 공부 목적  , 1 : 취미 목적 2 : 어린이 3 : 자기개발
         userService.addrecc(recc, member_id);
-
     }
+
+
+    // 추천아이템 불러오기
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/reccitem", method = RequestMethod.GET)
+    public List<ItemDTO> getReccItem(@RequestParam(value="member_id") String member_id) {
+        String recc_code = itemService.getReccItem(member_id);
+        System.out.println("RECC : " + recc_code);
+
+        if("0".equals(recc_code)){
+            recc_code = "과학";
+        }else if("1".equals(recc_code)){
+            recc_code = "소설";
+        }else if("2".equals(recc_code)){
+            recc_code = "만화";
+        }else{
+            recc_code = "미술";
+        }
+        System.out.println("RESULT RECC : " + recc_code);
+
+        return itemService.getItemWithRecc(recc_code);
+    }
+
 }
