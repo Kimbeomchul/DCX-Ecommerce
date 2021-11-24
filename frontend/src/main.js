@@ -1,6 +1,7 @@
 import Vue from 'vue'
+import MyPage from './components/MyPage'
 //import App from './App.vue'
-import ProductDetail from './components/ProductDetail.vue'
+//import ProductDetail from './components/ProductDetail.vue'
 
 import router from './routes/router'
 import * as filters from './util/filters'
@@ -17,6 +18,7 @@ new Vue({
   el: '#app',
   vuetify,
   router,
-  render: h => h(ProductDetail)
+  render: h => h(MyPage)
+  //render: h => h(ProductDetail)
   //render: h => h(App)
 });
