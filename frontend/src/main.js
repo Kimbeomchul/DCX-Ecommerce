@@ -1,5 +1,9 @@
 import Vue from 'vue'
-import MyPage from './components/MyPage'
+import CartPage from './components/CartPage'
+//import AddProductPage from './components/AddProductPage'
+//import OrderedList from './components/OrderedList'
+//import ZzimList from './components/ZzimList'
+//import MyPage from './components/MyPage'
 //import App from './App.vue'
 //import ProductDetail from './components/ProductDetail.vue'
 
@@ -18,7 +22,11 @@ new Vue({
   el: '#app',
   vuetify,
   router,
-  render: h => h(MyPage)
+  render: h => h(CartPage)
+  //render: h => h(AddProductPage)
+  //render: h => h(OrderedList)
+  //render: h => h(ZzimList)
+  //render: h => h(MyPage)
   //render: h => h(ProductDetail)
   //render: h => h(App)
 });
