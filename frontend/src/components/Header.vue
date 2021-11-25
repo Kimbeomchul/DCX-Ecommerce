@@ -7,11 +7,14 @@
 		elevate-on-scroll
 		scroll-target="#scrolling-techniques-7"
 		>
-		<v-toolbar-title>Title</v-toolbar-title>
-		<v-spacer></v-spacer>
-		<v-btn icon>
-			<v-icon>person</v-icon>
-		</v-btn>
+			<v-toolbar-title>Title</v-toolbar-title>
+			<v-spacer></v-spacer>
+			<v-btn v-on:click="goTest" icon>
+				<v-icon>person</v-icon>
+			</v-btn>
+			<v-btn icon>
+				<v-icon>person</v-icon>
+			</v-btn>
 			<v-btn icon>
 			<v-badge
 				color="red"
@@ -26,10 +29,17 @@
 </template>
 
 <script>
+import * as routerService from '../services/routerService'
+import routes from '../constants/routes'
 export default {
 	name: "HeaderWrapper",
 	data: () => ({
 		content: 1
 	}),
+	methods: {
+		goTest() {
+			routerService.go(routes.TEST);
+		}
+	}
 }
 </script>

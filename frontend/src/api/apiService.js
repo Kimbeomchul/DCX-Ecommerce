@@ -1,6 +1,8 @@
 import axios from "axios";
 import api from '../constants/api' 
+import routes from '../constants/routes'
 import * as dialogService from '../services/dialogService'
+import * as routerService from '../services/routerService'
 
 const instance = axios.create({
     baseURL: api.BASE_URL,
@@ -32,6 +34,7 @@ function errorHandler(response) {
     switch (response.status) {
         case 401:
             errorMessage = '권한이 없습니다. 다시 로그인해주세요';
+            routerService.go(routes.MAIN);
             break;
 
         default:
