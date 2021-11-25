@@ -1,17 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
 import Login from '../components/Login';
-<<<<<<< HEAD
 import Main from '../components/MainPage';
 import AddProductPage from '../components/AddProductPage';
 import MyPage from '../components/MyPage';
 import CartPage from '../components/CartPage';
 import Zzim from '../components/ZzimList';
-=======
-import Main from '../pages/Main';
-import Test from '../pages/Test'
->>>>>>> 3b44b890a6ad9e93278c937d87c6707d65bc891e
+import Test from '../pages/Test';
+import OrderedList from '../components/OrderedList';
 
 Vue.use(VueRouter);
 
@@ -44,9 +40,12 @@ const routes = [
     ,{
         path: '/test',
         component: Test
+    },
+    {
+        path: '/orderedList',
+        component: OrderedList
     }
 ]
-
 
 //라우터 생성
 const router = new VueRouter({

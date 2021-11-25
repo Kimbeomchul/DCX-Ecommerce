@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import App from './App.vue'
-
+//import App from './App.vue'
+import Test from './pages/Test.vue'
 import router from './routes/router'
 import * as filters from './util/filters'
 import vuetify from './plugins/vuetify'
@@ -16,5 +16,6 @@ new Vue({
   el: '#app',
   vuetify,
   router,
-  render: h => h(App)
+  //render: h => h(App)
+  render: h => h(Test)
 });
