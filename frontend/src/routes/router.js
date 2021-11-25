@@ -2,7 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Login from '../components/Login';
-import Main from '../pages/Main';
+import Main from '../components/MainPage';
+import AddProductPage from '../components/AddProductPage';
+import MyPage from '../components/MyPage';
+import CartPage from '../components/CartPage';
+import Zzim from '../components/ZzimList';
 
 Vue.use(VueRouter);
 
@@ -15,6 +19,22 @@ const routes = [
     ,{
         path: '/login',
         component: Login
+    },
+    {
+        path: '/addProduct',
+        component: AddProductPage
+    },
+    {
+        path: '/cart',
+        component: CartPage
+    },
+    {
+        path: '/mypage',
+        component: MyPage
+    },
+    {
+        path: '/zzim',
+        component: Zzim
     }
 ]
 

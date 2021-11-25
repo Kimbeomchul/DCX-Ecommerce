@@ -7,19 +7,30 @@
 		elevate-on-scroll
 		scroll-target="#scrolling-techniques-7"
 		>
-		<v-toolbar-title>Title</v-toolbar-title>
+		<v-toolbar-title>
+			<router-link 
+			to="/"
+			style="text-decoration:none;color:black;"
+			>
+			이커머스
+			</router-link>
+		</v-toolbar-title>
 		<v-spacer></v-spacer>
-		<v-btn icon>
+		<v-btn 
+		icon
+		to="mypage">
 			<v-icon>person</v-icon>
 		</v-btn>
-			<v-btn icon>
-			<v-badge
-				color="red"
-				:content=content
-			>
-				<v-icon>shopping_bag</v-icon>
-			</v-badge>
-			</v-btn>
+		<v-btn 
+		icon
+		to ="cart">
+		<v-badge
+			color="red"
+			:content=content
+		>
+			<v-icon>shopping_bag</v-icon>
+		</v-badge>
+		</v-btn>
 		</v-app-bar>
 	</v-card>
 </div>

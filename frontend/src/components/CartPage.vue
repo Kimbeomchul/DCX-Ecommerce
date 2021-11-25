@@ -10,39 +10,39 @@
     >
     <v-container fluid style="padding-top:60px;">
 
-	<h3>장바구니</h3>
-	<v-list three-line>
-	<template v-for="(item, index) in items">
-		<v-divider
-		v-if="item.divider"
-		:key="index"
-		></v-divider>
+    <h3>장바구니</h3>
+    <v-list three-line>
+    <template v-for="(item, index) in items">
+      <v-divider
+      v-if="item.divider"
+      :key="index"
+      ></v-divider>
+      
+      <v-list-item
+      v-else
+      :key="item.title"
+      v-model="buying"
+      multiple
+      active-class=""
+      >
+        <template v-slot:default="{ active }">
+          <v-list-item-action>
+            <v-checkbox :input-value="active"></v-checkbox>
+          </v-list-item-action>
+          <v-img
+          :src="item.book_img"
+          max-height="50px"
+          max-width="50px"
+          style="margin-right:10px;"
+          ></v-img>
 
-		<v-list-item
-		v-else
-		:key="item.title"
-		v-model="buying"
-        multiple
-        active-class=""
-		>
-		<template v-slot:default="{ active }">
-			<v-list-item-action>
-              <v-checkbox :input-value="active"></v-checkbox>
-            </v-list-item-action>
-			<v-img
-			:src="item.book_img"
-			max-height="50px"
-			max-width="50px"
-			style="margin-right:10px;"
-			></v-img>
-
-			<v-list-item-content>
-				<v-list-item-title v-html="item.title"></v-list-item-title>
-				<v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-			</v-list-item-content>
-		</template>
-		</v-list-item>
-	</template>
+          <v-list-item-content>
+            <v-list-item-title v-html="item.title"></v-list-item-title>
+            <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+          </v-list-item-content>
+        </template>
+      </v-list-item>
+      </template>
     </v-list>
 
 	</v-container>

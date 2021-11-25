@@ -43,6 +43,7 @@
 							v-for="item in items"
 							:key="item.title"
 							color="primary"
+							:to="item.to"
 						>
 							<v-list-item-content>
 								<v-list-item-title v-text="item.title"></v-list-item-title>
@@ -66,10 +67,10 @@ export default {
 	},
 	data: () => ({
 		items: [
-			{ title: '찜목록' },
-			{ title: '주문 내역' },
-			{ title: '장바구니' },
-			{ title: '관리자' },
+			{ title: '찜목록', to: '/zzim' },
+			{ title: '주문 내역', to: '/orderedList' },
+			{ title: '장바구니', to: '/cart' },
+			{ title: '관리자', to: '/manager' },
 		]
 	}),
 }
