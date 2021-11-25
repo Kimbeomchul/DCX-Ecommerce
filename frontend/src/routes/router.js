@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 import Login from '../components/Login';
 import Main from '../pages/Main';
+import Test from '../pages/Test'
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,10 @@ const routes = [
     ,{
         path: '/login',
         component: Login
+    }
+    ,{
+        path: '/test',
+        component: Test
     }
 ]
 
