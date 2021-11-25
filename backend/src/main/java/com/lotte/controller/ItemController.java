@@ -5,6 +5,7 @@ import com.lotte.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,6 +26,13 @@ public class ItemController {
     @RequestMapping(value = "/searchid", method = RequestMethod.GET)
     public List<ItemDTO> getItemWithId(@RequestParam(value="item_title") String item_title) {
         return itemService.getItemIdList(item_title);
+    }
+
+    // 추천하기위한 아이템 10개 픽
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/selectitem", method = RequestMethod.GET)
+    public List<ItemDTO> selectItem() {
+        return itemService.selectItem();
     }
 
     // 관리자용

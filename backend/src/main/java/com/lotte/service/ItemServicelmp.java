@@ -8,7 +8,26 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 class ItemServicelmp implements ItemService {
+
     private final UserMapper userMapper;
+
+    // 추천아이템 검색
+    @Override
+    public String getReccItem(String member_id) {
+        return userMapper.getReccItem(member_id);
+    }
+
+    // 추천아이템 검색2
+    @Override
+    public List<ItemDTO> getItemWithRecc(String recc_code) {
+        return userMapper.getItemWithRecc(recc_code);
+    }
+
+    // 추천을 위한 아이템
+    @Override
+    public List<ItemDTO> selectItem () {
+        return userMapper.selectItem();
+    }
 
 
     // 모든아이템 검색

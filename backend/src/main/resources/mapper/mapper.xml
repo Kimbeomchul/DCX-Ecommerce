@@ -18,12 +18,28 @@
         SELECT * FROM basket
     </select>
 
+    <select id="getItemWithRecc" resultType="com.lotte.dto.ItemDTO">
+        SELECT * FROM item WHERE item_section = #{recc_code} ORDER BY RAND() LIMIT 3;
+    </select>
+
+    <select id="selectItem" resultType="com.lotte.dto.ItemDTO">
+        SELECT * FROM item ORDER BY RAND() LIMIT 10;
+    </select>
+
+    <select id="getReccItem" resultType="String">
+        SELECT member_recc FROM members WHERE member_id = #{member_id}
+    </select>
+
     <select id="getBasketList" resultType="com.lotte.dto.BasketDTO">
         SELECT * FROM basket WHERE member_id = #{member_id}
     </select>
 
     <select id="getAllZzim" resultType="com.lotte.dto.ZzimDTO">
         SELECT * FROM zzim WHERE member_id = #{member_id}
+    </select>
+
+    <select id="showPay" resultType="com.lotte.dto.PayDTO">
+        SELECT * FROM payment WHERE member_id = #{member_id}
     </select>
 
     <insert id="setUserInfo">
@@ -36,9 +52,14 @@
         VALUES       (#{item_section}, #{item_title}, #{item_image}, #{item_content}, #{item_writer} , #{item_date} ,#{item_price})
     </insert>
 
+    <insert id="addPay">
+        INSERT INTO  payment(member_id, item_code , pay_kakao)
+        VALUES       (#{member_id}, #{item_code}, #{pay_kakao})
+    </insert>
+
     <insert id="addbasket">
-        INSERT INTO  basket(member_id, item_code, basket_date)
-        VALUES       (#{member_id}, #{item_code}, #{basket_date})
+        INSERT INTO  basket(member_id, item_code)
+        VALUES       (#{member_id}, #{item_code})
     </insert>
 
     <insert id="addZzim">
@@ -63,5 +84,8 @@
         DELETE FROM basket WHERE member_id = #{member_id} AND item_code = #{item_code}
     </delete>
 
+    <update id="addrecc">
+        UPDATE members SET member_recc = #{recc} WHERE member_id = #{member_id}
+    </update>
 
 </mapper>

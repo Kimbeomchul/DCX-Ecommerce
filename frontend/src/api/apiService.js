@@ -1,5 +1,8 @@
 import axios from "axios";
 import api from '../constants/api' 
+import routes from '../constants/routes'
+import * as dialogService from '../services/dialogService'
+import * as routerService from '../services/routerService'
 
 const instance = axios.create({
     baseURL: api.BASE_URL,
@@ -25,6 +28,20 @@ function successHandler(response) {
 }
 
 function errorHandler(response) {
+    let errorMessage = '';
+    const defaultErrorMessage = '서버와의 통신이 원활하지 않습니다. 잠시 후 다시 시도 해주세요';
+
+    switch (response.status) {
+        case 401:
+            errorMessage = '권한이 없습니다. 다시 로그인해주세요';
+            routerService.go(routes.MAIN);
+            break;
+
+        default:
+            errorMessage = response.message ? response.message : defaultErrorMessage;
+    }
+    dialogService.alert(errorMessage);
+    
     return Promise.reject(response.data);
 }
 
