@@ -1,9 +1,22 @@
 <template>
+<<<<<<< HEAD
+<div id="app">
+  <v-app id="inspire">
+    <HeaderWrapper />
+=======
+>>>>>>> 3b44b890a6ad9e93278c937d87c6707d65bc891e
     <v-sheet
       id="scrolling-techniques-7"
       class="overflow-y-auto"
       max-height="2000"
     >
+<<<<<<< HEAD
+    <router-view></router-view>
+    </v-sheet>
+
+  </v-app>
+</div>
+=======
       <v-container fluid style="padding-top:60px;">
         <h1 class="font-weight-black">
           인기 많은 책
@@ -79,21 +92,46 @@
         </v-row>
       </v-container>
     </v-sheet>
+>>>>>>> 3b44b890a6ad9e93278c937d87c6707d65bc891e
 </template>
 
+<style lang="scss" scoped>
+  .like-button {
+    position:absolute;
+    width:100%;
+  }
+</style>
+
 <script>
+import HeaderWrapper from "@/components/Header";
+//import MainPage from "@/components/MainPage";
+
 export default {
+<<<<<<< HEAD
+    components: {
+      HeaderWrapper,
+    },
+=======
     name: 'Main',
+>>>>>>> 3b44b890a6ad9e93278c937d87c6707d65bc891e
     data: () => ({
       books: [
         { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', price: '10,000 원', flex: 6 },
         { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', price: '10,000 원', flex: 6 },
         { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+<<<<<<< HEAD
+        { title: 'Best airlines2', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Pre-fab homes2', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Favorite road trips2', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Best airlines3', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+        { title: 'Best airlines4', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+=======
         { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
         { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', price: '10,000 원', flex: 6 },
         { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', price: '10,000 원', flex: 6 },
         { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
         { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
+>>>>>>> 3b44b890a6ad9e93278c937d87c6707d65bc891e
       ],
       ranked: [
         { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', rank: '1', flex: 4},
