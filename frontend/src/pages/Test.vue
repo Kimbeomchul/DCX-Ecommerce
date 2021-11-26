@@ -30,6 +30,11 @@ import * as dialogService from '../services/dialogService'
 import * as routerService from '../services/routerService'
 import routes from '../constants/routes'
 
+var a = ${data};
+var b = ${status};
+alert(a);
+alert(b);
+
 export default {
     name: 'Main',
     data: () => {
