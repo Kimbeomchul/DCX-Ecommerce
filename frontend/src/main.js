@@ -1,9 +1,16 @@
 import Vue from 'vue'
-//import App from './App.vue'
-import Test from './pages/Test.vue'
+import App from './App.vue'
+//import Test from './pages/Test.vue'
 import router from './routes/router'
 import * as filters from './util/filters'
 import vuetify from './plugins/vuetify'
+
+// vuejs-dialog
+import VuejsDialog from 'vuejs-dialog'
+import 'vuejs-dialog/dist/vuejs-dialog.min.css'
+import Login from './components/Login'
+import view from './constants/dialogCustomView'
+import store from '@/store/index'
 
 Vue.config.productionTip = false
 
@@ -12,10 +19,19 @@ for(const key in filters) {
   Vue.filter(key, filters[key]);
 }
 
+Vue.use(VuejsDialog,{
+  backdropClose: true,
+});
+
+// 전역 store 등록
+
+Vue.dialog.registerComponent(view.LOGIN, Login);
+
 new Vue({
   el: '#app',
   vuetify,
   router,
-  //render: h => h(App)
-  render: h => h(Test)
+  store,
+  render: h => h(App)
+  //render: h => h(Test)
 });

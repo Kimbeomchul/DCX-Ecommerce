@@ -13,12 +13,12 @@
             <p>{{money | currency | won}}</p>
         </div>
         <div>
-            <p>Dialog Test</p>
-            <button v-on:click="dialogTest">testClick</button>
-        </div>
-        <div>
             <p>Router Test</p>
             <button v-on:click="routerTest">testClick</button>
+        </div>
+        <div>
+            <p>Dialog Test</p>
+            <button v-on:click="dialogTest">testClick</button>
         </div>
     </div>
 </template>
@@ -42,7 +42,7 @@ export default {
         routerService.go(routes.MAIN);
     },
     async dialogTest() {
-        let test = await dialogService.confirm('test');
+        let test = await dialogService.alertCustomComponent('login');
         console.log(test);
     },
     apiTest: async () => {

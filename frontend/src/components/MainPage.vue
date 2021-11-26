@@ -48,13 +48,13 @@
     </v-row>
     <v-row>
         <v-col
-        v-for="book in books"
-        :key="book.title"
-        :cols="book.flex"
+        v-for="book in this.$store.state.books"
+        :key="book.item_code"
+        cols= 6
         >
         <v-card>
             <v-img
-            :src="book.src"
+            :src="book.item_image"
             class="white--text align-end"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="200px"
@@ -63,8 +63,8 @@
                 <v-icon>mdi-heart</v-icon>
             </v-btn>
             </v-img>
-            <v-card-title v-text="book.title"></v-card-title>
-            <v-card-text v-text="book.price"></v-card-text>
+            <v-card-title v-text="book.item_title"></v-card-title>
+            <v-card-text>{{ book.item_price }} 원</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn icon>
@@ -87,33 +87,28 @@
 </style>
 
 <script>
-
 export default {
-    components: {
-      
-    },
-    data: () => ({
-      books: [
-        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', price: '10,000 원', flex: 6 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', price: '10,000 원', flex: 6 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
-        { title: 'Best airlines2', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
-        { title: 'Pre-fab homes2', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', price: '10,000 원', flex: 6 },
-        { title: 'Favorite road trips2', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', price: '10,000 원', flex: 6 },
-        { title: 'Best airlines3', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
-        { title: 'Best airlines4', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', price: '10,000 원', flex: 6 },
-      ],
-      ranked: [
-        { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', rank: '1', flex: 4},
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', rank: '2', flex: 4},
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', rank: '3', flex: 4},
-      ],
-      categories: [
-        { name: '소설' },
-        { name: '시' },
-        { name: '인문학' },
-        { name: '종교' },
-      ]
-    }),
+  components: {
+    
+  },
+  data: () => ({
+    books: this.$store.state.books,
+    ranked: [
+      { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', rank: '1', flex: 4},
+      { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', rank: '2', flex: 4},
+      { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', rank: '3', flex: 4},
+    ],
+    categories: [
+      { name: '소설' },
+      { name: '시' },
+      { name: '인문학' },
+      { name: '종교' },
+    ]
+  }),
+  methods: {
+  },
+  created() {
+    this.$store.dispatch('FETCH_BOOKS');
+  }
 }
 </script>

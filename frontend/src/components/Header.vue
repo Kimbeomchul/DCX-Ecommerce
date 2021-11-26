@@ -18,6 +18,11 @@
 		<v-spacer></v-spacer>
 		<v-btn 
 		icon
+		to="test">
+			<v-icon>person</v-icon>
+		</v-btn>
+		<v-btn 
+		icon
 		to="mypage">
 			<v-icon>person</v-icon>
 		</v-btn>
@@ -26,7 +31,7 @@
 		to ="cart">
 		<v-badge
 			color="red"
-			:content=content
+			:content= $store.state.total
 		>
 			<v-icon>shopping_bag</v-icon>
 		</v-badge>
@@ -42,7 +47,7 @@ import routes from '../constants/routes'
 export default {
 	name: "HeaderWrapper",
 	data: () => ({
-		content: 1
+		content: this.$store.state.total
 	}),
 	methods: {
 		goTest() {
