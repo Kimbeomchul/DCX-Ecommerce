@@ -31,7 +31,7 @@ public class LoginController {
     private final UserService userService;
 
     @GetMapping(value = "auth/kakao/callback")
-    public Model FindAuthCode(Model model , @RequestParam("code") String code){
+    public String FindAuthCode(@RequestParam("code") String code){
         System.out.println(code);
 
         RestTemplate rt = new RestTemplate();
@@ -102,17 +102,7 @@ public class LoginController {
         }
 
 
-
-        if("Y".equals(Flag)){
-            model.addAttribute("status","Y");
-
-        }else{
-            model.addAttribute("status","N");
-        }
-
-        model.addAttribute("data", response2.getBody());
-
-        return model;
+        return Flag+response2.getbody();
 
 
     }
