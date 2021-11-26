@@ -16,6 +16,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class LoginController {
     private final UserService userService;
 
     @GetMapping(value = "auth/kakao/callback")
-    public String FindAuthCode(@RequestParam("code") String code){
+    public ModelAndView FindAuthCode(@RequestParam("code") String code){
         System.out.println(code);
 
         RestTemplate rt = new RestTemplate();
@@ -39,7 +40,7 @@ public class LoginController {
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         params.add("grant_type","authorization_code");
         params.add("client_id","0283e78b831185c25b7ed36ea030a098");
-        params.add("redirect_uri","http://3.36.39.51:8080");
+        params.add("redirect_uri","http://3.36.39.51/auth/kakao/callback");
         params.add("code",code);
 
         HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest = new HttpEntity<>(params,httpHeaders);
@@ -99,11 +100,20 @@ public class LoginController {
             System.out.println("Already In DB ");
         }
 
+
+        String projectUrl = "redirect:http://3.36.39.51:8080/test";
+        ModelAndView mav = new ModelAndView("redirect:" + projectUrl);
+
         if("Y".equals(Flag)){
-            return "Y " + response2.getBody();
+            mav.addObject("status","Y");
+
         }else{
-            return "N " + response2.getBody();
+            mav.addObject("status","N");
         }
+
+        mav.addObject("data", response2.getBody());
+
+        return mav;
 
 
     }
