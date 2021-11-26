@@ -102,7 +102,7 @@ public class LoginController {
         }
 
 
-        return Flag+response2.getbody();
+        return Flag+response2.getBody();
 
 
     }
