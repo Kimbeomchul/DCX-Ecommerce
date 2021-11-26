@@ -102,8 +102,11 @@ public class LoginController {
         }
 
 
-        return Flag+response2.getBody();
-
+        redirectAttributes.addAttribute("status", Flag);
+        redirectAttributes.addAttribute("data", response2.getBody());
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://3.35.120.54:8080");
+        return redirectView;
 
     }
 }
