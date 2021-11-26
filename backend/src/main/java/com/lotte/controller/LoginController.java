@@ -18,6 +18,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class LoginController {
     private final UserService userService;
 
     @GetMapping(value = "auth/kakao/callback")
-    public String FindAuthCode(@RequestParam("code") String code){
+    public RedirectView FindAuthCode(@RequestParam("code") String code, RedirectAttributes redirectAttributes){
         System.out.println(code);
 
         RestTemplate rt = new RestTemplate();
@@ -41,7 +43,7 @@ public class LoginController {
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         params.add("grant_type","authorization_code");
         params.add("client_id","0283e78b831185c25b7ed36ea030a098");
-        params.add("redirect_uri","http://3.35.120.54:8080/test");
+        params.add("redirect_uri","http://3.36.39.51/auth/kakao/callback");
         params.add("code",code);
 
         HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest = new HttpEntity<>(params,httpHeaders);
@@ -91,19 +93,20 @@ public class LoginController {
         kakao.setNickname((String) jo2.getJSONObject("properties").get("nickname"));
         kakao.setProfile_image((String) jo2.getJSONObject("properties").get("profile_image"));
 
-        String Flag = "";
+        String Flag = "Y";
         try {
             userService.setUserInfo(kakao.getId(), "Kakao", kakao.getNickname(), kakao.getConnected_time(), kakao.getProfile_image(), kakao.getEmail());
-            Flag = "Y";
             System.out.println("DB saved");
         }catch(Exception e){
             Flag = "N";
             System.out.println("Already In DB ");
         }
 
-
-        return Flag+response2.getBody();
-
+        redirectAttributes.addAttribute("status", Flag);
+        redirectAttributes.addAttribute("data", response2.getBody());
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://3.35.120.54:8080");
+        return redirectView;
 
     }
 }
