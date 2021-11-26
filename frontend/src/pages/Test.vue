@@ -2,7 +2,7 @@
     <div style="align-self:center; margin:30px">
         <div>
             <p>apiTest</p>
-            <button v-on:click="apiTest">testClick</button>
+            <button v-on:click="apiTest">${data}testClick</button>
         </div>
         <div>
             <p>userSet</p>
@@ -29,11 +29,6 @@ import * as userService from '../services/userService'
 import * as dialogService from '../services/dialogService'
 import * as routerService from '../services/routerService'
 import routes from '../constants/routes'
-
-var a = '${data}';
-var b = "${status}";
-alert(a);
-alert(b);
 
 export default {
     name: 'Main',
