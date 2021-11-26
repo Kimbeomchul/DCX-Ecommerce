@@ -101,9 +101,11 @@ public class LoginController {
             Flag = "N";
             System.out.println("Already In DB ");
         }
-
         redirectAttributes.addAttribute("status", Flag);
-        redirectAttributes.addAttribute("data", response2.getBody());
+        redirectAttributes.addAttribute("image", (String) jo2.getJSONObject("properties").get("profile_image"));
+        redirectAttributes.addAttribute("nickname", (String) jo2.getJSONObject("properties").get("nickname"));
+        redirectAttributes.addAttribute("id", (Integer) jo2.get("id"));
+        
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://3.35.120.54:8080");
         return redirectView;
