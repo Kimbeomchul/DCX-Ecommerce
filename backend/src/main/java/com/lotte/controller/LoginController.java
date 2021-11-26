@@ -31,8 +31,8 @@ public class LoginController {
     private final UserService userService;
 
     @GetMapping(value = "auth/kakao/callback")
-    public String FindAuthCode(@RequestParam("code") String code){
-        System.out.println(code);
+   public RedirectView FindAuthCode(@RequestParam("code") String code, RedirectAttributes redirectAttributes){
+         System.out.println(code);
 
         RestTemplate rt = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
