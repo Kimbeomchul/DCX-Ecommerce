@@ -2,16 +2,12 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Login from '../components/Login';
-<<<<<<< HEAD
 import Main from '../components/MainPage';
 import AddProductPage from '../components/AddProductPage';
 import MyPage from '../components/MyPage';
 import CartPage from '../components/CartPage';
 import Zzim from '../components/ZzimList';
-=======
-import Main from '../pages/Main';
 import Test from '../pages/Test'
->>>>>>> 3b44b890a6ad9e93278c937d87c6707d65bc891e
 
 Vue.use(VueRouter);
 
@@ -46,7 +42,6 @@ const routes = [
         component: Test
     }
 ]
-
 
 //라우터 생성
 const router = new VueRouter({

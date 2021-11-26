@@ -5,7 +5,8 @@ export default Object.freeze({
     BASE_URL: 'http://3.36.39.51/',
 
     // 로그인
-    LOGIN_URL: 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://3.36.39.51/auth/kakao/callback',
+    KAKAO_LOGIN_URL: 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://3.36.39.51/auth/kakao/callback',
+    KAKAO_LOGOUT: 'kapi.kakao.com//v1/user/unlink',
     
     // 도서
     GET_BOOK_LIST: 'allitem',
