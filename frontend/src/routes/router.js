@@ -1,13 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
 import Login from '../components/Login';
 import Main from '../components/MainPage';
 import AddProductPage from '../components/AddProductPage';
 import MyPage from '../components/MyPage';
 import CartPage from '../components/CartPage';
 import Zzim from '../components/ZzimList';
-import Test from '../pages/Test'
+import Test from '../pages/Test';
+import OrderedList from '../components/OrderedList';
 
 Vue.use(VueRouter);
 
@@ -40,6 +40,10 @@ const routes = [
     ,{
         path: '/test',
         component: Test
+    },
+    {
+        path: '/orderedList',
+        component: OrderedList
     }
 ]
 
