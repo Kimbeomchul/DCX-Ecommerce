@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class LoginController {
     private final UserService userService;
 
     @GetMapping(value = "auth/kakao/callback")
-    public ModelAndView FindAuthCode(@RequestParam("code") String code){
+    public Model FindAuthCode(Model model , @RequestParam("code") String code){
         System.out.println(code);
 
         RestTemplate rt = new RestTemplate();
@@ -102,18 +103,18 @@ public class LoginController {
 
 
         String projectUrl = "redirect:http://3.36.39.51:8080/test";
-        ModelAndView mav = new ModelAndView("redirect:" + projectUrl);
+
 
         if("Y".equals(Flag)){
-            mav.addObject("status","Y");
+            model.addAttribute("status","Y");
 
         }else{
-            mav.addObject("status","N");
+            model.addAttribute("status","N");
         }
 
-        mav.addObject("data", response2.getBody());
+        model.addAttribute("data", response2.getBody());
 
-        return mav;
+        return model;
 
 
     }
