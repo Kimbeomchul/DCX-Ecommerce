@@ -41,7 +41,7 @@ public class LoginController {
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         params.add("grant_type","authorization_code");
         params.add("client_id","0283e78b831185c25b7ed36ea030a098");
-        params.add("redirect_uri","http://3.36.39.51/auth/kakao/callback");
+        params.add("redirect_uri","http://3.36.39.51:8080/test");
         params.add("code",code);
 
         HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest = new HttpEntity<>(params,httpHeaders);
@@ -101,8 +101,6 @@ public class LoginController {
             System.out.println("Already In DB ");
         }
 
-
-        String projectUrl = "redirect:http://3.36.39.51:8080/test";
 
 
         if("Y".equals(Flag)){
