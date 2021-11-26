@@ -2,7 +2,7 @@
     <div style="align-self:center; margin:30px">
         <div>
             <p>apiTest</p>
-            <button v-on:click="apiTest">${data}testClick</button>
+            <button v-on:click="apiTest">testClick</button>
         </div>
         <div>
             <p>userSet</p>
