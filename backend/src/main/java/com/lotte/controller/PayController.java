@@ -27,7 +27,7 @@ public class PayController {
         System.out.println("TID : " +pay_kakao);
 
         try {
-            String[] list1 = datas.split(",");
+            String[] list1 = nodap.split(",");
             for (int i = 0; i < list1.length; i++) {
                 payService.addPay(member_id, Integer.parseInt(list1[i]), pay_kakao);
             }
