@@ -30,5 +30,10 @@ export default Object.freeze({
     // 찜
     GET_ZZIM_LIST: 'allzzim',
     ADD_ZZIM: 'azzim',
-    DELETE_ZZIM: 'dzzim'
+    DELETE_ZZIM: 'dzzim',
+
+    // 구매
+    PAY: 'pay',
+    PAY_COMPLETE: 'paysave',
+    GET_PAY_LIST: 'paylist',
 })
