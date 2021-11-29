@@ -8,6 +8,7 @@ import CartPage from '../components/CartPage';
 import Zzim from '../components/ZzimList';
 import Test from '../pages/Test';
 import OrderedList from '../components/OrderedList';
+import ProductDetail from '../components/ProductDetail';
 
 Vue.use(VueRouter);
 
@@ -44,6 +45,10 @@ const routes = [
     {
         path: '/orderedList',
         component: OrderedList
+    },
+    {
+        path: '/book/:bookId',
+        component: ProductDetail
     }
 ]
 
