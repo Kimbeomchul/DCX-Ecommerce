@@ -42,17 +42,10 @@
 </template>
 
 <script>
-import * as routerService from '../services/routerService'
-import routes from '../constants/routes'
 export default {
 	name: "HeaderWrapper",
 	data: () => ({
 		content: this.$store.state.total
 	}),
-	methods: {
-		goTest() {
-			routerService.go(routes.TEST);
-		}
-	}
 }
 </script>

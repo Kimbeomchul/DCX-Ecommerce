@@ -11,6 +11,7 @@ export default Object.freeze({
     
     // 도서
     GET_BOOK_LIST: 'allitem',
+    GET_BOOK_RANDOM: 'selectitem',
     GET_BOOK: 'searchid',
     DELETE_BOOK: 'ditem',
     ADD_BOOK: 'aitem',
