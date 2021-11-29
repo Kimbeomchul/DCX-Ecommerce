@@ -1,6 +1,7 @@
 import apiService from "../api/apiService";
 import api from '../constants/api'
 import * as utils from '../util/utils'
+import * as userService from './userService'
 
 /**
  * 도서 전체 조회
@@ -8,6 +9,14 @@ import * as utils from '../util/utils'
  */
 export async function getBookList() {
     return await apiService.toGet(api.GET_BOOK_LIST);
+}
+
+/**
+ * 도서 9개 랜덤 조회
+ * @returns {Object} book
+ */
+export async function getBookRandom() {
+    return await apiService.toGet(api.GET_BOOK_RANDOM);
 }
 
 /**
@@ -30,11 +39,13 @@ export async function registerBook(book) {
 }
 
 /**
- * 도서 삭제
- * @param {Number} itemCode
+ * 사용자 희망 도서 선택
+ * @param {Array} book
  */
 export async function removeBook(itemCode) {
-    const params = {item_code: itemCode};
-    return await apiService.toDelete(api.DELETE_BOOK, params);
+    const params = {
+        item_code: itemCode,
+        member_id: userService.getUser().member_id
+    };
+    return await apiService.toDelete(api.RECOMMAND, params);
 }
-

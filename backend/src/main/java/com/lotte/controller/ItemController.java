@@ -2,10 +2,13 @@ package com.lotte.controller;
 
 import com.lotte.dto.ItemDTO;
 import com.lotte.service.ItemService;
+import jdk.nashorn.internal.parser.JSONParser;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -20,6 +23,24 @@ public class ItemController {
     public List<ItemDTO> getAllItem() {
         return itemService.getAllItemList();
     }
+
+    // code 로 검색
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/getItemCode", method = RequestMethod.GET)
+    public String getItemCode(@RequestParam(value="data") String data) {
+        String[] list1 = data.split(",");
+
+        JSONArray ary1 = new JSONArray();
+
+        for (int i = 0; i < list1.length; i++) {
+            HashMap<String,String> temp1 = itemService.getItemCode(Integer.parseInt(list1[i]));
+            JSONObject obj1 = new JSONObject(temp1);
+            ary1.put(obj1);
+        }
+        return ary1.toString();
+    }
+
+
 
     // 특정 아이템 제목으로 검색
     @CrossOrigin(origins = "*", allowedHeaders = "*")

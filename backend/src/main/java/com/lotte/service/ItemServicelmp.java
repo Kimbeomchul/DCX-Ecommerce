@@ -3,7 +3,10 @@ package com.lotte.service;
 import com.lotte.dto.ItemDTO;
 import com.lotte.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
@@ -15,6 +18,11 @@ class ItemServicelmp implements ItemService {
     @Override
     public String getReccItem(String member_id) {
         return userMapper.getReccItem(member_id);
+    }
+
+    @Override
+    public HashMap<String,String> getItemCode(int item_code) {
+        return userMapper.getItemCode(item_code);
     }
 
     // 추천아이템 검색2

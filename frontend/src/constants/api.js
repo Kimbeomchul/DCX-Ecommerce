@@ -5,14 +5,17 @@ export default Object.freeze({
     BASE_URL: 'http://3.36.39.51/',
 
     // 로그인
+    // KAKAO_LOGIN_URL: 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://3.35.120.54:8080/',
     KAKAO_LOGIN_URL: 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://3.36.39.51/auth/kakao/callback',
     KAKAO_LOGOUT: 'kapi.kakao.com//v1/user/unlink',
     
     // 도서
     GET_BOOK_LIST: 'allitem',
+    GET_BOOK_RANDOM: 'selectitem',
     GET_BOOK: 'searchid',
     DELETE_BOOK: 'ditem',
     ADD_BOOK: 'aitem',
+    RECOMMAND: 'rec',
 
     // 장바구니
     GET_BASKET_LIST: 'allbasket',

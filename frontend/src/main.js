@@ -5,12 +5,14 @@ import router from './routes/router'
 import * as filters from './util/filters'
 import vuetify from './plugins/vuetify'
 
+
 // vuejs-dialog
 import VuejsDialog from 'vuejs-dialog'
 import 'vuejs-dialog/dist/vuejs-dialog.min.css'
 import Login from './components/Login'
 import view from './constants/dialogCustomView'
 import store from '@/store/index'
+import SelectBooks from './components/SelectBooks'
 
 Vue.config.productionTip = false
 
@@ -26,6 +28,7 @@ Vue.use(VuejsDialog,{
 // 전역 store 등록
 
 Vue.dialog.registerComponent(view.LOGIN, Login);
+Vue.dialog.registerComponent(view.SELECT_BOOKS, SelectBooks);
 
 new Vue({
   el: '#app',
