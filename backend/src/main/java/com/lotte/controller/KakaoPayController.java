@@ -16,7 +16,7 @@ public class KakaoPayController {
     //카카오페이 결제시스템 개발
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/pay")
-    public String KakaoPay() {
+    public String KakaoPay(@RequestParam(value="item_name") String item_name, @RequestParam(value="item_cost") String item_cost) {
 
         RestTemplate rt = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -28,13 +28,13 @@ public class KakaoPayController {
         params.add("cid", "TC0ONETIME");
         params.add("partner_order_id", "1001");
         params.add("partner_user_id", "gorany");
-        params.add("item_name", "lotte_malang");
+        params.add("item_name", item_name);
         params.add("quantity", "1");
-        params.add("total_amount", "999999");
+        params.add("total_amount", item_cost);
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost/user");
-        params.add("cancel_url", "http://localhost/allitem");
-        params.add("fail_url", "http://localhost/allbasket");
+        params.add("approval_url", "http://3.35.120.54:8080?data=success");
+        params.add("cancel_url", "http://3.35.120.54:8080?data=cancel");
+        params.add("fail_url", "http://3.35.120.54:8080data=fail");
 
         HttpEntity<MultiValueMap<String, String>> kakaopay = new HttpEntity<>(params, httpHeaders);
 
@@ -58,7 +58,7 @@ public class KakaoPayController {
         // 적립금 저장
 
 
-        String redirect_url = (String) jo.get("next_redirect_pc_url");
-        return redirect_url;
+        String redirect_url = (String) jo.get("next_redirect_mobile_url");
+        return jo.get("tid") + "," + redirect_url;
     }
 }
