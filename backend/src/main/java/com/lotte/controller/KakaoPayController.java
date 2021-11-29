@@ -32,9 +32,9 @@ public class KakaoPayController {
         params.add("quantity", "1");
         params.add("total_amount", item_cost);
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://3.35.120.54:8080?data=success");
-        params.add("cancel_url", "http://3.35.120.54:8080?data=cancel");
-        params.add("fail_url", "http://3.35.120.54:8080data=fail");
+        params.add("approval_url", "http://3.35.120.54:8080/?data=success");
+        params.add("cancel_url", "http://3.35.120.54:8080/?data=cancel");
+        params.add("fail_url", "http://3.35.120.54:8080/?data=fail");
 
         HttpEntity<MultiValueMap<String, String>> kakaopay = new HttpEntity<>(params, httpHeaders);
 
