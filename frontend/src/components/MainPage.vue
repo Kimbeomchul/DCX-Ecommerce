@@ -52,6 +52,12 @@
         :key="book.item_code"
         cols= 6
         >
+        <router-link
+          v-bind:to="{
+            path: `/book/${book.item_code}`,
+            params: { index: `${book.item_code}` },
+          }"
+        >
         <v-card>
             <v-img
             :src="book.item_image"
@@ -59,19 +65,17 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="200px"
             >
-            <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-            </v-btn>
             </v-img>
             <v-card-title v-text="book.item_title"></v-card-title>
             <v-card-text>{{ book.item_price }} 원</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
+                <v-icon @click="zzimClicked">mdi-heart</v-icon>
             </v-btn>
             </v-card-actions>
         </v-card>
+        </router-link>
         </v-col>
     </v-row>
     </v-container>
@@ -89,7 +93,7 @@
 <script>
 export default {
   components: {
-    
+
   },
   data: () => ({
     books: this.$store.state.books,
@@ -106,6 +110,10 @@ export default {
     ]
   }),
   methods: {
+    zzimClicked() {
+      this.
+      console.log(this.$store.state.books.item_code + "클릭되었습니다.");
+    },
   },
   created() {
     this.$store.dispatch('FETCH_BOOKS');

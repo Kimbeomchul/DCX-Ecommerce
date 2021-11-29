@@ -8,6 +8,7 @@ import CartPage from '../components/CartPage';
 import Zzim from '../components/ZzimList';
 import Test from '../pages/Test';
 import OrderedList from '../components/OrderedList';
+import ProductDetail from '../components/ProductDetail';
 
 import * as userService from '../services/userService'
 import {LOGIN_NEED} from '../constants/routes'
@@ -51,6 +52,10 @@ const routes = [
     {
         path: '/orderedList',
         component: OrderedList
+    },
+    {
+        path: '/book/:bookId',
+        component: ProductDetail
     }
 ]
 
@@ -79,7 +84,7 @@ router.beforeEach((to, from, next) => {
             return next(false);
         }
     }
-    
+
     return next();
 })
 
