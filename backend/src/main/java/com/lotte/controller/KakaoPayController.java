@@ -58,7 +58,7 @@ public class KakaoPayController {
         // 적립금 저장
 
 
-        String redirect_url = (String) jo.get("next_redirect_mobile_url");
+        String redirect_url = (String) jo.get("next_redirect_pc_url");
         return jo.get("tid") + "," + redirect_url;
     }
 }
