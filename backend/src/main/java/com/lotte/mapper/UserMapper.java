@@ -23,8 +23,8 @@ public interface UserMapper {
 
     //======================== 아이템 ==============================//
 
-    // 이미지
-    HashMap<String,String> getItemCode(int item_code);
+    // 코드로검색
+    List<ItemDTO> getItemCode(Integer[] arr);
     // 전체 책리스트
     List<ItemDTO> getAllItemList();
     // 제목으로 책 검색
