@@ -21,13 +21,13 @@ public class PayController {
     // 결제내역 저장
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/paysave", method = RequestMethod.POST)
-    public void addPay(@RequestParam(value="member_id") String member_id,@RequestParam(value="nodap") String nodap  , @RequestParam(value="pay_kakao") String pay_kakao) {
-        System.out.println("DATAS : " + nodap);
+    public void addPay(@RequestParam(value="member_id") String member_id,@RequestParam(value="datas") String datas  , @RequestParam(value="pay_kakao") String pay_kakao) {
+        System.out.println("DATAS : " + datas);
         System.out.println("ID : " +member_id);
         System.out.println("TID : " +pay_kakao);
 
         try {
-            String[] list1 = nodap.split(",");
+            String[] list1 = datas.split(",");
             for (int i = 0; i < list1.length; i++) {
                 payService.addPay(member_id, Integer.parseInt(list1[i]), pay_kakao);
             }
