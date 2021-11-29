@@ -1,7 +1,7 @@
 import router from '../routes/router'
 
-export function go(path) {
-  router.push(path)
+export function go(path, query) {
+  router.push({path, query})
 }
 
 export function goback() {

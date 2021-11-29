@@ -30,5 +30,17 @@ export function cameltoSnake(calmelObject) {
         }).join('');
 
         snakeObject[snakeKey] = calmelObject[calmelKey];
+        return snakeObject;
     }
+}
+
+/**
+ * Object가 비었는지 확인
+ * @returns {boolean}
+ */
+export function isEmptyObject(object) {
+    if(object) {
+        return Object.keys(object).length === 0;
+    }
+    return false;
 }

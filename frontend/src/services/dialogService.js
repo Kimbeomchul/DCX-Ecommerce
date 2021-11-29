@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import view from '../constants/dialogCustomView'
 
 export function alert(message, options) {
   Vue.dialog.alert(message, options);
@@ -11,8 +10,8 @@ export function confirm(message, options) {
         .catch(data => data);
 }
 
-export function alertCustomComponent() {
-  Vue.dialog.confirm('로그인팝업 테스트', {
-    view: view.LOGIN,
+export async function alertCustomComponent(view) {
+  return await Vue.dialog.confirm('로그인팝업 테스트', {
+    view
   })
 }
