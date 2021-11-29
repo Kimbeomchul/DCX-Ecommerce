@@ -8,7 +8,7 @@ import * as userService from './userService'
  * @returns {Array} basket
  */
 export async function getZzimList() {
-    return await apiService.toGet(api.GET_ZZIM_LIST, userService.getUser());
+    return await apiService.toGet(api.GET_ZZIM_LIST, userService.getUser().member_id);
 }
 
 /**
@@ -19,7 +19,7 @@ export async function getZzimList() {
 export async function addZzim(itemCode) {
     const params = {
         item_code: itemCode,
-        member_id: userService.getUser()
+        member_id: userService.getUser().member_id
     };
     return await apiService.toPost(api.ADD_ZZIM, params);
 }
@@ -31,7 +31,7 @@ export async function addZzim(itemCode) {
 export async function deleteZzim(itemCode) {
     const params = {
         item_code: itemCode,
-        member_id: userService.getUser()
-    }
+        member_id: userService.getUser().member_id
+    };
     return await apiService.toDelete(api.DELETE_ZZIM, params);
 }
