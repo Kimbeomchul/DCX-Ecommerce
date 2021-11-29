@@ -48,6 +48,7 @@ import * as bookService from '../services/bookService'
 import * as userService from '../services/userService'
 import * as dialogService from '../services/dialogService'
 import * as routerService from '../services/routerService'
+import * as payService from '../services/payService'
 import {ROUTES} from '../constants/routes'
 
 export default {
@@ -68,7 +69,7 @@ export default {
         routerService.go(ROUTES.MAIN, query);
     },
     payTest() {
-        // testService.gettest();
+        payService.pay();
     },
     async imageTest() {
         await dialogService.alertCustomComponent('SelectBooks');
