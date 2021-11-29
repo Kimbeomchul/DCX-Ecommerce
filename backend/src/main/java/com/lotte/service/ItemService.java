@@ -1,6 +1,8 @@
 package com.lotte.service;
 import com.lotte.dto.ItemDTO;
+import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
 public interface ItemService {
 
@@ -17,4 +19,6 @@ public interface ItemService {
     void addItem(String item_section, String item_title, String item_image, String item_content, String item_writer, String item_date, int item_price);
 
     String getReccItem(String member_id);
+
+    HashMap<String,String> getItemCode(int item_code);
 }

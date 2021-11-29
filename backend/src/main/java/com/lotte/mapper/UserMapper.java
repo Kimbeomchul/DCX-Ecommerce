@@ -3,6 +3,10 @@ package com.lotte.mapper;
 import com.lotte.dto.*;
 import com.lotte.login.Login;
 import org.apache.ibatis.annotations.Mapper;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
 @Mapper
 public interface UserMapper {
@@ -19,6 +23,8 @@ public interface UserMapper {
 
     //======================== 아이템 ==============================//
 
+    // 이미지
+    HashMap<String,String> getItemCode(int item_code);
     // 전체 책리스트
     List<ItemDTO> getAllItemList();
     // 제목으로 책 검색

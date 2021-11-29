@@ -10,6 +10,10 @@
         SELECT * FROM item
     </select>
 
+    <select id="getItemCode" resultType="HashMap">
+        SELECT * FROM item where item_code = #{item_code}
+    </select>
+
     <select id="getItemIdList" resultType="com.lotte.dto.ItemDTO">
         SELECT * FROM item WHERE item_title = #{item_title}
     </select>
