@@ -10,9 +10,9 @@
       <v-img
         :src="book.item_image"
         @click="select(book, book.item_code)"
+        aspect-ratio="1"
+        class="grey lighten-2"
       >
-        <!-- aspect-ratio="1"
-        class="grey lighten-2" -->
         <template v-slot:placeholder>
           <v-row
             class="fill-height ma-0"
