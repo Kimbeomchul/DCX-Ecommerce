@@ -96,7 +96,7 @@
     </update>
 
     <update id="addphone">
-        UPDATE members SET member_phone = #{member_phone} AND member_address = #{member_address} WHERE member_id = #{member_id}
+        UPDATE members SET member_phone = #{member_phone} , member_address = #{member_address} WHERE member_id = #{member_id}
     </update>
 
 </mapper>
