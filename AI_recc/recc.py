@@ -1,15 +1,95 @@
+from email.mime import application
+
 import pandas as pd
-from flask import Flask ,request,jsonify
+from flask import Flask, render_template, redirect, request, url_for , flash
 import requests
-import json
 
 
 app = Flask(__name__)
+
+# Backoffice API
+
+@app.route('/', methods=['GET'])
+def m():
+    return render_template('login.jsp')
+@app.route('/mvadd', methods=['GET'])
+def mv1():
+    return render_template('book_add.jsp')
+@app.route('/mvdel', methods=['GET'])
+def mv2():
+    url = "http://3.36.39.51/allitem"
+    response = requests.get(url)
+
+    obj = response.json()
+    status = response.status_code
+    print(status)
+
+    return render_template('book_delete.jsp', data=obj)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    result = request.form
+    if result.get('id') == 'root' and result.get('pw') == 'root':
+
+        return render_template('main.jsp')
+
+    flash("로그인 실패")
+    return render_template('login.jsp')
+
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+
+    result = request.form
+    url = "http://3.36.39.51/ditem"
+    response = requests.delete(url, data= result)
+
+    obj = response.request
+    status = response.status_code
+    print(status)
+    print(obj)
+
+    if response.raise_for_status() or status == 500:
+        flash("책삭제에 실패했습니다.")
+    if status == 200:
+        flash("책삭제 성공 ")
+
+    return render_template('main.jsp')
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+
+    result = request.form
+    url = "http://3.36.39.51/aitem"
+    response = requests.post(url, data= result)
+
+    obj = response.request
+    status = response.status_code
+    print(status)
+    print(obj)
+
+    if response.raise_for_status() or status == 500:
+        flash("책등록에 실패했습니다.")
+        return render_template('main.jsp')
+
+
+    flash("책등록 성공 ")
+    return render_template('main.jsp')
+
+
+
+
+
+# Backoffice END
+
+
+
+
 ## [0,0,0,0,0,0,3,0,0,2] <<= data input
 
 ## Ex) localhost:5000/rec/0000003002
 ## return cluster 1,2,3,4 spring에서 분기처리
-
 
 # 머신러닝 API 리턴
 @app.route('/rec/<data>/<id>')
@@ -70,4 +150,7 @@ df_cluster_pairplot = df_csv[
     ["sosul", "essay", "column", "misul", "gungang", "hobby", "children", "gojun", "science", "manhwa", 'cluster']]
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.run(host='0.0.0.0', port=5000, debug=False)
+
