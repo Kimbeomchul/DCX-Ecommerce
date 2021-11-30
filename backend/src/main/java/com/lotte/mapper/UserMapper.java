@@ -22,6 +22,8 @@ public interface UserMapper {
     void addrecc(String recc, String member_id);
 
     void addphone(String member_phone , String member_address, String member_id);
+
+    void addsave(int member_savemoney, String member_id);
     //======================== 아이템 ==============================//
 
     // 코드로검색
