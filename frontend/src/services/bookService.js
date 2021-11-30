@@ -4,7 +4,7 @@ import * as utils from '../util/utils'
 import * as userService from './userService'
 
  export function getBuyingBooks() {
-    const items = JSON.parse(localStorage.getItem(buyingBooks));
+    const items = JSON.parse(localStorage.getItem('buyingBooks'));
     return Object.values(items);
 }
 
