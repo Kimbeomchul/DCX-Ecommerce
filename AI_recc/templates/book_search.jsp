@@ -171,6 +171,13 @@ body {
             }
         });
 
+
+        $("#searchInput").keyup(function(event) {
+            if (window.event.keyCode == 13) {
+                $("#as").click();
+            }
+        });
+
     });
 
 
