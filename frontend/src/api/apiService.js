@@ -1,5 +1,5 @@
 import axios from "axios";
-import api from '../constants/api' 
+import api from '../constants/api'
 import {ROUTES} from '../constants/routes'
 import * as dialogService from '../services/dialogService'
 import * as routerService from '../services/routerService'
@@ -41,7 +41,7 @@ function errorHandler(response) {
             errorMessage = response.message ? response.message : defaultErrorMessage;
     }
     dialogService.alert(errorMessage);
-    
+
     return Promise.reject(response.data);
 }
 

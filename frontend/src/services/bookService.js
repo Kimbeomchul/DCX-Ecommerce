@@ -29,6 +29,17 @@ export async function getBook(itemCode) {
 }
 
 /**
+ * 도서 타이틀로 조회
+ * @param {String} itemTitle
+ * @returns {Object} book
+ */
+export async function getBookByTitle(itemTitle) {
+    const params = {};
+    params['item_title'] = itemTitle;
+    return await apiService.toGet(api.GET_BOOK, params);
+}
+
+/**
  * 도서 추가
  * @param {Object} book
  */

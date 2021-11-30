@@ -54,7 +54,7 @@ const routes = [
         component: OrderedList
     },
     {
-        path: '/book/:bookId',
+        path: '/book/:bookTitle',
         component: ProductDetail
     }
 ]

@@ -99,12 +99,12 @@ export default {
 			return attrs
 		},
 		bookInfo() {
-			return this.$store.state.id;
+			return this.$store.state.book;
 		}
 	},
 	created() {
-		const bookId = this.$route.params.bookId;
-		this.$store.dispatch("FETCH_BOOK", bookId);
+		const bookTitle = this.$route.params.bookTitle;
+		this.$store.dispatch("FETCH_BOOK", bookTitle);
 	}
 }
 </script>

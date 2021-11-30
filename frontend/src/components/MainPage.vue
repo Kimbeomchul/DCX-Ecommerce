@@ -54,8 +54,8 @@
         >
         <router-link
           v-bind:to="{
-            path: `/book/${book.item_code}`,
-            params: { index: `${book.item_code}` },
+            path: `/book/${book.item_title}`,
+            params: { bookTitle: `${book.item_title}` },
           }"
         >
         <v-card>
@@ -111,8 +111,7 @@ export default {
   }),
   methods: {
     zzimClicked() {
-      this.
-      console.log(this.$store.state.books.item_code + "클릭되었습니다.");
+
     },
   },
   created() {
