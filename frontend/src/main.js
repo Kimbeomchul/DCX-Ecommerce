@@ -1,10 +1,10 @@
 import Vue from 'vue'
-//import App from './App.vue'
+import App from './App.vue'
 //import Test from './pages/Test.vue'
 import router from './routes/router'
 import * as filters from './util/filters'
 import vuetify from './plugins/vuetify'
-import OrderPage from './components/OrderPage'
+//import OrderPage from './components/OrderPage'
 
 // vuejs-dialog
 import VuejsDialog from 'vuejs-dialog'
@@ -35,7 +35,6 @@ new Vue({
   vuetify,
   router,
   store,
-  render: h => h(OrderPage)
-  //render: h => h(App)
+  render: h => h(App)
   //render: h => h(Test)
 });

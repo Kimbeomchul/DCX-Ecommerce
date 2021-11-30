@@ -16,48 +16,11 @@
         <v-form
 		ref="form"
 		>
-            <v-text-field
-              ref="name"
-              v-model="name"
-              :rules="[() => !!name || '필수 입력항목입니다.']"
-              :error-messages="errorMessages"
-              label="성함"
-              placeholder="홍길동"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              ref="phoneNumber"
-              v-model="name"
-              :rules="[() => !! phoneNumber || '필수 입력항목입니다.']"
-              :error-messages="errorMessages"
-              label="전화번호"
-              placeholder="010-0000-0000"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              ref="zip"
-              v-model="zip"
-              :rules="[() => !! zip || '필수 입력항목입니다.']"
-              label="우편번호"
-              required
-              placeholder="79938"
-            ></v-text-field>
-
-			<v-text-field
-              ref="address"
-              v-model="address"
-              :rules="[
-                () => !!address || '필수 입력항목입니다.',
-                addressCheck
-              ]"
-              label="배송지 주소"
-              placeholder="서울시 금천구 ..."
-              required
-            ></v-text-field>
-
-
+            <v-text-field v-model="postcode" placeholder="우편번호"></v-text-field>
+            <v-btn @click="execDaumPostcode()">우편번호 찾기</v-btn>
+            <v-text-field id="address" placeholder="주소"><br></v-text-field>
+            <v-text-field id="detailAddress" placeholder="상세주소"></v-text-field>
+            <v-text-field id="phoneNumber" placeholder="전화번호"></v-text-field>
 		</v-form>
       </v-container>
 
@@ -96,20 +59,56 @@ export default {
     components: {
       HeaderWrapper
     },
-    data: () => ({
-		valid: true,
-		errorMessages: '',
-        name: null,
-        phoneNumber: null,
-        address: null,
-        zip: null,
-        formHasErrors: false,
-	}),
+    data() {
+        return {
+            postcode: "",
+            address: "",
+            extraAddress: "",
+            phoneNumber: "",
+        };
+    },
 
 	methods: {
-		submit () {
-		this.$v.$touch()
-		},
-	},
+        execDaumPostcode() {
+        new window.daum.Postcode({
+            oncomplete: (data) => {
+            if (this.extraAddress !== "") {
+                this.extraAddress = "";
+            }
+            if (data.userSelectedType === "R") {
+                // 사용자가 도로명 주소를 선택했을 경우
+                this.address = data.roadAddress;
+            } else {
+                // 사용자가 지번 주소를 선택했을 경우(J)
+                this.address = data.jibunAddress;
+            }
+    
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if (data.userSelectedType === "R") {
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                this.extraAddress += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if (data.buildingName !== "" && data.apartment === "Y") {
+                this.extraAddress +=
+                    this.extraAddress !== ""
+                    ? `, ${data.buildingName}`
+                    : data.buildingName;
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if (this.extraAddress !== "") {
+                this.extraAddress = `(${this.extraAddress})`;
+                }
+            } else {
+                this.extraAddress = "";
+            }
+            // 우편번호를 입력한다.
+            this.postcode = data.zonecode;
+            },
+        }).open();
+        },
+    },
   }
 </script>
