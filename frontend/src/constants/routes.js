@@ -6,7 +6,8 @@ export const ROUTES = Object.freeze({
     MYPAGE: '/mypage',
     ZZIM: '/zzim',
     TEST: '/test',
-    ORDEREDLIST: '/orderedList'
+    ORDEREDLIST: '/orderedList',
+    ORDER: '/order'
 });
 
 export const LOGIN_NEED = [
