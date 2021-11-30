@@ -49,8 +49,12 @@ function toPost(url, params, errorAlert) {
     return toRequest('POST', url, params, errorAlert);
 }
 
+function toPut(url, params, errorAlert) {
+    return toRequest('PUT', url, params, errorAlert);
+}
+
 function toDelete(url, params, errorAlert) {
     return toRequest('DELETE', url, params, errorAlert);
 }
 
-export default {toGet, toPost, toDelete}
+export default {toGet, toPost, toDelete, toPut}
