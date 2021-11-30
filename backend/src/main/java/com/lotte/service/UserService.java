@@ -12,4 +12,6 @@ public interface UserService {
     void addrecc(String recc, String member_id);
 
     void addphone(String member_phone, String member_address , String member_id);
+
+    void addsave(int member_savemoney , String member_id);
 }
