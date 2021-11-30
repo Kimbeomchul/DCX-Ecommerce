@@ -10,8 +10,11 @@
         SELECT * FROM item
     </select>
 
-    <select id="getItemCode" resultType="HashMap">
-        SELECT * FROM item where item_code = #{item_code}
+    <select id="getItemCode" resultType="com.lotte.dto.ItemDTO">
+        SELECT * FROM item WHERE item_code IN
+        <foreach collection="array" item="arr" open="(" close=")" separator=",">
+            #{arr}
+        </foreach>
     </select>
 
     <select id="getItemIdList" resultType="com.lotte.dto.ItemDTO">

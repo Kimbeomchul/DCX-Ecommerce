@@ -20,5 +20,5 @@ public interface ItemService {
 
     String getReccItem(String member_id);
 
-    HashMap<String,String> getItemCode(int item_code);
+    List<ItemDTO> getItemCode(Integer[] arr);
 }

@@ -21,8 +21,8 @@ class ItemServicelmp implements ItemService {
     }
 
     @Override
-    public HashMap<String,String> getItemCode(int item_code) {
-        return userMapper.getItemCode(item_code);
+    public List<ItemDTO> getItemCode(Integer[] arr) {
+        return userMapper.getItemCode(arr);
     }
 
     // 추천아이템 검색2

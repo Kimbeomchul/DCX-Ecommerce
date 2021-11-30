@@ -2,10 +2,7 @@ package com.lotte.controller;
 
 import com.lotte.dto.ItemDTO;
 import com.lotte.service.ItemService;
-import jdk.nashorn.internal.parser.JSONParser;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -27,17 +24,17 @@ public class ItemController {
     // code 로 검색
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/getItemCode", method = RequestMethod.GET)
-    public String getItemCode(@RequestParam(value="data") String data) {
-        String[] list1 = data.split(",");
+    public List<ItemDTO> getItemCode(@RequestParam(value="data") String data) {
 
-        JSONArray ary1 = new JSONArray();
+        String[] temp = data.split(",");
+        Integer[] arr = new Integer[temp.length];
 
-        for (int i = 0; i < list1.length; i++) {
-            HashMap<String,String> temp1 = itemService.getItemCode(Integer.parseInt(list1[i]));
-            JSONObject obj1 = new JSONObject(temp1);
-            ary1.put(obj1);
+        for(int i =0; i<temp.length; i++){
+            arr[i] = Integer.parseInt(temp[i]);
         }
-        return ary1.toString();
+
+        return itemService.getItemCode(arr);
+
     }
 
 
