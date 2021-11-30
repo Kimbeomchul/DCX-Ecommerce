@@ -9,25 +9,17 @@ const instance = axios.create({
     timeout: 3000
 });
 
-function toRequest(method, url, params){
-    const options = {method, url};
-
-    if(method === 'GET') {
-        options.params = params;
-    } else {
-        options.data = params;
-    }
-
-    return instance(options)
-            .then(res => successHandler(res))
-            .catch(res => errorHandler(res));
+function toRequest(method, url, params, errorAlert){
+    return instance({method, url, params})
+            .then(res => successHandler(res, errorAlert))
+            .catch(res => errorHandler(res, errorAlert));
 }
 
 function successHandler(response) {
     return Promise.resolve(response.data);
 }
 
-function errorHandler(response) {
+function errorHandler(response, errorAlert = true) {
     let errorMessage = '';
     const defaultErrorMessage = '서버와의 통신이 원활하지 않습니다. 잠시 후 다시 시도 해주세요';
 
@@ -40,22 +32,25 @@ function errorHandler(response) {
         default:
             errorMessage = response.message ? response.message : defaultErrorMessage;
     }
-    dialogService.alert(errorMessage);
+
+    if(errorAlert) {
+        dialogService.alert(errorMessage);
+    }
     
     return Promise.reject(response.data);
 }
 
 
-function toGet(url, params) {
-    return toRequest('GET', url, params);
+function toGet(url, params, errorAlert) {
+    return toRequest('GET', url, params, errorAlert);
 }
 
-function toPost(url, params) {
-    return toRequest('POST', url, params);
+function toPost(url, params, errorAlert) {
+    return toRequest('POST', url, params, errorAlert);
 }
 
-function toDelete(url, params) {
-    return toRequest('DELETE', url, params);
+function toDelete(url, params, errorAlert) {
+    return toRequest('DELETE', url, params, errorAlert);
 }
 
 export default {toGet, toPost, toDelete}

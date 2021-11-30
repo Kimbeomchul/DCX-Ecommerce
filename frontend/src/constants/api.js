@@ -12,7 +12,8 @@ export default Object.freeze({
     // 도서
     GET_BOOK_LIST: 'allitem',
     GET_BOOK_RANDOM: 'selectitem',
-    GET_BOOK: 'searchid',
+    GET_BOOK_BY_TITLE: 'searchid',
+    GET_BOOK_BY_CODE: 'getItemCode',
     DELETE_BOOK: 'ditem',
     ADD_BOOK: 'aitem',
     RECOMMAND: 'rec',
@@ -30,5 +31,10 @@ export default Object.freeze({
     // 찜
     GET_ZZIM_LIST: 'allzzim',
     ADD_ZZIM: 'azzim',
-    DELETE_ZZIM: 'dzzim'
+    DELETE_ZZIM: 'dzzim',
+
+    // 구매
+    PAY: 'pay',
+    PAY_SAVE: 'paysave',
+    GET_PAY_LIST: 'paylist',
 })
