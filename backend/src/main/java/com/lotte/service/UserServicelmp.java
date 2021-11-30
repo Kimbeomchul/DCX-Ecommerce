@@ -24,6 +24,11 @@ class UserServicelmp implements UserService{
         UserMapper.addrecc(recc, member_id);
     }
 
+    @Override
+    public void addphone(String member_phone, String member_address, String member_id) {
+        UserMapper.addphone(member_phone,member_address,member_id);
+    }
+
 
 }
 

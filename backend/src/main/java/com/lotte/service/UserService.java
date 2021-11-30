@@ -10,4 +10,6 @@ public interface UserService {
     void setUserInfo(int id, String Kakao, String nickname,  String login_time, String profile_image , String email);
 
     void addrecc(String recc, String member_id);
+
+    void addphone(String member_phone, String member_address , String member_id);
 }
