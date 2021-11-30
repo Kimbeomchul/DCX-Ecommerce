@@ -9,7 +9,7 @@ import * as userService from './userService'
 }
 
 export function setBuyingBooks(data) {
-    localStorage.setItem('buyingBooks', JSON.parse(data));
+    localStorage.setItem('buyingBooks', JSON.stringify(data));
 }
 
 /**
