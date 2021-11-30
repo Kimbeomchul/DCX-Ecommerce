@@ -49,7 +49,6 @@ import * as userService from '../services/userService'
 import * as dialogService from '../services/dialogService'
 import * as routerService from '../services/routerService'
 import {ROUTES} from '../constants/routes'
-import * as testService from '../services/testService'
 
 export default {
     name: 'Main',
@@ -61,18 +60,27 @@ export default {
     methods: {
     routerTest() {
         const query = {
+            data:'success',
             status:'N',
             image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
             nickname:'전주환',
             id:2007473952
         };
+        // const query = {
+        //     status:'N',
+        //     image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
+        //     nickname:'전주환',
+        //     id:2007473952
+        // };
         routerService.go(ROUTES.MAIN, query);
     },
     payTest() {
-        testService.gettest();
     },
-    async imageTest() {
-        await dialogService.alertCustomComponent('SelectBooks');
+    imageTest() {
+        // await dialogService.alertCustomComponent('SelectBooks');
+        dialogService.confirm('결제가 완료되었습니다.<br>결제 페이지로 이동하시겠습니까?', () => {
+            routerService.go('/mypage')
+        });
     },
     async loginTest() {
         let test = await dialogService.alertCustomComponent('login');
@@ -84,14 +92,14 @@ export default {
     },
     userSet: () => {
         console.log('user info before:',  JSON.parse(localStorage.getItem('user')));
-        let obj = {name:'joohwan', year:30};
+        let obj = {name:'joohwan', year:30, member_id: 'mickey1102'};
         localStorage.setItem('user', JSON.stringify(obj));
         let test = JSON.parse(localStorage.getItem('user'));
         userService.setUser(test);
         console.log('user info after:',  JSON.parse(localStorage.getItem('user')));
     },
     userClear: () => {
-        localStorage.removeItem('user');
+        userService.clearUser()
     },
   },
 }

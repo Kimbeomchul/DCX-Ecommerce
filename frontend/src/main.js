@@ -23,6 +23,7 @@ for(const key in filters) {
 
 Vue.use(VuejsDialog,{
   backdropClose: true,
+  html: true,
 });
 
 // 전역 store 등록

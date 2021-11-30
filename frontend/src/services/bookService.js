@@ -3,6 +3,16 @@ import api from '../constants/api'
 import * as utils from '../util/utils'
 import * as userService from './userService'
 
+let buyingBooks = undefined;
+
+ export function getBuyingBooks() {
+    return Object.values(buyingBooks);
+}
+
+export function setBuyingBooks(data) {
+    buyingBooks = data;
+}
+
 /**
  * 도서 전체 조회
  * @returns {Array} book
@@ -17,15 +27,6 @@ export async function getBookList() {
  */
 export async function getBookRandom() {
     return await apiService.toGet(api.GET_BOOK_RANDOM);
-}
-
-/**
- * 도서 조회
- * @param {string} title
- * @returns {Object} book
- */
-export async function getBookByTitle(title) {
-    return await apiService.toGet(api.GET_BOOK_BY_TITLE, title);
 }
 
 /**
