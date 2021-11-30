@@ -27,6 +27,7 @@ export default Object.freeze({
 
     // 사용자
     GET_USER_LIST: 'user',
+    SAVE_USER_INFO: 'addphone',
 
     // 찜
     GET_ZZIM_LIST: 'allzzim',
