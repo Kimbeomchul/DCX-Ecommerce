@@ -15,15 +15,14 @@ export async function getUserList() {
 
 /**
  * 사용자 조회
- * @returns {Object} user
  */
-export function getUser() {
+export function getUser(key) {
     if(user) {
-        return user;
+        return key ? user[key] : user;
     }
     
     user = JSON.parse(localStorage.getItem('user'));
-    return user;
+    return key ? user[key] : user;
 }
 
 /**
@@ -32,4 +31,9 @@ export function getUser() {
  */
 export function setUser(data) {
     user = localStorage.setItem('user', JSON.stringify(data));
+}
+
+export function clearUser() {
+    localStorage.removeItem('user');
+    user = undefined;
 }

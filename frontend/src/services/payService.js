@@ -15,10 +15,23 @@ export async function pay() {
 }
 
 /**
- * 
- * @returns 결제내역
+ * 결제내역 조회
+ * @param userId
  */
 export async function payList() {
-    const user = userService.getUser();
+    const user = userService.getUser('member_id');
     return await apiService.toGet(api.GET_PAY_LIST, user);
+}
+
+/**
+ * 결제 저장
+ * @param userId
+ */
+export async function paySave(itemCodes) {
+    const params = {
+        nodap: itemCodes.join(','),
+        member_id: userService.getUser('member_id'),
+        pay_kakao: localStorage.getItem('tid')
+    }
+    return await apiService.toPost(api.PAY_SAVE, params);
 }

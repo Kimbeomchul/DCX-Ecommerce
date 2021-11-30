@@ -21,11 +21,20 @@ export async function getBookRandom() {
 
 /**
  * 도서 조회
- * @param {Number} itemCode
+ * @param {string} title
  * @returns {Object} book
  */
-export async function getBook(itemCode) {
-    return await apiService.toGet(api.GET_BOOK, itemCode);
+export async function getBookByTitle(title) {
+    return await apiService.toGet(api.GET_BOOK_BY_TITLE, title);
+}
+
+/**
+ * 도서 리스트 조회
+ * @param {string} itemcode,itemcode,... ex) 1,2,3
+ * @returns {Object} book
+ */
+export async function getBookByCode(item_codes) {
+    return await apiService.toGet(api.GET_BOOK_BY_CODE, {data: item_codes.toString()});
 }
 
 /**
@@ -56,7 +65,7 @@ export async function registerBook(book) {
 export async function removeBook(itemCode) {
     const params = {
         item_code: itemCode,
-        member_id: userService.getUser().member_id
+        member_id: userService.getUser('member_id')
     };
     return await apiService.toDelete(api.RECOMMAND, params);
 }
