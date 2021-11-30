@@ -101,12 +101,12 @@ body {
 </head>
 <body>
    <form action="login" method="POST" class="addBook" onsubmit="DoJoinForm__submit(this); return false;">
-
+      <h2>로그인</h2>
       <div class="textForm">
         <input name="id" type="text" class="id" placeholder="아이디" required>
       </div>
       <div class="textForm">
-        <input name="pw" type="text" class="pw" placeholder="패스워드" required>
+        <input name="pw" type="password" class="pw" placeholder="패스워드" required>
       </div>
       <input type="submit" class="btn" value="로그인"/>
     </form>
