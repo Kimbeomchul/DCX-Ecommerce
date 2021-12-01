@@ -10,7 +10,7 @@
     >
       <v-container fluid style="padding-top:60px;">
         <h3 class="font-weight-black">
-          주문하기
+          구매자 정보
         </h3>
         
         <v-form ref="form">
@@ -31,6 +31,60 @@
             </v-col>
           </v-row>
         </v-form>
+
+        <h3 class="font-weight-black">
+        주문 상세
+        </h3>
+        <v-expansion-panels inset>
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              구매 도서
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-list three-line>
+                <template v-for="(book, index) in books">
+                  <v-divider :key="index" />
+                  <v-list-item
+                  :key="book.item_title"
+                  multiple
+                  v-model="buying"
+                  >
+                    <template>
+                      <v-img
+                      :src="book.item_image"
+                      max-height="50px"
+                      max-width="50px"
+                      style="margin-right:10px;"
+                      ></v-img>
+
+                      <v-list-item-content>
+                        <v-list-item-title v-html="book.item_title"></v-list-item-title>
+                        <v-list-item-subtitle >
+                          <span class="text--primary">
+                            {{book.item_price | currency | won}}
+                          </span>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </template>
+                  </v-list-item>
+                  </template>
+                </v-list>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              결제정보
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              총 결제 금액 : {{total | currency | won}}
+            </v-expansion-panel-content>
+            <v-expansion-panel-content>
+              예상 적립금 : {{reward | currency | won}}
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+
       </v-container>
 
       <v-container>
@@ -65,6 +119,7 @@
 import HeaderWrapper from "@/components/Header";
 import * as userService from '../services/userService'
 import * as payService from '../services/payService'
+import * as utils from '../util/utils'
 
 export default {
     components: {
@@ -81,18 +136,24 @@ export default {
         };
     },
   created() {
-    this.books =this.$route.query;
+    this.books = utils.getLocalstorageItem('buyItems')
+  },
+  computed: {
+    reward() {
+      return Math.ceil(this.total * 0.01);
+    },
+    total() {
+      return this.books.reduce((acc, cur) => acc + cur.item_price, 0);
+    }
   },
 	methods: {
     async goPay() {
       if(this.address && this.extraAddress && this.detailAddress) {
         const address = this.address + this.extraAddress + this.detailAddress;
         const phoneNumber = this.phoneNumber.join('');
-        const books = JSON.parse(JSON.stringify(this.books));
-        await userService.saveUserInfo(address, phoneNumber, books);
-        let fail = await userService.saveUserInfo(address, phoneNumber, books);
+        let fail = await userService.saveUserInfo(address, phoneNumber);
         if(!fail) {
-          await payService.pay(books)
+          await payService.pay(this.books);
         }
 
       }

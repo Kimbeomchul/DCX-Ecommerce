@@ -87,6 +87,7 @@ import HeaderWrapper from "@/components/Header";
 import * as basketService from '../services/basketService'
 import * as routerService from '../services/routerService'
 import {ROUTES} from '../constants/routes'
+import * as utils from '../util/utils'
 
 export default {
   components: {
@@ -99,7 +100,8 @@ export default {
   },
   methods: {
     goOrder() {
-      routerService.go(ROUTES.ORDER, JSON.parse(JSON.stringify(this.buying)))
+      utils.setLocalstorageItem('buyItems', this.buying);
+      routerService.go(ROUTES.ORDER)
     }
   },
   data: () => ({

@@ -40,6 +40,16 @@
             <p>Pay Test</p>
             <v-btn style="margin-bottom: 30px" color="primary" v-on:click="payTest">testClick</v-btn>
         </div>
+        <div>
+            <v-divider />
+            <p>localGet Test</p>
+            <v-btn style="margin-bottom: 30px" color="primary" v-on:click="localGet">testClick</v-btn>
+        </div>
+        <div>
+            <v-divider />
+            <p>localSet Test</p>
+            <v-btn style="margin-bottom: 30px" color="primary" v-on:click="localSet">testClick</v-btn>
+        </div>
     </div>
 </template>
 
@@ -50,6 +60,7 @@ import * as dialogService from '../services/dialogService'
 import * as routerService from '../services/routerService'
 import * as payService from '../services/payService'
 import {ROUTES} from '../constants/routes'
+import * as utils from '../util/utils'
 
 export default {
     name: 'Main',
@@ -59,6 +70,27 @@ export default {
         }
     },
     methods: {
+    localGet() {
+        let t = (localStorage.getItem('test'))
+        t = Array(t)
+        console.log(JSON.parse(t));
+        console.log(Object.values(t));
+    },
+    localSet() {
+        let arr = [
+            {
+                a:1,
+                b:2,
+                c:3
+            },
+            {
+                a:4,
+                b:5,
+                c:6
+            }
+        ]
+        localStorage.setItem('test', JSON.stringify(arr))
+    },
     routerTest() {
         const query = {
             data:'success',
@@ -93,14 +125,24 @@ export default {
         console.log(test);
     },
     userSet: () => {
-        console.log('user info before:',  JSON.parse(localStorage.getItem('user')));
+        // console.log('user info before:',  JSON.parse(localStorage.getItem('user')));
+        // let obj = {name:'joohwan', year:30, member_id: 'mickey1102'};
+        // localStorage.setItem('user', JSON.stringify(obj));
+        // let test = JSON.parse(localStorage.getItem('user'));
+        // userService.setUser(test);
+        // console.log('user info after:',  JSON.parse(localStorage.getItem('user')));
+
         let obj = {name:'joohwan', year:30, member_id: 'mickey1102'};
-        localStorage.setItem('user', JSON.stringify(obj));
-        let test = JSON.parse(localStorage.getItem('user'));
-        userService.setUser(test);
-        console.log('user info after:',  JSON.parse(localStorage.getItem('user')));
+        userService.setUser( obj);
+        let user = userService.getUser();
+        let id = userService.getUser('member_id')
+
+        console.log(user);
+        console.log(id);
+
     },
     userClear: () => {
+        utils.clearLocalsorageItem('user');
         userService.clearUser()
     },
   },

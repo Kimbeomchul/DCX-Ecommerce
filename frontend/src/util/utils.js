@@ -44,3 +44,25 @@ export function isEmptyObject(object) {
     }
     return false;
 }
+
+/**
+ * 로컬스토리지 데이터 조회
+ */
+export function getLocalstorageItem(dataName, key) {
+    let data = JSON.parse(localStorage.getItem(dataName));
+    return key ? data[key] : data;
+}
+
+/**
+ * 로컬스토리지 데이터 저장
+ */
+export function setLocalstorageItem(dataName, data) {
+    localStorage.setItem(dataName, JSON.stringify(data));
+}
+
+/**
+ * 로컬스토리지 데이터 삭제
+ */
+export function clearLocalsorageItem(dataName) {
+    localStorage.removeItem(dataName);
+}
