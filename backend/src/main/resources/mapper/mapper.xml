@@ -99,4 +99,7 @@
         UPDATE members SET member_phone = #{member_phone} , member_address = #{member_address} WHERE member_id = #{member_id}
     </update>
 
+    <update id="addsave">
+        UPDATE members SET member_savemoney = #{member_savemoney} WHERE member_id = #{member_id}
+    </update>
 </mapper>

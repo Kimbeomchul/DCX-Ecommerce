@@ -1,11 +1,14 @@
 import apiService from '../api/apiService'
 import api from '../constants/api'
 import * as userService from './userService'
+import * as bookService from '../services/bookService'
 
-export async function pay() {
+
+export async function pay(books) {
+    books = Object.values(books);
     const params = {
-        item_name: '루시 외 5건',
-        item_cost: '50000'
+        item_name: `${books[0].item_title}외 ${books.length}건`,
+        item_cost: books.reduce((acc,cur) => acc + cur.item_price, 0)
     }
     const response = await apiService.toGet(api.PAY, params);
     const [tid, path] = response.split(',');
@@ -27,9 +30,9 @@ export async function payList() {
  * 결제 저장
  * @param userId
  */
-export async function paySave(itemCodes) {
+export async function paySave() {
     const params = {
-        nodap: itemCodes.join(','),
+        datas: bookService.getBuyingBooks().map(v => v.item_code).join(','),
         member_id: userService.getUser('member_id'),
         pay_kakao: localStorage.getItem('tid')
     }

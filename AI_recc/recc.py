@@ -15,8 +15,18 @@ def m():
 @app.route('/mvadd', methods=['GET'])
 def mv1():
     return render_template('book_add.jsp')
-@app.route('/mvdel', methods=['GET'])
+@app.route('/mvser', methods=['GET'])
 def mv2():
+    url = "http://3.36.39.51/allitem"
+    response = requests.get(url)
+
+    obj = response.json()
+    status = response.status_code
+    print(status)
+    return render_template('book_search.jsp', data=obj)
+
+@app.route('/mvdel', methods=['GET'])
+def mv3():
     url = "http://3.36.39.51/allitem"
     response = requests.get(url)
 
@@ -25,6 +35,8 @@ def mv2():
     print(status)
 
     return render_template('book_delete.jsp', data=obj)
+
+
 
 
 @app.route('/login', methods=['GET', 'POST'])

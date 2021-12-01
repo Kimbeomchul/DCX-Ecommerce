@@ -1,5 +1,6 @@
 import apiService from "../api/apiService";
 import api from '../constants/api'
+import * as bookService from '../services/bookService'
 
 // 사용자 정보 전역변수로 사용
 // getter setter를 이용해 접근
@@ -11,6 +12,19 @@ let user = undefined;
  */
 export async function getUserList() {
     return await apiService.toGet(api.GET_USER_LIST);
+}
+
+/**
+ * 사용자 정보 저장
+ */
+export async function saveUserInfo(address, phoneNumber, books) {
+    const params = {
+        member_id: getUser('member_id'),
+        member_phone: phoneNumber,
+        member_address: address
+    }
+    bookService.setBuyingBooks(books)
+    return await apiService.toPut(api.SAVE_USER_INFO, params);
 }
 
 /**

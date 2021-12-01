@@ -3,6 +3,15 @@ import api from '../constants/api'
 import * as utils from '../util/utils'
 import * as userService from './userService'
 
+ export function getBuyingBooks() {
+    const items = JSON.parse(localStorage.getItem('buyingBooks'));
+    return Object.values(items);
+}
+
+export function setBuyingBooks(data) {
+    localStorage.setItem('buyingBooks', JSON.stringify(data));
+}
+
 /**
  * 도서 전체 조회
  * @returns {Array} book

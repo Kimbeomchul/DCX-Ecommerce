@@ -4,10 +4,10 @@ export function alert(message, options) {
   Vue.dialog.alert(message, options);
 }
 
-export function confirm(message, options) {
+export function confirm(message, successHandler = data => data, errorHandler = error => error, options) {
   return Vue.dialog.confirm(message, options)
-        .then(data => data)
-        .catch(data => data);
+        .then(successHandler)
+        .catch(errorHandler);
 }
 
 export async function alertCustomComponent(view) {

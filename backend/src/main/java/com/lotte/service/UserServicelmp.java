@@ -29,6 +29,11 @@ class UserServicelmp implements UserService{
         UserMapper.addphone(member_phone,member_address,member_id);
     }
 
+    @Override
+    public void addsave(int member_savemoney, String member_id) {
+        UserMapper.addsave(member_savemoney,member_id);
+    }
+
 
 }
 

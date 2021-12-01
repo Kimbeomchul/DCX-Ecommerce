@@ -12,16 +12,25 @@
         <h3 class="font-weight-black">
           주문하기
         </h3>
-        
-        <v-form
-		ref="form"
-		>
+
+        <v-form ref="form">
+          <div @click="execDaumPostcode()">
             <v-text-field v-model="postcode" placeholder="우편번호"></v-text-field>
-            <v-btn @click="execDaumPostcode()">우편번호 찾기</v-btn>
-            <v-text-field v-model="address" id="address" placeholder="주소"><br></v-text-field>
-            <v-text-field id="detailAddress" placeholder="상세주소"></v-text-field>
-            <v-text-field id="phoneNumber" placeholder="전화번호"></v-text-field>
-		</v-form>
+            <v-btn>우편번호 찾기</v-btn>
+          </div>
+          <v-text-field v-model="address" placeholder="주소"><br></v-text-field>
+          <v-text-field v-model="detailAddress" placeholder="상세주소"></v-text-field>
+          <v-row>
+            <v-col
+            cols="12"
+            sm="4"
+            v-for="(phone, index) in phoneNumber"
+            :key="index"
+          >
+            <v-text-field type="number" v-model="phoneNumber[index]" placeholder="000" :rules="[true]"></v-text-field>
+            </v-col>
+          </v-row>
+        </v-form>
       </v-container>
 
       <v-container>
@@ -31,7 +40,7 @@
 		>
 		<v-btn
 			color="primary"
-			@click="submit"
+			@click="goPay"
 			width="90%"
 		>
 			상품 주문하기
@@ -54,6 +63,8 @@
 
 <script>
 import HeaderWrapper from "@/components/Header";
+import * as userService from '../services/userService'
+import * as payService from '../services/payService'
 
 export default {
     components: {
@@ -61,19 +72,37 @@ export default {
     },
     data() {
         return {
-            postcode: "",
-            address: "",
-            extraAddress: "",
-            phoneNumber: "",
+            postcode: '',
+            address: '',
+            extraAddress: '',
+            phoneNumber: ['','',''],
+            detailAddress: '',
+            books: []
         };
     },
-
+  created() {
+    this.books =this.$route.query;
+  },
 	methods: {
-        execDaumPostcode() {
-        new window.daum.Postcode({
-            oncomplete: (data) => {
+    async goPay() {
+      if(this.address && this.extraAddress && this.detailAddress) {
+        const address = this.address + this.extraAddress + this.detailAddress;
+        const phoneNumber = this.phoneNumber.join('');
+        const books = JSON.parse(JSON.stringify(this.books));
+        await userService.saveUserInfo(address, phoneNumber, books);
+        let fail = await userService.saveUserInfo(address, phoneNumber, books);
+        if(!fail) {
+          await payService.pay(books)
+        }
+
+      }
+    },
+    execDaumPostcode() {
+      new window.daum.Postcode({
+          oncomplete: (data) => {
             if (this.extraAddress !== "") {
                 this.extraAddress = "";
+                console.log(data);
             }
             if (data.userSelectedType === "R") {
                 // 사용자가 도로명 주소를 선택했을 경우
@@ -82,7 +111,6 @@ export default {
                 // 사용자가 지번 주소를 선택했을 경우(J)
                 this.address = data.jibunAddress;
             }
-    
             // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
             if (data.userSelectedType === "R") {
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -108,7 +136,7 @@ export default {
             this.postcode = data.zonecode;
             },
         }).open();
-        },
+      },
     },
   }
 </script>

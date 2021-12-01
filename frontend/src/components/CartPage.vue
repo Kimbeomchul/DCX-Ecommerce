@@ -21,7 +21,7 @@
       >
         <template>
           <v-list-item-action>
-            <v-checkbox v-model="buying" :value="book.item_code"></v-checkbox>
+            <v-checkbox v-model="buying" :value="book"></v-checkbox>
           </v-list-item-action>
           <v-img
           :src="book.item_image"
@@ -60,7 +60,7 @@
 					color="primary"
 					elevation="2"
 					width="90%"
-          @click="goBuy"
+          @click="goOrder"
 				>
 					바로 구매하기
 				</v-btn>
@@ -85,6 +85,9 @@
 <script>
 import HeaderWrapper from "@/components/Header";
 import * as basketService from '../services/basketService'
+import * as routerService from '../services/routerService'
+import {ROUTES} from '../constants/routes'
+
 export default {
   components: {
     HeaderWrapper
@@ -92,11 +95,11 @@ export default {
   async created() {
     let books = await basketService.getBasket();
     this.books = books
-    this.buying = this.books.map(v => v.item_code)
+    this.buying = this.books.slice()
   },
   methods: {
-    goBuy() {
-      console.log(JSON.stringify(this.buying));
+    goOrder() {
+      routerService.go(ROUTES.ORDER, JSON.parse(JSON.stringify(this.buying)))
     }
   },
   data: () => ({
@@ -110,7 +113,7 @@ export default {
 			return attrs
 		},
     total_price () {
-      return this.books.reduce((acc, cur) => acc + cur.item_price, 0);
+      return this.buying.reduce((acc, cur) => acc + cur.item_price, 0);
     }
 	},
   
