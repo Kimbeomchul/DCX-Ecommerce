@@ -20,15 +20,6 @@ export async function getBookRandom() {
 }
 
 /**
- * 도서 조회
- * @param {string} title
- * @returns {Object} book
- */
-export async function getBookByTitle(title) {
-    return await apiService.toGet(api.GET_BOOK_BY_TITLE, title);
-}
-
-/**
  * 도서 리스트 조회
  * @param {string} itemcode,itemcode,... ex) 1,2,3
  * @returns {Object} book
@@ -45,7 +36,7 @@ export async function getBookByCode(item_codes) {
 export async function getBookByTitle(itemTitle) {
     const params = {};
     params['item_title'] = itemTitle;
-    return await apiService.toGet(api.GET_BOOK, params);
+    return await apiService.toGet(api.GET_BOOK_BY_TITLE, params);
 }
 
 /**

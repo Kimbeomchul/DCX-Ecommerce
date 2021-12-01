@@ -52,12 +52,6 @@
         :key="book.item_code"
         cols= 6
         >
-        <router-link
-          v-bind:to="{
-            path: `/book/${book.item_title}`,
-            params: { bookTitle: `${book.item_title}` },
-          }"
-        >
         <v-card>
             <v-img
             :src="book.item_image"
@@ -65,17 +59,23 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="200px"
             >
+            <v-btn icon>
+                <v-icon :color="myIcon.color" @click="zzimClicked">mdi-heart</v-icon>
+            </v-btn>
             </v-img>
+            <router-link
+              v-bind:to="{
+                path: `/book/${book.item_title}`,
+                params: { bookTitle: `${book.item_title}` },
+              }"
+            >
             <v-card-title v-text="book.item_title"></v-card-title>
             <v-card-text>{{ book.item_price }} 원</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn icon>
-                <v-icon @click="zzimClicked">mdi-heart</v-icon>
-            </v-btn>
             </v-card-actions>
+            </router-link>
         </v-card>
-        </router-link>
         </v-col>
     </v-row>
     </v-container>
@@ -107,15 +107,26 @@ export default {
       { name: '시' },
       { name: '인문학' },
       { name: '종교' },
-    ]
+    ],
+    myIcon: {
+      name: 'mdi-heart',
+      color: ''
+    }
   }),
   methods: {
     zzimClicked() {
-
+      this.myIcon.name = "mdi-heart";
+      this.myIcon.color = "red";
+      console.log(this.myIcon.color);
+      console.log(this.$store.state.books);
     },
   },
   created() {
     this.$store.dispatch('FETCH_BOOKS');
+    this.myIcon= {
+      name: 'mdi-heart',
+      color: 'default'
+    }
   }
 }
 </script>

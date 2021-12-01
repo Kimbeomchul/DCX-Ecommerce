@@ -18,7 +18,7 @@
 		>
             <v-text-field v-model="postcode" placeholder="우편번호"></v-text-field>
             <v-btn @click="execDaumPostcode()">우편번호 찾기</v-btn>
-            <v-text-field id="address" placeholder="주소"><br></v-text-field>
+            <v-text-field v-model="address" id="address" placeholder="주소"><br></v-text-field>
             <v-text-field id="detailAddress" placeholder="상세주소"></v-text-field>
             <v-text-field id="phoneNumber" placeholder="전화번호"></v-text-field>
 		</v-form>
