@@ -306,6 +306,24 @@
       </div>
     </div>
 
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-8 mb-5 mb-xl-0">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-uppercase text-black ls-1 mb-1">Status</h6>
+                  <h2 class="text-black mb-0">Scikit-learn</h2>
+                </div>
+              </div>
+            </div>
+              <img src="{{ url_for('static', filename='assets/img/charts.png') }}" alt="Charts" width:10 style="border-radius: 7px;">
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
   <!--   Core   -->
   <script src="{{ url_for('static', filename='assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <!--   Optional JS   -->
