@@ -47,5 +47,5 @@ async function rewardSave(books) {
         member_id: userService.getUser('member_id')
     };
 
-    return await apiService.toPost(api.REWARD_SAVE, params);
+    return await apiService.toPut(api.REWARD_SAVE, params);
 }
