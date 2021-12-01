@@ -26,19 +26,6 @@
     width: 6px;
 }
 
-
-* {
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  font-family:sans-serif;
-
-}
-
-body {
-  background-image: grey;
-}
-
 .addBook {
   position:absolute;
   width:400px;
@@ -213,7 +200,7 @@ body {
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  active ">
-            <a class="nav-link  active " href="/main">
+            <a class="nav-link  " href="/main">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
@@ -223,7 +210,7 @@ body {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/mvdel">
+            <a class="nav-link active" href="/mvdel">
               <i class="ni ni-planet text-red"></i>     Delete book
             </a>
           </li>

@@ -25,17 +25,6 @@
 }
 
 
-* {
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  font-family:sans-serif;
-
-}
-
-body {
-  background-image: grey;
-}
 
 .addBook {
   position:absolute;
@@ -266,7 +255,7 @@ body {
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  active ">
-            <a class="nav-link  active " href="/main">
+            <a class="nav-link   " href="/main">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
@@ -281,7 +270,7 @@ body {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/mvser">
+            <a class="nav-link active" href="/mvser">
               <i class="ni ni-planet text-green"></i> Search book
             </a>
           </li>

@@ -203,12 +203,12 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  active ">
-            <a class="nav-link  active " href="/main">
+            <a class="nav-link " href="/main">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/mvadd">
+            <a class="nav-link active" href="/mvadd">
               <i class="ni ni-planet text-blue"></i>     Add book
             </a>
           </li>
