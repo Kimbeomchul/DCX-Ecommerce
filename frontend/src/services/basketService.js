@@ -16,11 +16,9 @@ export async function getBasketList() {
  * @returns {Array} basket
  */
 export async function getBasket() {
-    const params = {
-        member_id: userService.getUser('member_id')
-    }
+    const member_id = userService.getUser('member_id');
     
-    const basketList = await apiService.toGet(api.SEARCH_BASKET, params);
+    const basketList = await apiService.toGet(api.SEARCH_BASKET, {member_id});
 
     if(basketList.length > 0) {
         const itemCodes = basketList.map(v => v.item_code);

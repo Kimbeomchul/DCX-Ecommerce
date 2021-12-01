@@ -1,13 +1,11 @@
 import apiService from '../api/apiService'
 import api from '../constants/api'
 import * as userService from './userService'
-import * as bookService from '../services/bookService'
-
+import * as utils from '../util/utils'
 
 export async function pay(books) {
-    books = Object.values(books);
     const params = {
-        item_name: `${books[0].item_title}외 ${books.length}건`,
+        item_name: `${books[0].item_title}외 ${books.length - 1}건`,
         item_cost: books.reduce((acc,cur) => acc + cur.item_price, 0)
     }
     const response = await apiService.toGet(api.PAY, params);
@@ -31,10 +29,23 @@ export async function payList() {
  * @param userId
  */
 export async function paySave() {
+    const books = utils.getLocalstorageItem('buyItems');
+
     const params = {
-        datas: bookService.getBuyingBooks().map(v => v.item_code).join(','),
+        datas: books.map(v => v.item_code).join(','),
         member_id: userService.getUser('member_id'),
         pay_kakao: localStorage.getItem('tid')
     }
+    rewardSave(books);
     return await apiService.toPost(api.PAY_SAVE, params);
+}
+
+async function rewardSave(books) {
+    const reward = Math.ceil(books.reduce((acc, cur) => acc + cur.item_price) * 0.01)
+    const params = {
+        member_savemoney: reward,
+        member_id: userService.getUser('member_id')
+    };
+
+    return await apiService.toPost(api.REWARD_SAVE, params);
 }
