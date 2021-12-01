@@ -41,7 +41,7 @@ export async function paySave() {
 }
 
 async function rewardSave(books) {
-    const reward = Math.ceil(books.reduce((acc, cur) => acc + cur.item_price) * 0.01)
+    const reward = Math.ceil(books.reduce((acc, cur) => acc + cur.item_price, 0) * 0.01)
     const params = {
         member_savemoney: reward,
         member_id: userService.getUser('member_id')
