@@ -152,10 +152,14 @@ body {
                     <option value="과학">과학</option>
                     <option value="만화">만화</option>
                     <option value="미술">미술</option>
+                    <option value="건강">건강</option>
+                    <option value="고전">고전</option>
+                    <option value="취미">취미</option>
+                    <option value="에세이">에세이</option>
                 </select>
       </div>
       <div class="textForm">
-        <input name="item_image" type="file" class="item_image" placeholder="이미지" required>
+        <input name="item_image" type="text" class="item_image" placeholder="이미지" required>
       </div>
        <div class="textForm">
         <input name="item_content" type="text" class="item_content" placeholder="내용" required>
