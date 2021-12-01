@@ -47,7 +47,6 @@
                   <v-list-item
                   :key="book.item_title"
                   multiple
-                  v-model="buying"
                   >
                     <template>
                       <v-img
