@@ -32,7 +32,7 @@ export async function payList() {
  */
 export async function paySave() {
     const params = {
-        datas: bookService.getBuyingBooks().map(v => v.item_code).join(''),
+        datas: bookService.getBuyingBooks().map(v => v.item_code).join(','),
         member_id: userService.getUser('member_id'),
         pay_kakao: localStorage.getItem('tid')
     }

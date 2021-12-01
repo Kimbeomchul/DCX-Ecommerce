@@ -102,7 +102,12 @@ router.beforeEach(async (to, from, next) => {
                     break;
             }
         } else {
-            userService.setUser(query);
+            userService.setUser({
+                member_id: query.id,
+                member_image: query.image,
+                mbmber_name: query.name,
+                need_book_reccomand: !query.status
+            });
         }
     }
 

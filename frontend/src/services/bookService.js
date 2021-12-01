@@ -3,14 +3,13 @@ import api from '../constants/api'
 import * as utils from '../util/utils'
 import * as userService from './userService'
 
-let buyingBooks = undefined;
-
  export function getBuyingBooks() {
-    return Object.values(buyingBooks);
+    const items = JSON.parse(localStorage.getItem('buyingBooks'));
+    return Object.values(items);
 }
 
 export function setBuyingBooks(data) {
-    buyingBooks = data;
+    localStorage.setItem('buyingBooks', JSON.stringify(data));
 }
 
 /**

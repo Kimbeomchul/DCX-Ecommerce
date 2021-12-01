@@ -24,7 +24,7 @@ export async function saveUserInfo(address, phoneNumber, books) {
         member_address: address
     }
     bookService.setBuyingBooks(books)
-    return await apiService.toGet(api.SAVE_USER_INFO, params);
+    return await apiService.toPut(api.SAVE_USER_INFO, params);
 }
 
 /**
