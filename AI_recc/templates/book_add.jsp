@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html>
 <style>
-* {
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  font-family:sans-serif;
-
-}
-
-body {
-  background-image:#34495e;
-}
 
 .addBook {
   position:absolute;
   width:400px;
-  height:400px;
+  height:630px;
   padding: 30px, 20px;
   background-color:#FFFFFF;
   text-align:center;
-  top:40%;
+  top:45%;
   left:50%;
   transform: translate(-50%,-50%);
   border-radius: 15px;
@@ -98,7 +87,7 @@ body {
   background: none;
 }
 
-.btn {
+.btn22 {
   position:relative;
   left:40%;
   transform: translateX(-50%);
@@ -116,7 +105,7 @@ body {
   display:inline;
 }
 
-.btn:hover {
+.btn22:hover {
   background-position: right;
 }
 </style>
@@ -131,14 +120,140 @@ body {
 {%endif%}
 {%endwith%}
 
+  <!-- Favicon -->
+  <link href="{{ url_for('static', filename='assets/img/11.jpeg') }}" rel="icon" type="image/jpeg">
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
 
 <head>
-    <meta charset="UTF-8">
     <title>
-        Flask #2
+        DCX_E-Commerce
     </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Favicon -->
+  <link href="{{ url_for('static', filename='assets/img/11.jpeg') }}" rel="icon" type="image/jpeg">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="{{ url_for('static', filename='assets/js/plugins/nucleo/css/nucleo.css') }}"rel="stylesheet" />
+  <link href="{{ url_for('static', filename='assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="{{ url_for('static', filename='assets/css/argon-dashboard.css') }}" rel="stylesheet" />
 </head>
-<body>
+
+<body class="">
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <div class="container-fluid">
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Brand -->
+      <a class="navbar-brand pt-0" href="/main">
+        <img src="{{ url_for('static', filename='assets/img/11.jpeg') }}" class="navbar-brand-img" alt="...">
+      </a>
+      <!-- User -->
+      <ul class="nav align-items-center d-md-none">
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="ni ni-bell-55"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle">
+                <img alt="Image placeholder" src="{{ url_for('static', filename='assets/img/theme/team-1-800x800.jpg') }}">
+">
+              </span>
+            </div>
+          </a>
+
+        </li>
+      </ul>
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Collapse header -->
+        <div class="navbar-collapse-header d-md-none">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="/main">
+                <img src="{{ url_for('static', filename='assets/img/brand/blue.png') }}">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Navigation -->
+        <ul class="navbar-nav">
+          <li class="nav-item  active ">
+            <a class="nav-link  active " href="/main">
+              <i class="ni ni-tv-2 text-primary"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/mvadd">
+              <i class="ni ni-planet text-blue"></i>     Add book
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/mvdel">
+              <i class="ni ni-planet text-red"></i>     Delete book
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/mvser">
+              <i class="ni ni-planet text-green"></i> Search book
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{{ url_for('static', filename='examples/profile.html') }}">
+              <i class="ni ni-single-02 text-yellow"></i> Search user
+            </a>
+          </li>
+
+        </ul>
+        <!-- Divider -->
+        <hr class="my-3">
+        <!-- Heading -->
+        <h6 class="navbar-heading text-muted">Developer</h6>
+        <!-- Navigation -->
+        <ul class="navbar-nav mb-md-3">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Kimbeomchul/">
+              <i class="ni ni-spaceship"></i> 김범철
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/joohwan812">
+              <i class="ni ni-spaceship"></i> 전주환
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/jennkimm">
+              <i class="ni ni-spaceship"></i> 김서현
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
    <form action="add" method="POST" class="addBook" onsubmit="DoJoinForm__submit(this); return false;">
 
       <h2>책 등록</h2>
@@ -146,7 +261,7 @@ body {
         <input name="item_title" type="text" class="item_title" placeholder="제목" required>
         </input>
       </div>
-      <div class="textForm">
+      <div class="textForm" align="left">
                 <select name="item_section" id ="section" required>
                     <option value="소설">소설</option>
                     <option value="과학">과학</option>
@@ -168,9 +283,9 @@ body {
         <input name="item_writer" type="text" class="item_writer" placeholder="글쓴이" required>
       </div>
       <div class="textForm">
-        <input name="item_price" type="text" class="item_price" placeholder="가격" required>
+        <input name="item_price" type="number" class="item_price" placeholder="가격" required>
       </div>
-      <input type="submit" class="btn" value="등록"/>
+      <input type="submit" class="btn22" value="등록"/>
       <input id="currentDatetime" name="item_date" type="hidden" class="item_date" placeholder="등록일자" required>
     </form>
 

@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="kr">
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(){
@@ -44,9 +39,9 @@
                         window.location.href='/mvser';
                     }else if(list_data[i] == 'Search User' || list_data[i] == '유저 검색'){
                     }
-                }else{
-                alert("검색결과가 없습니다.");
                 }
+            }else{
+            alert("검색결과가 없습니다.");
             }
         });
 
@@ -63,9 +58,17 @@
 
 </script>
 
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
 
 <head>
+    <title>
+        DCX_E-Commerce
+    </title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Favicon -->
@@ -87,7 +90,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="/main.jsp">
+      <a class="navbar-brand pt-0" href="/main">
         <img src="{{ url_for('static', filename='assets/img/11.jpeg') }}" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
@@ -121,7 +124,7 @@
         <div class="navbar-collapse-header d-md-none">
           <div class="row">
             <div class="col-6 collapse-brand">
-              <a href="/main.jsp">
+              <a href="/main">
                 <img src="{{ url_for('static', filename='assets/img/brand/blue.png') }}">
               </a>
             </div>
@@ -192,7 +195,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/main.jsp">Dashboard</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/main">Dashboard</a>
         <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
           <div class="form-group mb-0">

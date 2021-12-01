@@ -95,8 +95,10 @@ body {
 
 <head>
     <meta charset="UTF-8">
+      <!-- Favicon -->
+  <link href="{{ url_for('static', filename='assets/img/11.jpeg') }}" rel="icon" type="image/jpeg">
     <title>
-        Flask #2
+        DCX_E-Commerce
     </title>
 </head>
 <body>
