@@ -38,5 +38,5 @@ export default Object.freeze({
     PAY: 'pay',
     PAY_SAVE: 'paysave',
     GET_PAY_LIST: 'paylist',
-    REWARD_SAVE: 'savemoney',
+    REWARD_SAVE: 'addsave',
 })
