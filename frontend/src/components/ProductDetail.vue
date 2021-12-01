@@ -12,7 +12,7 @@
 	<v-container fluid style="padding-top:60px;">
 		<v-img
 			height="450"
-			src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+			:src="bookInfo.item_image"
 		>
 			<v-btn icon>
 				<v-icon>mdi-heart</v-icon>

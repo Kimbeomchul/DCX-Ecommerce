@@ -30,8 +30,8 @@
 					<v-col
 						cols="9"
 					>
-						<div>반갑습니다,</div>
-						<div>홍길동님</div>
+						<div>반갑습니다, {{ userInfo.username }} 님</div>
+						<div>적립금: {{ userInfo.reward }}</div>
 					</v-col>
 				</v-row>
 
@@ -66,12 +66,17 @@ export default {
 		HeaderWrapper
 	},
 	data: () => ({
+		userInfo: {
+			username: JSON.parse(localStorage.getItem('user')).name,
+			reward: 0,
+		},
 		items: [
 			{ title: '찜목록', to: '/zzim' },
 			{ title: '주문 내역', to: '/orderedList' },
 			{ title: '장바구니', to: '/cart' },
 			{ title: '관리자', to: '/manager' },
-		]
+		],
+
 	}),
 }
 </script>

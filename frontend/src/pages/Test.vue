@@ -94,7 +94,11 @@ export default {
     },
     userSet: () => {
         console.log('user info before:',  JSON.parse(localStorage.getItem('user')));
+<<<<<<< HEAD
+        let obj = {name:'joohwan', year:30, member_id : 'mickey1102'};
+=======
         let obj = {name:'joohwan', year:30, member_id: 'mickey1102'};
+>>>>>>> 4e4956c0dd470ec72444c004e6c3d5d716e5eb6d
         localStorage.setItem('user', JSON.stringify(obj));
         let test = JSON.parse(localStorage.getItem('user'));
         userService.setUser(test);
