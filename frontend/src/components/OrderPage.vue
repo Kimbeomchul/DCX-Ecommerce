@@ -12,7 +12,7 @@
         <h3 class="font-weight-black">
           주문하기
         </h3>
-        
+
         <v-form ref="form">
           <div @click="execDaumPostcode()">
             <v-text-field v-model="postcode" placeholder="우편번호"></v-text-field>
@@ -26,7 +26,7 @@
             sm="4"
             v-for="(phone, index) in phoneNumber"
             :key="index"
-          > 
+          >
             <v-text-field type="number" v-model="phoneNumber[index]" placeholder="000" :rules="[true]"></v-text-field>
             </v-col>
           </v-row>

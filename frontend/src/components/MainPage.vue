@@ -52,12 +52,6 @@
         :key="book.item_code"
         cols= 6
         >
-        <router-link
-          v-bind:to="{
-            path: `/book/${book.item_title}`,
-            params: { bookTitle: `${book.item_title}` },
-          }"
-        >
         <v-card>
             <v-img
             :src="book.item_image"
@@ -65,17 +59,29 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="200px"
             >
+
+            <v-btn v-if="isZzimed(book.item_code)" icon>
+                <v-icon color="red" @click="zzimClicked(book.item_code)">mdi-heart</v-icon>
+            </v-btn>
+
+            <v-btn v-else icon>
+                <v-icon @click="zzimClicked(book.item_code)">mdi-heart</v-icon>
+            </v-btn>
+
             </v-img>
+            <router-link
+              v-bind:to="{
+                path: `/book/${book.item_title}`,
+                params: { bookTitle: `${book.item_title}` },
+              }"
+            >
             <v-card-title v-text="book.item_title"></v-card-title>
             <v-card-text>{{ book.item_price }} 원</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn icon>
-                <v-icon @click="zzimClicked">mdi-heart</v-icon>
-            </v-btn>
             </v-card-actions>
+            </router-link>
         </v-card>
-        </router-link>
         </v-col>
     </v-row>
     </v-container>
@@ -97,6 +103,7 @@ export default {
   },
   data: () => ({
     books: this.$store.state.books,
+    zzims: this.$sotre.state.zzims,
     ranked: [
       { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', rank: '1', flex: 4},
       { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', rank: '2', flex: 4},
@@ -107,15 +114,30 @@ export default {
       { name: '시' },
       { name: '인문학' },
       { name: '종교' },
-    ]
+    ],
+    myIcon: {
+      name: 'mdi-heart',
+      color: ''
+    }
   }),
   methods: {
-    zzimClicked() {
-
+    zzimClicked(item_code) {
+      this.myIcon.name = "mdi-heart";
+      this.myIcon.color = "red";
+      console.log(this.$store.state.zzims.find(zz => zz.item_code == item_code).item_code, item_code);
+      console.log(item_code);
+    },
+    isZzimed(it_code) {
+      return this.$store.state.zzims.find(zz => zz.item_code == it_code) ? true : false;
     },
   },
   created() {
     this.$store.dispatch('FETCH_BOOKS');
+    this.$store.dispatch('FETCH_ZZIM');
+    this.myIcon= {
+      name: 'mdi-heart',
+      color: 'default'
+    }
   }
 }
 </script>

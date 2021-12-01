@@ -45,7 +45,7 @@ export async function getBookByCode(item_codes) {
 export async function getBookByTitle(itemTitle) {
     const params = {};
     params['item_title'] = itemTitle;
-    return await apiService.toGet(api.GET_BOOK, params);
+    return await apiService.toGet(api.GET_BOOK_BY_TITLE, params);
 }
 
 /**

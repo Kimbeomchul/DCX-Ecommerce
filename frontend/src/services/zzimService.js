@@ -8,7 +8,10 @@ import * as userService from './userService'
  * @returns {Array} basket
  */
 export async function getZzimList() {
-    return await apiService.toGet(api.GET_ZZIM_LIST, userService.getUser('member_id'));
+    const params = {
+        member_id: userService.getUser('member_id')
+    }
+    return await apiService.toGet(api.GET_ZZIM_LIST, params);
 }
 
 /**
