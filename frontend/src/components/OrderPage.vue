@@ -136,7 +136,7 @@ export default {
         };
     },
   created() {
-    this.books = utils.getLocalstorageItem('buyItems')
+    this.books = this.books.concat(utils.getLocalstorageItem('buyItems'))
   },
   computed: {
     reward() {
