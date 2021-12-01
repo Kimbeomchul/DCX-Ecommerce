@@ -20,7 +20,7 @@ export default new Vuex.Store({
       },
       setZzimList(state, zzimList) {
         state.zzims = zzimList;
-      }
+      },
     },
     actions: {
     async FETCH_BOOKS(context) {

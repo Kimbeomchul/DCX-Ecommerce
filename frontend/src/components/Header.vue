@@ -8,7 +8,7 @@
 		scroll-target="#scrolling-techniques-7"
 		>
 		<v-toolbar-title>
-			<router-link 
+			<router-link
 			to="/"
 			style="text-decoration:none;color:black;"
 			>
@@ -16,17 +16,17 @@
 			</router-link>
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
-		<v-btn 
+		<v-btn
 		icon
 		to="test">
 			<v-icon>person</v-icon>
 		</v-btn>
-		<v-btn 
+		<v-btn
 		icon
 		to="mypage">
 			<v-icon>person</v-icon>
 		</v-btn>
-		<v-btn 
+		<v-btn
 		icon
 		to ="cart">
 		<v-badge
@@ -45,7 +45,6 @@
 export default {
 	name: "HeaderWrapper",
 	data: () => ({
-		content: this.$store.state.total
 	}),
 }
 </script>
