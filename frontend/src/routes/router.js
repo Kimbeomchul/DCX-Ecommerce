@@ -25,42 +25,51 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
+        name: '/',
         component: Main
     }
     ,{
         path: '/login',
+        name: 'login',
         component: Login
     },
     {
         path: '/addProduct',
+        name: 'addProduct',
         component: AddProductPage
     },
     {
         path: '/cart',
+        name: 'cart',
         component: CartPage
     },
     {
         path: '/mypage',
+        name: 'mypage',
         component: MyPage
     },
     {
         path: '/zzim',
+        name: 'zzim',
         component: Zzim
     }
     ,{
         path: '/test',
+        name: 'test',
         component: Test
     },
     {
         path: '/orderedList',
+        name: 'orderedList',
         component: OrderedList
     },
     {
         path: '/book/:bookTitle',
-        component: ProductDetail
+        component: ProductDetail,
     },
     {
         path: '/order',
+        name: 'order',
         component: OrderPage
     },
 ]

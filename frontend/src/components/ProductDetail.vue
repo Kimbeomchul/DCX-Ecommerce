@@ -54,12 +54,14 @@
 					elevation="2"
 					outlined
 					style="margin-right:50px;"
+					@click="addCart"
 				>
 					장바구니에 담기
 				</v-btn>
 				<v-btn
 					color="primary"
 					elevation="2"
+					@click="goOrder"
 				>
 					바로 구매하기
 				</v-btn>
@@ -82,11 +84,27 @@
 
 <script>
 import HeaderWrapper from "@/components/Header";
+import * as basketService from '../services/basketService'
+import * as dialogService from '../services/dialogService'
+import * as utils from '../util/utils'
+import * as routerService from '../services/routerService'
+import {ROUTES} from '../constants/routes'
+
 
 export default {
 	name: "ProductDetail",
 	components: {
 		HeaderWrapper
+	},
+	methods: {
+		async addCart() {
+			await basketService.addBasket(this.$store.state.book.item_code);
+			dialogService.alert('추가되었습니다.');
+		},
+		goOrder() {
+			utils.setLocalstorageItem('buyItems', this.$store.state.book);
+			routerService.go(ROUTES.ORDER)
+		}
 	},
 	data: () => ({
 		selection: 1,

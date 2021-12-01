@@ -8,27 +8,27 @@
 		scroll-target="#scrolling-techniques-7"
 		>
 		<v-toolbar-title>
-			<router-link
-			to="/"
-			style="text-decoration:none;color:black;"
-			>
-			이커머스
+			<router-link to="/">
+				<v-img
+				src="@/assets/book_logo.png"
+				width="10%"
+				/>
 			</router-link>
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<v-btn
 		icon
-		to="test">
+		:to="{name: 'test'}">
 			<v-icon>person</v-icon>
 		</v-btn>
 		<v-btn
 		icon
-		to="mypage">
+		:to="{name: 'mypage'}">
 			<v-icon>person</v-icon>
 		</v-btn>
 		<v-btn
 		icon
-		to ="cart">
+		:to ="{name: 'cart'}">
 		<v-badge
 			color="red"
 			:content= $store.state.total
