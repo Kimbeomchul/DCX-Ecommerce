@@ -979,6 +979,11 @@ var OrdersChart = (function() {
   // Init chart
   function initChart($chart) {
 
+    // 범철
+    fetch("http://3.36.39.51/paylist")
+        .then((response) => response.json())
+        .then((data) => console.log(data + Object.keys(data).length));
+
     // Create chart
     var ordersChart = new Chart($chart, {
       type: 'bar',
@@ -1019,10 +1024,10 @@ var OrdersChart = (function() {
         }
       },
       data: {
-        labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: ['12월', '1월', '2월', '3월', '4월', '5월'],
         datasets: [{
           label: 'Sales',
-          data: [25, 20, 30, 22, 17, 29]
+          data: [Objects.keys(data).length, 0, 0, 0, 0, 0]
         }]
       }
     });
