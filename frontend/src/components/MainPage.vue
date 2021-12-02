@@ -39,16 +39,16 @@
     >
         <v-col
         v-for="category in categories"
-        :key="category.name"
+        :key="category.item_section"
         >
-        <v-btn depressed>
-            <v-card-title v-text="category.name"></v-card-title>
+        <v-btn @click="isCategoryClicked(category.item_section)">
+            <v-card-title v-text="category.item_section"></v-card-title>
         </v-btn>
         </v-col>
     </v-row>
     <v-row>
         <v-col
-        v-for="book in this.$store.state.books"
+        v-for="book in this.$store.state.filteredBooks"
         :key="book.item_code"
         cols= 6
         >
@@ -61,11 +61,11 @@
             >
 
             <v-btn v-if="isZzimed(book.item_code)" icon>
-                <v-icon color="red" @click="zzimClicked(book.item_code)">mdi-heart</v-icon>
+                <v-icon color="red" @click="zzimClicked()">mdi-heart</v-icon>
             </v-btn>
 
             <v-btn v-else icon>
-                <v-icon @click="zzimClicked(book.item_code)">mdi-heart</v-icon>
+                <v-icon @click="zzimClicked()">mdi-heart</v-icon>
             </v-btn>
 
             </v-img>
@@ -97,47 +97,47 @@
 </style>
 
 <script>
+import store from '@/store/index.js';
+import * as bookService from '../services/bookService'
+
 export default {
   components: {
 
   },
   data: () => ({
-    books: this.$store.state.books,
-    zzims: this.$sotre.state.zzims,
-    ranked: [
+    ranked: [ /** 추천 */
       { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', rank: '1', flex: 4},
       { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', rank: '2', flex: 4},
       { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', rank: '3', flex: 4},
     ],
-    categories: [
-      { name: '소설' },
-      { name: '시' },
-      { name: '인문학' },
-      { name: '종교' },
-    ],
-    myIcon: {
-      name: 'mdi-heart',
-      color: ''
-    }
+    books: store.state.books,
+    books2: store.state.filteredBooks,
+    zzims: store.state.zzims,
+    categories: [],
   }),
   methods: {
-    zzimClicked(item_code) {
-      this.myIcon.name = "mdi-heart";
-      this.myIcon.color = "red";
-      console.log(this.$store.state.zzims.find(zz => zz.item_code == item_code).item_code, item_code);
-      console.log(item_code);
+    zzimClicked() {
+      
     },
     isZzimed(it_code) {
-      return this.$store.state.zzims.find(zz => zz.item_code == it_code) ? true : false;
+      return store.state.zzims.find(zz => zz.item_code == it_code) ? true : false;
     },
-  },
-  created() {
-    this.$store.dispatch('FETCH_BOOKS');
-    this.$store.dispatch('FETCH_ZZIM');
-    this.myIcon= {
-      name: 'mdi-heart',
-      color: 'default'
+    isCategoryClicked(category_name) {
+      if (category_name == "전체") {
+        store.commit('filterBooks', store.state.books);
+      } else {
+        const rich = store.state.books.filter(m => m.item_section == category_name);
+        store.commit('filterBooks', rich);
+      }
     }
+  },
+  async created() {
+    store.dispatch('FETCH_BOOKS');
+    store.dispatch('FETCH_ZZIM');
+    store.dispatch('SAVE_FILTERBOOK');
+    let categories = await bookService.getCategoryList();
+    categories.push({ item_section: '전체'});
+    this.categories = categories;
   }
 }
 </script>

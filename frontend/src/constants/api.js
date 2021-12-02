@@ -17,6 +17,7 @@ export default Object.freeze({
     DELETE_BOOK: 'ditem',
     ADD_BOOK: 'aitem',
     RECOMMAND: 'rec',
+    GET_CATEGORY: 'sections',
 
     // 장바구니
     GET_BASKET_LIST: 'allbasket',

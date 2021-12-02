@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
       books: [],
+      filteredBooks: [],
       book: [],
       zzims: [],
     },
@@ -21,6 +22,12 @@ export default new Vuex.Store({
       setZzimList(state, zzimList) {
         state.zzims = zzimList;
       },
+      setFilteredBooks(state, filteredBookList) {
+        state.filteredBooks = filteredBookList;
+      },
+      filterBooks(state, filteredBooks) {
+        state.filteredBooks = filteredBooks;
+      }
     },
     actions: {
     async FETCH_BOOKS(context) {
@@ -42,6 +49,13 @@ export default new Vuex.Store({
         .then((response) => {
           console.log(response);
           context.commit('setZzimList', response);
+        })
+    },
+    async SAVE_FILTERBOOK(context) {
+      await getBookList()
+            .then(response => {
+            console.log(response);
+            context.commit('setFilteredBooks', response);
         })
     }
     }
