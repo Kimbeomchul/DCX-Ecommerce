@@ -29,6 +29,8 @@ public interface UserMapper {
 
     // 아이템 카운트
     int item_count();
+    // 장르조회
+    List<SectionDTO> getSections();
     // 코드로검색
     List<ItemDTO> getItemCode(Integer[] arr);
     // 전체 책리스트

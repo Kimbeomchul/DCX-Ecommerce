@@ -17,6 +17,7 @@
     font-family: 'Nanum Gothic';
     background-color: white;
     margin-right: 50px;
+    border-radius: 20px;
 }
 
 /* 스크롤바 설정*/
@@ -34,7 +35,7 @@
   background-color:#FFFFFF;
   text-align:center;
   top:40%;
-  left:35%;
+  left:40%;
   transform: translate(-50%,-50%);
   border-radius: 15px;
 }
@@ -237,22 +238,27 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvadd">
-              <i class="ni ni-planet text-blue"></i>     Add book
+              <i class="ni ni-books text-blue"></i>     Add book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvdel">
-              <i class="ni ni-planet text-red"></i>     Delete book
+              <i class="ni ni-books text-red"></i>     Delete book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/mvser">
-              <i class="ni ni-planet text-green"></i> Search book
+              <i class="ni ni-books text-info"></i> Search book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvusr">
               <i class="ni ni-single-02 text-yellow"></i> Search user
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/mvsales">
+              <i class="ni ni-money-coins text-green"></i> Sales
             </a>
           </li>
 
@@ -282,7 +288,7 @@
       </div>
     </div>
   </nav>
-    <div class="mx-auto mt-5 search-bar input-group mb-3" style="position: absolute; top:5%; left:35%;">
+    <div class="mx-auto mt-5 search-bar input-group mb-3" style="position: absolute; top:5%; left:40%;">
       <input id="searchInput" name="search" type="text" class="rounded-pill" placeholder="책 검색" style="width:540px; text-indent:10px;">
       <button type="button" id="as" >
         <i class ="fas fa-search fa-2x"></i></button>
@@ -292,7 +298,7 @@
 
 
     <form action="#" class="addBook" >
-      <div id="sc" class="scroll type1">
+      <div id="sc" class="scroll type1 shadow">
 
       </div>
     </form>

@@ -33,6 +33,10 @@
         SELECT * FROM item ORDER BY RAND() LIMIT 10;
     </select>
 
+    <select id="getSections" resultType="com.lotte.dto.SectionDTO">
+        SELECT DISTINCT item_section FROM item;
+    </select>
+
     <select id="showAllPay" resultType="com.lotte.dto.PayDTO">
         SELECT * FROM payment;
     </select>

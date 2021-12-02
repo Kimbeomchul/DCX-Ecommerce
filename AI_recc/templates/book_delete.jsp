@@ -17,7 +17,7 @@
     margin-right: 50px;
     border-style: solid;
     border-width: 1px;
-    border-color: black;
+    border-color: grey;
     border-radius: 20px;
 }
 
@@ -34,7 +34,7 @@
   background-color:#FFFFFF;
   text-align:center;
   top:40%;
-  left:50%;
+  left:55%;
   transform: translate(-50%,-50%);
   border-radius: 15px;
 }
@@ -182,17 +182,17 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvadd">
-              <i class="ni ni-planet text-blue"></i>     Add book
+              <i class="ni ni-books text-blue"></i>     Add book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/mvdel">
-              <i class="ni ni-planet text-red"></i>     Delete book
+              <i class="ni ni-books text-red"></i>     Delete book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvser">
-              <i class="ni ni-planet text-green"></i> Search book
+              <i class="ni ni-books text-info"></i> Search book
             </a>
           </li>
           <li class="nav-item">
@@ -200,7 +200,11 @@
               <i class="ni ni-single-02 text-yellow"></i> Search user
             </a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link " href="/mvsales">
+              <i class="ni ni-money-coins text-green"></i> Sales
+            </a>
+          </li>
         </ul>
         <!-- Divider -->
         <hr class="my-3">
@@ -227,7 +231,7 @@
       </div>
     </div>
   </nav>
-   <form action="delete" method="POST" class="addBook" onsubmit="DoJoinForm__submit(this); return false;">
+   <form action="delete" method="POST" class="addBook shadow" onsubmit="DoJoinForm__submit(this); return false;">
        <h2>책 조회</h2>
       <div id="sc" class="scroll type1">
 

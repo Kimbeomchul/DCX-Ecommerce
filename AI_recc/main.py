@@ -44,6 +44,7 @@ def mv0():
     return render_template('main.jsp', sales=money, count_book=count_book, count_user=count_user)
 
 
+
 @app.route('/mvadd', methods=['GET'])
 def mv1():
     return render_template('book_add.jsp')
@@ -80,6 +81,34 @@ def mv4():
     return render_template('user_search.jsp', data=obj)
 
 
+
+@app.route('/mvsales', methods=['GET'])
+def mv5():
+    dics = {}
+    money = 0
+    #아이템 조회
+    url = "http://3.36.39.51/allitem"
+    response = requests.get(url)
+    items = response.json()
+
+    # 판매금액 조회용
+    url = "http://3.36.39.51/allpaylist"
+    response = requests.get(url)
+    pay = response.json()
+
+    for x in pay:
+        for y in items:
+            if y.get('item_code') == x.get('item_code'):
+                dics[y.get('item_title')] = 0
+
+    for i in pay:
+        temp = i.get('item_code')
+        for j in items:
+            if j.get('item_code') == temp:
+                dics[j.get('item_title')] += j.get('item_price')
+                money += j.get('item_price')
+
+    return render_template('sales.jsp', list=dics, money=money)
 
 
 

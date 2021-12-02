@@ -1,5 +1,6 @@
 package com.lotte.service;
 import com.lotte.dto.ItemDTO;
+import com.lotte.dto.SectionDTO;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -21,6 +22,8 @@ public interface ItemService {
     String getReccItem(String member_id);
 
     List<ItemDTO> getItemCode(Integer[] arr);
+
+    List<SectionDTO> getSections();
 
     int item_count();
 }

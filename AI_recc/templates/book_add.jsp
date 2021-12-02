@@ -10,7 +10,7 @@
   background-color:#FFFFFF;
   text-align:center;
   top:45%;
-  left:50%;
+  left:55%;
   transform: translate(-50%,-50%);
   border-radius: 15px;
 }
@@ -184,22 +184,27 @@
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/mvadd">
-              <i class="ni ni-planet text-blue"></i>     Add book
+              <i class="ni ni-books text-blue"></i>     Add book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvdel">
-              <i class="ni ni-planet text-red"></i>     Delete book
+              <i class="ni ni-books text-red"></i>     Delete book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvser">
-              <i class="ni ni-planet text-green"></i> Search book
+              <i class="ni ni-books text-info"></i> Search book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvusr">
               <i class="ni ni-single-02 text-yellow"></i> Search user
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/mvsales">
+              <i class="ni ni-money-coins text-green"></i> Sales
             </a>
           </li>
 
@@ -229,7 +234,7 @@
       </div>
     </div>
   </nav>
-   <form action="add" method="POST" class="addBook" onsubmit="DoJoinForm__submit(this); return false;">
+   <form action="add" method="POST" class="addBook shadow" onsubmit="DoJoinForm__submit(this); return false;">
 
       <h2>책 등록</h2>
       <div class="textForm">
