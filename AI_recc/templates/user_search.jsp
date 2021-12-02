@@ -140,6 +140,7 @@
 
 
         $("#as").on("click",function(){
+
             var temp_list = []
             var inner = '';
             var j = 0;
@@ -152,7 +153,7 @@
             }
             if(temp_list.length != 0){
                 for(idx in user){
-                    if(temp_list.includes(user[idx].item_title)){
+                    if(temp_list.includes(user[idx].member_name)){
                         inner +=  "<h5>====================================================================================================================</h5>";
                         inner +=  "<h5 style='text-align: left; text-indent:10px;'>  아이디 : " + user[idx].member_id +"</h5>";
                         inner +=  "<h5 style='text-align: left; text-indent:10px;'>  로그인 수단 : " + user[idx].member_social +"</h5>";
