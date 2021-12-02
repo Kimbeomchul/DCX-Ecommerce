@@ -107,9 +107,8 @@
 <script type="text/javascript">
     var user = {{data}};
     var list_data = [];
-    alert(user);
     document.addEventListener("DOMContentLoaded", function(){
-        alert("@@"
+    
         if(user != ""){
             for(idx in user){
                 list_data[idx] = user[idx].member_name.trim();
