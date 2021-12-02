@@ -32,12 +32,12 @@ def mv0():
                 money += j.get('item_price')
 
     # 책권수 조회
-    url = "http://localhost/item_count"
+    url = "http://3.36.39.51/item_count"
     response = requests.get(url)
     count_book = response.json()
 
     # 유저수 조회
-    url = "http://localhost/count_user"
+    url = "http://3.36.39.51/count_user"
     response = requests.get(url)
     count_user = response.json()
 
@@ -73,7 +73,7 @@ def mv3():
 
 @app.route('/mvusr', methods=['GET'])
 def mv4():
-    url = "http://localhost/user"
+    url = "http://3.36.39.51/user"
     response = requests.get(url)
     obj = response.json()
     print(obj)
