@@ -21,10 +21,8 @@ public class PayController {
     // 결제내역 저장
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/paysave", method = RequestMethod.POST)
-    public void addPay(@RequestParam(value="member_id") String member_id,@RequestParam(value="datas") String datas  , @RequestParam(value="pay_kakao") String pay_kakao) {
-        System.out.println("DATAS : " + datas);
-        System.out.println("ID : " +member_id);
-        System.out.println("TID : " +pay_kakao);
+    public void addPay(@RequestParam(value="datas") String datas, @RequestParam(value="member_id") String member_id , @RequestParam(value="pay_kakao") String pay_kakao) {
+
 
         try {
             String[] list1 = datas.split(",");
@@ -39,9 +37,16 @@ public class PayController {
 
     // 결제내역 조회
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/paylist", method = RequestMethod.POST)
-    public List<PayDTO> addPay(@RequestParam(value="member_id") String member_id) {
+    @RequestMapping(value = "/paylist", method = RequestMethod.GET)
+    public List<PayDTO> payList(@RequestParam(value="member_id") String member_id) {
 
         return payService.showPay(member_id);
+    }
+
+    // 결제내역 전체조회
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/allpaylist", method = RequestMethod.GET)
+    public void payAllList() {
+        payService.showAllPay();
     }
 }
