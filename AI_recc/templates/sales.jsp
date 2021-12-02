@@ -8,10 +8,10 @@
 }
 
 .scroll{
-    width: 1000px;
+    width: 400px;
     padding: 0px 13px 0px 13px;
     overflow-y: scroll;
-    height: 600px;
+    height: 500px;
     box-sizing: border-box;
     color: white;
     font-family: 'Nanum Gothic';
@@ -35,7 +35,7 @@
   background-color:#FFFFFF;
   text-align:center;
   top:40%;
-  left:40%;
+  left:55%;
   transform: translate(-50%,-50%);
   border-radius: 15px;
 }
@@ -106,13 +106,12 @@
 
 
 <script type="text/javascript">
-    var user = {{data}};
+    var books = {{data}};
     var list_data = [];
     document.addEventListener("DOMContentLoaded", function(){
-
-        if(user != ""){
-            for(idx in user){
-                list_data[idx] = user[idx].member_name.trim();
+        if(books != ""){
+            for(idx in books){
+                list_data[idx] = books[idx].item_title.trim();
             }
         }
         console.log(list_data);
@@ -140,7 +139,6 @@
 
 
         $("#as").on("click",function(){
-
             var temp_list = []
             var inner = '';
             var j = 0;
@@ -152,18 +150,16 @@
                 }
             }
             if(temp_list.length != 0){
-                for(idx in user){
-                    if(temp_list.includes(user[idx].member_name)){
+                for(idx in books){
+                    if(temp_list.includes(books[idx].item_title)){
                         inner +=  "<h5>====================================================================================================================</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  아이디 : " + user[idx].member_id +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  로그인 수단 : " + user[idx].member_social +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  이름 : " + user[idx].member_name +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  전화번호 : " + user[idx].member_phone +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  주소 : " + user[idx].member_address +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  가입일 : " + user[idx].member_regdate +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  적립금 : " + user[idx].member_savemoney +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  이메일 : " + user[idx].member_email +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  유저이미지 : " + user[idx].member_image +"</h5>";
+                        inner +=  "<img src='" + books[idx].item_image +"' width='180' height='190' style='float:left';>";
+                        inner +=  "<h5 style='text-align: left;'> </h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  번호 : " + books[idx].item_code +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  장르 : " + books[idx].item_section +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  제목 : " + books[idx].item_title +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  글쓴이 : " + books[idx].item_writer +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  가격 : " + books[idx].item_price +"</h5>";
                     }
                 }
             document.getElementById("sc").innerHTML = inner;
@@ -251,21 +247,20 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/mvser">
+            <a class="nav-link" href="/mvser">
               <i class="ni ni-books text-info"></i> Search book
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/mvusr">
+            <a class="nav-link " href="/mvusr">
               <i class="ni ni-single-02 text-yellow"></i> Search user
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/mvsales">
+            <a class="nav-link active" href="/mvsales">
               <i class="ni ni-money-coins text-green"></i> Sales
             </a>
           </li>
-
 
         </ul>
         <!-- Divider -->
@@ -293,18 +288,17 @@
       </div>
     </div>
   </nav>
-    <div class="mx-auto mt-5 search-bar input-group mb-3" style="position: absolute; top:5%; left:40%;">
-      <input id="searchInput" name="search" type="text" class="rounded-pill" placeholder="유저 검색" style="width:540px; text-indent:10px;">
-      <button type="button" id="as" >
-        <i class ="fas fa-search fa-2x"></i></button>
-      <div class="input-group-append">
-      </div>
-    </div>
-
-
     <form action="#" class="addBook" >
       <div id="sc" class="scroll type1 shadow">
-
+             <h2> 매출액 </h2>
+        {% for key, value in list.items() %}
+        <h5>====================================================================================================================</h5>
+        <br>
+        <h5 style='text-align: left; text-indent:10px;'>책 이름 : {{key}} </h5>
+        <h5 style='text-align: left; text-indent:10px;'>총 판매금액 : {{value}} </h5>
+        <br>
+        {% endfor %}
+        <h4 style="text-align: right; text-indent:10px;"> 총 매출액 : {{money}} </h4>
       </div>
     </form>
 

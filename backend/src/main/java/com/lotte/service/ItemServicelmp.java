@@ -1,6 +1,7 @@
 package com.lotte.service;
 
 import com.lotte.dto.ItemDTO;
+import com.lotte.dto.SectionDTO;
 import com.lotte.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
@@ -23,6 +24,11 @@ class ItemServicelmp implements ItemService {
     @Override
     public List<ItemDTO> getItemCode(Integer[] arr) {
         return userMapper.getItemCode(arr);
+    }
+
+    @Override
+    public List<SectionDTO> getSections() {
+        return userMapper.getSections();
     }
 
     @Override

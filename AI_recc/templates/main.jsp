@@ -2,8 +2,69 @@
 <html lang="kr">
 
 <script type="text/javascript">
+
+
     document.addEventListener("DOMContentLoaded", function(){
-        var list_data = ['Add book', 'Delete book', 'Search book', 'Search user' , '책 추가', '책 삭제' , '책 검색', '유저 검색'];
+    countSales();
+
+    // 판매량 집계
+    function countSales(){
+        fetch("http://3.36.39.51/allpaylist")
+          .then((response) => response.json())
+          .then((data) => charts(Object.keys(data).length));
+        }
+
+    function charts(data){
+
+    // 차트
+    var ctx = document.getElementById('orders');
+
+
+    var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: ['12월', '1월', '2월', '3월', '4월', '5월'],
+			datasets: [{
+				label: '# of Votes',
+				data: [data, 0, 0, 0, 0, 0],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			responsive: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			},
+		}
+	});
+
+
+    }
+
+
+
+
+        var list_data = ['Add book', 'Delete book', 'Search book', 'Search user' ,'Sales' ,'매출', '책 추가', '책 삭제' , '책 검색', '유저 검색'];
 
 
         var total_sales = {{sales}};
@@ -44,12 +105,15 @@
             for(i in list_data){
                 if(list_data[i].includes(word) == true){
                     if(list_data[i] == 'Add book' || list_data[i] == '책 추가'){
-                        location.href="/book_add.jsp";
+                        window.location.href='/mvadd';
                     }else if(list_data[i] == 'Delete book' || list_data[i] == '책 삭제'){
-                        location.href="/mvdel";
+                        window.location.href='/mvdel';
                     }else if(list_data[i] == 'Search book' || list_data[i] == '책 검색'){
                         window.location.href='/mvser';
                     }else if(list_data[i] == 'Search User' || list_data[i] == '유저 검색'){
+                        window.location.href='/mvusr';
+                    }else{
+                        window.location.href='/mvsales';
                     }
                 }
             }
@@ -130,22 +194,27 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvadd">
-              <i class="ni ni-planet text-blue"></i>     Add book
+              <i class="ni ni-books text-blue"></i>     Add book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvdel">
-              <i class="ni ni-planet text-red"></i>     Delete book
+              <i class="ni ni-books text-red"></i>     Delete book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvser">
-              <i class="ni ni-planet text-green"></i> Search book
+              <i class="ni ni-books text-info"></i> Search book
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/mvusr">
               <i class="ni ni-single-02 text-yellow"></i> Search user
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/mvsales">
+              <i class="ni ni-money-coins text-green"></i> Sales
             </a>
           </li>
 
@@ -207,8 +276,11 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
+                    <a href="/mvsales">
                       <h5 class="card-title text-uppercase text-muted mb-0">매출액</h5>
+
                       <span class="h2 font-weight-bold mb-0" id="sales"></span>
+                    </a>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -298,7 +370,7 @@
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-uppercase text-black ls-1 mb-1">Status</h6>
+                  <h6 class="text-uppercase text-black ls-1 mb-1">상태 update: 2021.12.02</h6>
                   <h2 class="text-black mb-0">Scikit-learn</h2>
                 </div>
               </div>
@@ -306,14 +378,33 @@
               <img src="{{ url_for('static', filename='assets/img/charts.png') }}" alt="Charts" width:10 style="border-radius: 7px;">
           </div>
         </div>
+        <div class="col-xl-4">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">월 판매량</h6>
+                  <h2 class="mb-0">Monthly orders</h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- 차아트 -->
+                <canvas id="orders" width="440" height="255"></canvas>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
       </div>
       </div>
-      </div>
+
   <!--   Core   -->
   <script src="{{ url_for('static', filename='assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-  <!--   Optional JS   -->
-  <script src="{{ url_for('static', filename='assets/js/plugins/chart.js/dist/Chart.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/js/plugins/chart.js/dist/Chart.extension.js') }}"></script>
+  <!--   차트 JS   -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
   <!--   Argon JS   -->
   <script src="{{ url_for('static', filename='assets/js/argon-dashboard.min.js') }}"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>

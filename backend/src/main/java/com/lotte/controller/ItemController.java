@@ -1,6 +1,7 @@
 package com.lotte.controller;
 
 import com.lotte.dto.ItemDTO;
+import com.lotte.dto.SectionDTO;
 import com.lotte.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,13 @@ public class ItemController {
     @RequestMapping(value = "/item_count", method = RequestMethod.GET)
     public int count_item() {
         return itemService.item_count();
+    }
+
+    // 장르조회
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/sections", method = RequestMethod.GET)
+    public List<SectionDTO> sections() {
+        return itemService.getSections();
     }
 
 
