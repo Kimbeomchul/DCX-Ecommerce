@@ -7,4 +7,5 @@ public interface PayService {
 
     void addPay(String member_id, int item_code, String pay_kakao);
     List showPay(String member_id);
+    void showAllPay();
 }

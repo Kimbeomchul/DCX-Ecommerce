@@ -21,5 +21,10 @@ class PayServicelmp implements PayService {
     public List<PayDTO> showPay(String member_id) {
         return UserMapper.showPay(member_id);
     }
+
+    @Override
+    public void showAllPay() {
+        UserMapper.showAllPay();
+    }
 }
 

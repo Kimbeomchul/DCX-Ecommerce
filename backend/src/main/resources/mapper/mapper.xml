@@ -33,6 +33,10 @@
         SELECT * FROM item ORDER BY RAND() LIMIT 10;
     </select>
 
+    <select id="showAllPay" resultType="com.lotte.dto.PayDTO">
+        SELECT * FROM payment;
+    </select>
+
     <select id="getReccItem" resultType="String">
         SELECT member_recc FROM members WHERE member_id = #{member_id}
     </select>
