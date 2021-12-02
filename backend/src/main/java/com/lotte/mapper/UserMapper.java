@@ -67,7 +67,7 @@ public interface UserMapper {
 
     void addPay(String member_id, int item_code, String pay_kakao);
     List<PayDTO> showPay(String member_id);
-    void showAllPay();
+    List<PayDTO> showAllPay();
 
     //======================== 추천 ==============================//
 

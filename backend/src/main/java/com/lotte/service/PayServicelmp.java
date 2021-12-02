@@ -23,8 +23,8 @@ class PayServicelmp implements PayService {
     }
 
     @Override
-    public void showAllPay() {
-        UserMapper.showAllPay();
+    public List<PayDTO> showAllPay() {
+        return UserMapper.showAllPay();
     }
 }
 

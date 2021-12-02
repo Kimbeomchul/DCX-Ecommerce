@@ -46,7 +46,7 @@ public class PayController {
     // 결제내역 전체조회
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/allpaylist", method = RequestMethod.GET)
-    public void payAllList() {
-        payService.showAllPay();
+    public List<PayDTO> payAllList() {
+        return payService.showAllPay();
     }
 }
