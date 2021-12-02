@@ -159,7 +159,7 @@
                         inner +=  "<h5 style='text-align: left; text-indent:10px;'>  장르 : " + books[idx].item_section +"</h5>";
                         inner +=  "<h5 style='text-align: left; text-indent:10px;'>  제목 : " + books[idx].item_title +"</h5>";
                         inner +=  "<h5 style='text-align: left; text-indent:10px;'>  글쓴이 : " + books[idx].item_writer +"</h5>";
-                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  가격 : " + books[idx].item_price +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  가격 : " + books[idx].item_price.toLocaleString(); +"</h5>";
                     }
                 }
             document.getElementById("sc").innerHTML = inner;

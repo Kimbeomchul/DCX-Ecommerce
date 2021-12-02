@@ -106,7 +106,7 @@
                 inner +=  "<h5>장르 : " + books[idx].item_section +"</h5>";
                 inner +=  "<h5>제목 : " + books[idx].item_title +"</h5>";
                 inner +=  "<h5>글쓴이 : " + books[idx].item_writer +"</h5>";
-                inner +=  "<h5>가격 : " + books[idx].item_price +"</h5>";
+                inner +=  "<h5>가격 : " + books[idx].item_price.toLocaleString(); +"</h5>";
 
             };
 
