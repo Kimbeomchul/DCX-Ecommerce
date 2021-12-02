@@ -21,4 +21,6 @@ public interface ItemService {
     String getReccItem(String member_id);
 
     List<ItemDTO> getItemCode(Integer[] arr);
+
+    int item_count();
 }

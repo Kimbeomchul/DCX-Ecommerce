@@ -12,6 +12,7 @@ import java.util.List;
 public interface UserMapper {
 
     //======================== 유저 ==============================//
+    int count_user();
 
     // 유저리스트
     List<UserDTO> getUserList();
@@ -26,6 +27,8 @@ public interface UserMapper {
     void addsave(int member_savemoney, String member_id);
     //======================== 아이템 ==============================//
 
+    // 아이템 카운트
+    int item_count();
     // 코드로검색
     List<ItemDTO> getItemCode(Integer[] arr);
     // 전체 책리스트

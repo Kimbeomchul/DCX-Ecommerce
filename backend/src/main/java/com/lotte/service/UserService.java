@@ -14,4 +14,6 @@ public interface UserService {
     void addphone(String member_phone, String member_address , String member_id);
 
     void addsave(int member_savemoney , String member_id);
+
+    int count_user();
 }

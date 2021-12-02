@@ -32,9 +32,15 @@ public class ItemController {
         for(int i =0; i<temp.length; i++){
             arr[i] = Integer.parseInt(temp[i]);
         }
-
         return itemService.getItemCode(arr);
+    }
 
+
+    // 책 건수 조회
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/item_count", method = RequestMethod.GET)
+    public int count_item() {
+        return itemService.item_count();
     }
 
 

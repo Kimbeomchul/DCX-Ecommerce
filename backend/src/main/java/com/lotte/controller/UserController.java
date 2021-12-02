@@ -11,14 +11,21 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-//
-//    // 모든 User정보 불러오기
-////    @CrossOrigin(origins = "*", allowedHeaders = "*")
-////    @RequestMapping(value = "/user", method = RequestMethod.GET)
-////    public List<UserDTO> getUser() {
-////        return userService.getUserList();
-////    }
-////
+
+//     모든 User정보 불러오기
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public List<UserDTO> getUser() {
+        return userService.getUserList();
+    }
+
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/count_user", method = RequestMethod.GET)
+    public int count_user() {
+        return userService.count_user();
+    }
+
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/addphone", method = RequestMethod.PUT)

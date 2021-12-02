@@ -37,6 +37,14 @@
         SELECT * FROM payment;
     </select>
 
+    <select id="item_count" resultType="int">
+        SELECT count(item_code) from item;
+    </select>
+
+    <select id="count_user" resultType="int">
+        SELECT count(member_id) from members;
+    </select>
+
     <select id="getReccItem" resultType="String">
         SELECT member_recc FROM members WHERE member_id = #{member_id}
     </select>

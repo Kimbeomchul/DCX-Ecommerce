@@ -14,10 +14,41 @@ def m():
     return render_template('login.jsp')
 @app.route('/main', methods=['GET'])
 def mv0():
-    return render_template('main.jsp')
+    money = 0
+    #아이템 조회
+    url = "http://3.36.39.51/allitem"
+    response = requests.get(url)
+    items = response.json()
+
+    # 판매금액 조회용
+    url = "http://3.36.39.51/allpaylist"
+    response = requests.get(url)
+    pay = response.json()
+
+    for i in pay:
+        temp = i.get('item_code')
+        for j in items:
+            if j.get('item_code') == temp:
+                money += j.get('item_price')
+
+    # 책권수 조회
+    url = "http://localhost/item_count"
+    response = requests.get(url)
+    count_book = response.json()
+
+    # 유저수 조회
+    url = "http://localhost/count_user"
+    response = requests.get(url)
+    count_user = response.json()
+
+    return render_template('main.jsp', sales=money, count_book=count_book, count_user=count_user)
+
+
 @app.route('/mvadd', methods=['GET'])
 def mv1():
     return render_template('book_add.jsp')
+
+
 @app.route('/mvser', methods=['GET'])
 def mv2():
     url = "http://3.36.39.51/allitem"
@@ -38,6 +69,16 @@ def mv3():
     print(status)
 
     return render_template('book_delete.jsp', data=obj)
+
+@app.route('/mvusr', methods=['GET'])
+def mv4():
+    url = "http://localhost/user"
+    response = requests.get(url)
+    obj = response.json()
+    print(obj)
+
+    return render_template('user_search.jsp', data=obj)
+
 
 
 

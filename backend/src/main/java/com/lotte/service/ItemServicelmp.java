@@ -25,6 +25,11 @@ class ItemServicelmp implements ItemService {
         return userMapper.getItemCode(arr);
     }
 
+    @Override
+    public int item_count() {
+        return userMapper.item_count();
+    }
+
     // 추천아이템 검색2
     @Override
     public List<ItemDTO> getItemWithRecc(String recc_code) {

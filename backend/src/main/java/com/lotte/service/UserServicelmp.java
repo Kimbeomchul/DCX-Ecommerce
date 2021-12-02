@@ -4,6 +4,7 @@ import com.lotte.dto.UserDTO;
 import com.lotte.login.Login;
 import com.lotte.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
@@ -32,6 +33,11 @@ class UserServicelmp implements UserService{
     @Override
     public void addsave(int member_savemoney, String member_id) {
         UserMapper.addsave(member_savemoney,member_id);
+    }
+
+    @Override
+    public int count_user() {
+        return UserMapper.count_user();
     }
 
 

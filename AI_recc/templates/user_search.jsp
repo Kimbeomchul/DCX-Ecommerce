@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
+<head>
+
 <style>
 .flex{
   display:flex;
 }
 
 .scroll{
-    width: 400px;
+    width: 1000px;
     padding: 0px 13px 0px 13px;
     overflow-y: scroll;
-    height: 210px;
+    height: 600px;
     box-sizing: border-box;
     color: white;
     font-family: 'Nanum Gothic';
     background-color: white;
     margin-right: 50px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    border-radius: 20px;
 }
 
 /* 스크롤바 설정*/
@@ -26,15 +24,17 @@
     width: 6px;
 }
 
+
+
 .addBook {
   position:absolute;
   width:400px;
-  height:540px;
+  height:400px;
   padding: 30px, 20px;
   background-color:#FFFFFF;
   text-align:center;
   top:40%;
-  left:50%;
+  left:35%;
   transform: translate(-50%,-50%);
   border-radius: 15px;
 }
@@ -62,7 +62,7 @@
 }
 
 
-.btn22 {
+.btn {
   position:relative;
   left:40%;
   transform: translateX(-50%);
@@ -80,38 +80,101 @@
   display:inline;
 }
 
-.btn22:hover {
+.btn:hover {
   background-position: right;
 }
 </style>
 
+  <!-- Favicon -->
+  <link href="{{ url_for('static', filename='assets/img/11.jpeg') }}" rel="icon" type="image/jpeg">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+    .search-bar {
+      width: 500px;
+    }
+  </style>
+    <meta charset="UTF-8">
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>
+        DCX_E-Commerce
+    </title>
+</head>
 
-{%with messages = get_flashed_messages()%}
-{%if messages %}
-<script type="text/javascript">
-  alert("{{messages[-1]}}");
-</script>
-{%endif%}
-{%endwith%}
 
 <script type="text/javascript">
+    var user = {{data}};
+    var list_data = [];
+    alert(user);
     document.addEventListener("DOMContentLoaded", function(){
-        var books = {{data}};
-        var inner = "";
-
-        if(books != ""){
-            for(idx in books){
-                inner +=  "<h5>==================================<h5>";
-                inner +=  "<h5>번호 : " + books[idx].item_code +"</h5>";
-                inner +=  "<h5>장르 : " + books[idx].item_section +"</h5>";
-                inner +=  "<h5>제목 : " + books[idx].item_title +"</h5>";
-                inner +=  "<h5>글쓴이 : " + books[idx].item_writer +"</h5>";
-                inner +=  "<h5>가격 : " + books[idx].item_price +"</h5>";
-
-            };
-
-            document.getElementById("sc").innerHTML = inner;
+        alert("@@"
+        if(user != ""){
+            for(idx in user){
+                list_data[idx] = user[idx].member_name.trim();
+            }
         }
+        console.log(list_data);
+
+        $("#searchInput").autocomplete({
+            source : list_data,
+            select : function(event, ui) {
+                console.log(ui.item);
+            },
+            focus : function(event, ui) {
+                return false;
+            },
+            minLength: 1,
+            autoFocus: true,
+            classes: {
+                "ui-autocomplete": "highlight"
+            },
+            delay: 100,
+//            disabled: true,
+            position: { my : "right top", at: "right bottom" },
+            close : function(event){
+                console.log(event);
+            }
+        });
+
+
+        $("#as").on("click",function(){
+            var temp_list = []
+            var inner = '';
+            var j = 0;
+            var word = document.getElementById("searchInput").value;
+            for(i in list_data){
+                if(list_data[i].includes(word) == true){
+                    temp_list[j] = list_data[i];
+                    j++;
+                }
+            }
+            if(temp_list.length != 0){
+                for(idx in user){
+                    if(temp_list.includes(user[idx].item_title)){
+                        inner +=  "<h5>====================================================================================================================</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  아이디 : " + user[idx].member_id +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  로그인 수단 : " + user[idx].member_social +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  이름 : " + user[idx].member_name +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  전화번호 : " + user[idx].member_phone +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  주소 : " + user[idx].member_address +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  가입일 : " + user[idx].member_regdate +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  적립금 : " + user[idx].member_savemoney +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  이메일 : " + user[idx].member_email +"</h5>";
+                        inner +=  "<h5 style='text-align: left; text-indent:10px;'>  유저이미지 : " + user[idx].member_image +"</h5>";
+                    }
+                }
+            document.getElementById("sc").innerHTML = inner;
+            }
+        });
+
+
+        $("#searchInput").keyup(function(event) {
+            if (window.event.keyCode == 13) {
+                $("#as").click();
+            }
+        });
 
     });
 
@@ -123,13 +186,9 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-  <!-- Favicon -->
-  <link href="{{ url_for('static', filename='assets/img/11.jpeg') }}" rel="icon" type="image/jpeg">
+
 
 <head>
-    <title>
-        DCX_E-Commerce
-    </title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Favicon -->
@@ -176,7 +235,7 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  active ">
-            <a class="nav-link  " href="/main">
+            <a class="nav-link   " href="/main">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
@@ -186,7 +245,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/mvdel">
+            <a class="nav-link " href="/mvdel">
               <i class="ni ni-planet text-red"></i>     Delete book
             </a>
           </li>
@@ -196,7 +255,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/mvusr">
+            <a class="nav-link active" href="/mvusr">
               <i class="ni ni-single-02 text-yellow"></i> Search user
             </a>
           </li>
@@ -227,17 +286,19 @@
       </div>
     </div>
   </nav>
-   <form action="delete" method="POST" class="addBook" onsubmit="DoJoinForm__submit(this); return false;">
-       <h2>책 조회</h2>
+    <div class="mx-auto mt-5 search-bar input-group mb-3" style="position: absolute; top:5%; left:35%;">
+      <input id="searchInput" name="search" type="text" class="rounded-pill" placeholder="유저 검색" style="width:540px; text-indent:10px;">
+      <button type="button" id="as" >
+        <i class ="fas fa-search fa-2x"></i></button>
+      <div class="input-group-append">
+      </div>
+    </div>
+
+
+    <form action="#" class="addBook" >
       <div id="sc" class="scroll type1">
 
       </div>
-      <h2>책 삭제</h2>
-      <div class="textForm">
-        <input name="item_code" type="text" class="item_code" placeholder="책 코드" required>
-        </input>
-       </div>
-      <input type="submit" class="btn22" value="등록"/>
     </form>
 
 </body>
