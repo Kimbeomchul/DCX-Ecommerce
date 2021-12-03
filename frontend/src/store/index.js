@@ -11,6 +11,7 @@ export default new Vuex.Store({
       filteredBooks: [],
       book: [],
       zzims: [],
+      newCartItems: 0,
     },
     mutations: {
       setBookList(state, bookList) {
@@ -37,6 +38,10 @@ export default new Vuex.Store({
       },
       addToZzim: (state, zzim) => {
         state.zzims.push(zzim);
+      },
+      setNewCartItems(state, reset = true) {
+        state.newCartItems = reset ? 0 : state.newCartItems + 1
+        console.log(reset, state.newCartItems);
       }
     },
     actions: {
@@ -80,5 +85,11 @@ export default new Vuex.Store({
           context.commit('removeFromZzim', id);
         })
     },
+    INIT_NEW_CART_ITEMS(context) {
+      context.commit('setNewCartItems');
+    },
+    ADD_NEW_CART_ITEMS(context) {
+      context.commit('setNewCartItems', false);
+    }
     }
 });

@@ -5,3 +5,4 @@ AI_recc/recc.py
 backend/.DS_Store
 AI_recc/recc.py
 backend/build/resources/main/application.properties
+backend/src/main/java/com/lotte/controller/PayController.java

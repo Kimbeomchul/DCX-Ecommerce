@@ -10,28 +10,30 @@
 		<v-toolbar-title>
 			<router-link to="/">
 				<v-img
-				src="@/assets/book_logo.png"
-				width="10%"
+				src="@/assets/lotte.png"
+				width="25%"
 				/>
 			</router-link>
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<v-btn
 		icon
-		:to="{name: 'test'}">
+		to="test">
+			<v-icon>mdi-thumb-up</v-icon>
+		</v-btn>
+		<v-btn
+		icon
+		to="mypage">
 			<v-icon>person</v-icon>
 		</v-btn>
 		<v-btn
 		icon
-		:to="{name: 'mypage'}">
-			<v-icon>person</v-icon>
-		</v-btn>
-		<v-btn
-		icon
-		:to ="{name: 'cart'}">
+		to ="cart">
 		<v-badge
+			:value="$store.state.newCartItems > 0"
+			overlap
 			color="red"
-			:content= $store.state.total
+			:content= "$store.state.newCartItems"
 		>
 			<v-icon>shopping_bag</v-icon>
 		</v-badge>
@@ -44,7 +46,9 @@
 <script>
 export default {
 	name: "HeaderWrapper",
-	data: () => ({
-	}),
+	data: () => {
+		return {
+		}
+	},
 }
 </script>

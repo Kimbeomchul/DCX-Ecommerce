@@ -96,10 +96,27 @@ export default {
 	components: {
 		HeaderWrapper
 	},
+	beforeRouteUpdate(to, from ,next) {
+		const path = to.path.split('/').pop();
+		const routes = this.$router.options.routes;
+
+		if(routes.findIndex(v => v.name) !== -1) {
+			next({name: path});
+		}
+		next();
+	},
 	methods: {
 		async addCart() {
-			await basketService.addBasket(this.$store.state.book.item_code);
-			dialogService.alert('추가되었습니다.');
+			const cartList = await basketService.getBasket();
+			const index = cartList.findIndex(v => this.bookInfo.item_code === v.item_code);
+			if(index !== -1) {
+				dialogService.alert('이미 추가된 도서 입니다.');
+				return ;
+			} else {
+				await basketService.addBasket(this.$store.state.book.item_code);
+				this.$store.dispatch('ADD_NEW_CART_ITEMS');
+				dialogService.alert('추가되었습니다.');
+			}
 		},
 		goOrder() {
 			utils.setLocalstorageItem('buyItems', this.$store.state.book);
