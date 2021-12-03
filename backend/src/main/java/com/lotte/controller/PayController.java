@@ -3,10 +3,7 @@ package com.lotte.controller;
 import com.lotte.dto.ItemDTO;
 import com.lotte.dto.PayDTO;
 import com.lotte.dto.ZzimDTO;
-import com.lotte.service.ItemService;
-import com.lotte.service.PayService;
-import com.lotte.service.UserService;
-import com.lotte.service.ZzimService;
+import com.lotte.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +15,7 @@ import java.util.List;
 public class PayController {
 
     private final PayService payService;
-    private final UserService userService;
+    private final BasketService basketService;
 
     // 결제내역 저장
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -30,8 +27,8 @@ public class PayController {
             String[] list1 = datas.split(",");
             for (int i = 0; i < list1.length; i++) {
                 payService.addPay(member_id, Integer.parseInt(list1[i]), pay_kakao);
+                basketService.deletebasket(Integer.parseInt(list1[i]),member_id);
             }
-            userService.addsave(savemoney,member_id);
         }catch (Exception e){
             System.out.println("Error with payment : < addPay > "+ e );
         }
