@@ -20,7 +20,7 @@ public class PayController {
     // 결제내역 저장
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/paysave", method = RequestMethod.POST)
-    public void addPay(@RequestParam(value="datas") String datas, @RequestParam(value="savemoney") int savemoney, @RequestParam(value="member_id") String member_id , @RequestParam(value="pay_kakao") String pay_kakao) {
+    public void addPay(@RequestParam(value="datas") String datas,@RequestParam(value="member_id") String member_id , @RequestParam(value="pay_kakao") String pay_kakao) {
 
 
         try {
