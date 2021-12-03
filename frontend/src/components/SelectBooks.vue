@@ -31,8 +31,11 @@
 </template>
 
 <script>
-import * as dialogService from '../services/dialogService'
-import * as bookService from '../services/bookService'
+import * as bookService from '../services/bookService';
+import * as routerService from '../services/routerService'
+import {ROUTES} from '../constants/routes'
+import store from '@/store/index.js';
+
     export default {
         name: 'Login',
         data() {
@@ -56,9 +59,12 @@ import * as bookService from '../services/bookService'
                     book.selected = !book.selected;
                 }
 
-                id = this.books.findIndex(v => v.item_code === id);
-                console.log(book.selected, id, this.books);
-                console.log(this.books[id].selected);
+            if(selectedBooks.length >= this.limit) {
+              await bookService.getRecommandBooks(selectedBooks);
+              const recommandBooks = await bookService.getRecommandBooks(selectedBooks);
+              this.$dialog.destroy();
+              store.dispatch("SET_RECOMMAND_BOOKS", recommandBooks)
+              routerService.go(ROUTES.MAIN);
             }
         },
         async created() {

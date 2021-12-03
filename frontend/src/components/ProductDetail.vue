@@ -114,7 +114,7 @@ export default {
 				return ;
 			} else {
 				await basketService.addBasket(this.$store.state.book.item_code);
-				this.$store.dispatch('ADD_NEW_CART_ITEMS');
+				store.dispatch('ADD_NEW_CART_ITEMS');
 				dialogService.alert('추가되었습니다.');
 			}
 		},
