@@ -9,7 +9,7 @@
       max-height="2000"
     >
       <v-container fluid style="padding-top:60px;">
-        <h3 class="font-weight-black">
+        <h3 class="font-weight-black" style="margin-top:10px">
           구매자 정보
         </h3>
 
@@ -17,8 +17,8 @@
           <div @click="execDaumPostcode()">
             <v-text-field v-model="postcode" placeholder="우편번호"></v-text-field>
             <v-btn>우편번호 찾기</v-btn>
-          </div>
           <v-text-field v-model="address" placeholder="주소"><br></v-text-field>
+          </div>
           <v-text-field v-model="detailAddress" placeholder="상세주소"></v-text-field>
           <v-row>
             <v-col
@@ -27,15 +27,15 @@
             v-for="(phone, index) in phoneNumber"
             :key="index"
           >
-            <v-text-field type="number" v-model="phoneNumber[index]" placeholder="000" :rules="[true]"></v-text-field>
+            <v-text-field type="number" v-model="phoneNumber[index]" placeholder="000"></v-text-field>
             </v-col>
           </v-row>
         </v-form>
 
-        <h3 class="font-weight-black">
+        <h3 class="font-weight-black"  style="margin-top:10px">
         주문 상세
         </h3>
-        <v-expansion-panels inset>
+        <v-expansion-panels :value="1" inset style="margin-top:10px">
           <v-expansion-panel>
             <v-expansion-panel-header>
               구매 도서
@@ -75,11 +75,37 @@
             <v-expansion-panel-header>
               결제정보
             </v-expansion-panel-header>
+
             <v-expansion-panel-content>
-              총 결제 금액 : {{total | currency | won}}
-            </v-expansion-panel-content>
-            <v-expansion-panel-content>
-              예상 적립금 : {{reward | currency | won}}
+              <v-simple-table dense>
+                <template v-slot:default>
+                  <tbody>
+                    <tr>
+                      <td class="text-left"><h3>보유 적립금</h3></td>
+                      <td class="text-left"><h3>{{extraReward | currency | won}}</h3></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left"><h3>사용 가능 적립금</h3></td>
+                      <td class="text-left">
+                        <v-row style="margin:8px 0;">
+                          <input class="input_number" type="number" v-model="useReward" @click="initTextField">
+                          <v-btn style="margin-left:10px" color="primary" small @click="spendAllReward">
+                              모두사용
+                          </v-btn>
+                        </v-row>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left"><h3>총 결제 금액</h3></td>
+                      <td class="text-left"><h3>{{total | currency | won}}</h3></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left"><h3>예상 적립금</h3></td>
+                      <td class="text-left"><h3>{{reward | currency | won}}</h3></td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -119,6 +145,7 @@ import HeaderWrapper from "@/components/Header";
 import * as userService from '../services/userService'
 import * as payService from '../services/payService'
 import * as utils from '../util/utils'
+import * as dialogService from '../services/dialogService'
 
 export default {
     components: {
@@ -126,35 +153,68 @@ export default {
     },
     data() {
         return {
-            postcode: '',
-            address: '',
-            extraAddress: '',
-            phoneNumber: ['','',''],
-            detailAddress: '',
-            books: []
+          useReward: 0,
+          user: {},
+          postcode: '06001',
+          address: '강남대로',
+          extraAddress: '어디든',
+          detailAddress: '나의 무대',
+          phoneNumber: ['010','1234','1234'],
+          books: [],
         };
     },
-  created() {
-    this.books = this.books.concat(utils.getLocalstorageItem('buyItems'))
+  async created() {
+    this.user = await userService.getUserFromDB();
+    console.log(this.user);
+    this.books = this.books.concat(utils.getLocalstorageItem('buyItems'));
+
+  },
+  watch: {
+    useReward() {
+      // -값 들어왓을때 유효성 테스트해야됨 ㅋㅋ;;;
+      if(this.useReward < 0) {
+        this.useReward = 0;
+      }
+      if(this.useReward > this.user.member_savemoney) {
+        this.useReward = this.user.member_savemoney;
+      }
+      if(this.useReward > this.price) {
+        this.useReward = this.price;
+      }
+    }
   },
   computed: {
-    reward() {
-      return Math.ceil(this.total * 0.01);
+    extraReward() {
+      return this.user.member_savemoney - this.useReward;
     },
     total() {
+      return this.price - this.useReward;
+    },
+    reward() {
+      return Math.ceil(this.price * 0.01);
+    },
+    price() {
       return this.books.reduce((acc, cur) => acc + cur.item_price, 0);
     }
   },
 	methods: {
+    spendAllReward() {
+      this.useReward = this.user.member_savemoney;
+    },
+    initTextField() {
+      this.useReward = null;
+    },
     async goPay() {
-      if(this.address && this.extraAddress && this.detailAddress) {
+      if(this.address && this.detailAddress) {
         const address = this.address + this.extraAddress + this.detailAddress;
         const phoneNumber = this.phoneNumber.join('');
-        let fail = await userService.saveUserInfo(address, phoneNumber);
+        const fail = await userService.saveUserInfo(address, phoneNumber);
+        utils.setLocalstorageItem('rewards', this.reward - this.useReward);
         if(!fail) {
           await payService.pay(this.books);
         }
-
+      } else {
+          await dialogService.alert('구매자 정보를 입력해주세요');
       }
     },
     execDaumPostcode() {
@@ -200,3 +260,12 @@ export default {
     },
   }
 </script>
+
+<style>
+.input_number {
+  width: 17%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid red;
+}
+</style>

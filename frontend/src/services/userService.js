@@ -10,8 +10,12 @@ let user = undefined;
  * 사용자 전체 조회
  * @returns {Array} user
  */
-export async function getUserList() {
-    return await apiService.toGet(api.GET_USER_LIST);
+export async function getUserFromDB() {
+    const userName = getUser('member_name');
+    const userList = await apiService.toGet(api.GET_USER_LIST);
+    const user = userList.find(v => v.member_name === userName);
+    
+    return {...user, ...getUser()};
 }
 
 /**

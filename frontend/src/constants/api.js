@@ -37,6 +37,7 @@ export default Object.freeze({
 
     // 구매
     PAY: 'pay',
+    PAY_LIST: 'paylist',
     PAY_SAVE: 'paysave',
     GET_PAY_LIST: 'paylist',
     REWARD_SAVE: 'addsave',

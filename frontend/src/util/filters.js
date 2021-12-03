@@ -11,6 +11,6 @@ export function won(data) {
  * @returns 10,000
  */
 export function currency(data) {
-    return data.toLocaleString();
+    return data ? data.toLocaleString() : 0;
 }
 
