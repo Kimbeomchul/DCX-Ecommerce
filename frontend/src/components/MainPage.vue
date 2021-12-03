@@ -68,6 +68,9 @@
                 <v-icon @click="zzimClicked(book.item_code)">mdi-heart</v-icon>
             </v-btn>
 
+            <!-- <v-btn icon>
+                <v-icon @click="zzimClicked(book.item_code)">shopping_bag</v-icon>
+            </v-btn> -->
             </v-img>
             <router-link
               v-bind:to="{

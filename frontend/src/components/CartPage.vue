@@ -28,9 +28,10 @@
           max-height="50px"
           max-width="50px"
           style="margin-right:10px;"
+          @click="goBookDetail(book)"
           ></v-img>
 
-          <v-list-item-content>
+          <v-list-item-content @click="goBookDetail(book)">
             <v-list-item-title v-html="book.item_title"></v-list-item-title>
             <v-list-item-subtitle >
               <span class="text--primary">
@@ -38,6 +39,9 @@
               </span>
             </v-list-item-subtitle>
           </v-list-item-content>
+          <v-list-item-action>
+            <v-icon @click="removeItem(book)">mdi-trash-can</v-icon>
+          </v-list-item-action>
         </template>
       </v-list-item>
       </template>
@@ -94,11 +98,23 @@ export default {
     HeaderWrapper
   },
   async created() {
-    let books = await basketService.getBasket();
-    this.books = books
-    this.buying = this.books.slice()
+    await this.init();
   },
   methods: {
+    async init() {
+      this.books = await basketService.getBasket();
+      this.buying = this.books;
+      this.$store.dispatch('INIT_NEW_CART_ITEMS');
+    },
+    goBookDetail(book) {
+      const path = `/book/${book.item_title}`;
+      const params =  { bookTitle: `${book.item_title}` };
+      routerService.go(path, null, params)
+    },
+    async removeItem(book) {
+      await basketService.deleteBasket(book.item_code);
+      await this.init();
+    },
     goOrder() {
       utils.setLocalstorageItem('buyItems', this.buying);
       routerService.go(ROUTES.ORDER)

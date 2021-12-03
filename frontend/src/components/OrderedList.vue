@@ -15,34 +15,38 @@
 	subheader
 	three-line
 	>
-		<template v-for="(item, index) in items">
+		<template v-for="(order, index1) in orders">
 			<v-subheader
-			v-if="item.header"
-			:key="item.header"
-			v-text="item.header"
+			:key="order.payKakao"
+			v-text="`No.${order.payKakao}`"
 			></v-subheader>
 
-			<v-divider
-			v-else-if="item.divider"
-			:key="index"
-			></v-divider>
+			<v-divider :key="'A' + order.payKakao" />
 
-			<v-list-item
-			v-else
-			:key="item.title"
-			>
-				<v-img
-				:src="item.book_img"
-				max-height="50px"
-				max-width="50px"
-				style="margin-right:10px;"
-				></v-img>
+      <template v-for="(itemCode, index2) in order.itemCodes">
+        <v-list-item
+        :key="index1 + index2 + index1 + 20 * index2 *20"
+        v-bind:to = "{
+            path: `/book/${books[itemCode].item_title}`,
+            params: { bookTitle: `${books[itemCode].item_title}` },
+        }">
+          <v-img
+          :src="books[itemCode].item_image"
+          max-height="50px"
+          max-width="50px"
+          style="margin-right:10px;"
+          ></v-img>
 
-				<v-list-item-content>
-					<v-list-item-title v-html="item.title"></v-list-item-title>
-					<v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
+          <v-list-item-content>
+            <v-list-item-title v-html="books[itemCode].item_title"></v-list-item-title>
+            <v-list-item-subtitle>
+              <span>
+                {{books[itemCode].item_price | currency | won}}
+              </span>
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
 		</template>
     </v-list>
     </v-container>
@@ -61,76 +65,20 @@
 
 <script>
 import HeaderWrapper from "@/components/Header";
+import * as payService from '../services/payService';
+import * as bookService from '../services/bookService';
 
 export default {
     components: {
       HeaderWrapper
     },
     data: () => ({
-    items: [
-      { header: '2021.11.24' },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-        title: '번역의 모험',
-        subtitle: `<span class="text--primary">'번역 바이블', 12년 만에 나온 두 번째 가이드</span> `,
+      books: [],
+      orders: [],
+     }),
+      async created() {
+        this.books = await bookService.getBookList();
+        this.orders = await payService.getOrderList();
       },
-      { divider: true, inset: true },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-        title: '네 번의 노크',
-        subtitle: `<span class="text--primary">영화계가 먼저 선택한 새로운 미스터리</span> `,
-      },
-      { divider: true, inset: true },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-        title: '장면들',
-        subtitle: '<span class="text--primary">손석희의 저널리즘 에세이</span>',
-      },
-      { divider: true, inset: true },
-      { header: '2021.11.20' },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-        title: '주식투자 절대 원칙',
-        subtitle: '<span class="text--primary">‘주식농부’ 박영옥의 투자 철칙</span>',
-      },
-      { divider: true, inset: true },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-        title: '우리는 약속도 없이 사랑을 하고',
-        subtitle: '<span class="text--primary">시인 정현우의 첫 번째 산문집</span>',
-      },
-      { divider: true, inset: true },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-        title: '번역의 모험',
-        subtitle: `<span class="text--primary">'번역 바이블', 12년 만에 나온 두 번째 가이드</span> `,
-      },
-      { divider: true, inset: true },
-      { header: '2021.11.01' },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-        title: '네 번의 노크',
-        subtitle: `<span class="text--primary">영화계가 먼저 선택한 새로운 미스터리</span> `,
-      },
-      { divider: true, inset: true },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-        title: '장면들',
-        subtitle: '<span class="text--primary">손석희의 저널리즘 에세이</span>',
-      },
-      { divider: true, inset: true },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-        title: '주식투자 절대 원칙',
-        subtitle: '<span class="text--primary">‘주식농부’ 박영옥의 투자 철칙</span>',
-      },
-      { divider: true, inset: true },
-      {
-        book_img: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-        title: '우리는 약속도 없이 사랑을 하고',
-        subtitle: '<span class="text--primary">시인 정현우의 첫 번째 산문집</span>',
-      },
-    ],
-  }),
   }
 </script>

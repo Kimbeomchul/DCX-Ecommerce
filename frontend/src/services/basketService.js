@@ -24,7 +24,7 @@ export async function getBasket() {
         const itemCodes = basketList.map(v => v.item_code);
         return await bookService.getBookByCode(itemCodes);
     }
-    return ;
+    return basketList;
 }
 
 /**

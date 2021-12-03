@@ -10,6 +10,7 @@ export default new Vuex.Store({
       books: [],
       book: [],
       zzims: [],
+      newCartItems: 0
     },
     mutations: {
       setBookList(state, bookList) {
@@ -21,28 +22,38 @@ export default new Vuex.Store({
       setZzimList(state, zzimList) {
         state.zzims = zzimList;
       },
+      setNewCartItems(state, reset = true) {
+        state.newCartItems = reset ? 0 : state.newCartItems + 1
+        console.log(reset, state.newCartItems);
+      }
     },
     actions: {
-    async FETCH_BOOKS(context) {
-        await getBookList()
-            .then(response => {
-            console.log(response);
-            context.commit('setBookList', response);
-        })
-    },
-    async FETCH_BOOK(context, title) {
-        await getBookByTitle(title)
+      async FETCH_BOOKS(context) {
+          await getBookList()
+              .then(response => {
+              console.log(response);
+              context.commit('setBookList', response);
+          })
+      },
+      async FETCH_BOOK(context, title) {
+          await getBookByTitle(title)
+            .then((response) => {
+              console.log(response);
+              context.commit('setBook', response[0]);
+            })
+      },
+      async FETCH_ZZIM(context) {
+        await getZzimList()
           .then((response) => {
             console.log(response);
-            context.commit('setBook', response[0]);
+            context.commit('setZzimList', response);
           })
-    },
-    async FETCH_ZZIM(context) {
-      await getZzimList()
-        .then((response) => {
-          console.log(response);
-          context.commit('setZzimList', response);
-        })
-    }
+      },
+      INIT_NEW_CART_ITEMS(context) {
+        context.commit('setNewCartItems');
+      },
+      ADD_NEW_CART_ITEMS(context) {
+        context.commit('setNewCartItems', false);
+      }
     }
 });
