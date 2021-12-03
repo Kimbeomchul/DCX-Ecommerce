@@ -60,12 +60,12 @@
             height="200px"
             >
 
-            <v-btn v-if="isZzimed(book.item_code)" icon>
-                <v-icon color="red" @click="zzimClicked()">mdi-heart</v-icon>
+            <v-btn v-if="isZzimed(book.item_code)" @click="removeFromZzim(book.item_code)" icon>
+              <v-icon class="reds" @click="heartClicked()">mdi-heart</v-icon>
             </v-btn>
 
-            <v-btn v-else icon>
-                <v-icon @click="zzimClicked()">mdi-heart</v-icon>
+            <v-btn v-else @click="addToZzim(book.item_code)" icon>
+              <v-icon @click="heartClicked()">mdi-heart</v-icon>
             </v-btn>
 
             <!-- <v-btn icon>
@@ -97,11 +97,18 @@
     position:absolute;
     width:100%;
   }
+
+  .reds {
+    color: red !important;
+  }
 </style>
 
 <script>
 import store from '@/store/index.js';
 import * as bookService from '../services/bookService'
+import * as userService from '../services/userService'
+import * as dialogService from '../services/dialogService'
+import view from '../constants/dialogCustomView'
 
 export default {
   components: {
@@ -131,6 +138,24 @@ export default {
       } else {
         const rich = store.state.books.filter(m => m.item_section == category_name);
         store.commit('filterBooks', rich);
+      }
+    },
+    addToZzim(id) {
+      const user = userService.getUser();
+      if(!user) {
+        dialogService.alertCustomComponent(view.LOGIN);
+      } else {
+        store.dispatch('ADD_ZZIM', id);
+      }
+    },
+    removeFromZzim(id) {
+      store.dispatch('REMOVE_ZZIM', id);
+    },
+    heartClicked() {
+      if(event.target.classList.contains('reds')){
+        event.target.classList.remove('reds');
+      }else{
+        event.target.classList.add('reds');
       }
     }
   },
