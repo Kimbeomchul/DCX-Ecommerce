@@ -46,7 +46,7 @@ export async function paySave() {
  */
 async function rewardSave() {
     const params = {
-        member_savemoney: localStorage.getItem('reward'),
+        member_savemoney: localStorage.getItem('rewards'),
         member_id: userService.getUser('member_id'),
     };
 
