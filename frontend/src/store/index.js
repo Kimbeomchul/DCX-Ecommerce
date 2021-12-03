@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { getBookByTitle, getBookList } from '../services/bookService';
-import { getZzimList } from '../services/zzimService';
+import { getZzimList, addZzim, deleteZzim } from '../services/zzimService';
 
 Vue.use(Vuex);
 
@@ -27,6 +27,16 @@ export default new Vuex.Store({
       },
       filterBooks(state, filteredBooks) {
         state.filteredBooks = filteredBooks;
+      },
+      removeFromZzim: (state, id) => {
+        state.zzims.forEach(el => {
+          if (id == el.item_code) {
+            //state.zzims.remove(el);
+          }
+        })
+      },
+      addToZzim: (state, zzim) => {
+        state.zzims.push(zzim);
       }
     },
     actions: {
@@ -57,6 +67,18 @@ export default new Vuex.Store({
             console.log(response);
             context.commit('setFilteredBooks', response);
         })
-    }
+    },
+    async ADD_ZZIM(context, id) {
+      await addZzim(id)
+        .then(response => {
+          context.commit('addToZzim', response);
+        })
+    },
+    async REMOVE_ZZIM(context, id) {
+      await deleteZzim(id)
+        .then(() => {
+          context.commit('removeFromZzim', id);
+        })
+    },
     }
 });
