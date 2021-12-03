@@ -60,3 +60,11 @@ export async function removeBook(itemCode) {
     };
     return await apiService.toDelete(api.RECOMMAND, params);
 }
+
+/**
+ * 도서 전체 조회
+ * @returns {Array} category
+ */
+ export async function getCategoryList() {
+    return await apiService.toGet(api.GET_CATEGORY);
+}

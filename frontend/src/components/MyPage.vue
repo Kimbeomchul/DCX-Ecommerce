@@ -4,8 +4,8 @@
 		<HeaderWrapper />
 		<v-avatar>
 			<img
-				src="https://cdn.vuetifyjs.com/images/john.jpg"
-				alt="John"
+				:src="user.member_image"
+				alt="사용자 이미지"
 			>
 		</v-avatar>
 		<v-sheet
@@ -22,16 +22,16 @@
 					>
 						<v-avatar>
 							<img
-								src="https://cdn.vuetifyjs.com/images/john.jpg"
-								alt="John"
+								:src="user.member_image"
+								alt="사용자 이미지"
 							>
 						</v-avatar>
 					</v-col>
 					<v-col
 						cols="9"
 					>
-						<div>반갑습니다, {{ userInfo.username }} 님</div>
-						<div>적립금: {{ userInfo.reward }}</div>
+						<div>반갑습니다, {{ user.member_name }} 님</div>
+						<div>적립금: {{ user.member_savemoney | currency | won }}</div>
 					</v-col>
 				</v-row>
 
@@ -59,22 +59,23 @@
 
 <script>
 import HeaderWrapper from "@/components/Header";
+import * as userService from '../services/userService'
 
 export default {
 	name: "MyPage",
 	components: {
 		HeaderWrapper
 	},
+	async created() {
+		this.user = await userService.getUserFromDB();
+		console.log(this.user);
+	},
 	data: () => ({
-		userInfo: {
-			username: JSON.parse(localStorage.getItem('user')).name,
-			reward: 0,
-		},
+		user: {},
 		items: [
 			{ title: '찜목록', to: '/zzim' },
 			{ title: '주문 내역', to: '/orderedList' },
 			{ title: '장바구니', to: '/cart' },
-			{ title: '관리자', to: '/manager' },
 		],
 
 	}),

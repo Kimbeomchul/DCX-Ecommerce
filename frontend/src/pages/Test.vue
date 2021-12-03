@@ -40,6 +40,12 @@
             <p>Pay Test</p>
             <v-btn style="margin-bottom: 30px" color="primary" v-on:click="payTest">testClick</v-btn>
         </div>
+        <div>
+            <v-divider />
+            <p>Pay Test</p>
+            <!-- <v-text-field type="number" v-model="dd"></v-text-field> -->
+            <input v-model="dd">
+        </div>
     </div>
 </template>
 
@@ -56,53 +62,67 @@ export default {
     data: () => {
         return {
         money: 100000,
+        dd: 1
+        }
+    },
+    watch: {
+        dd(f,a) {
+            console.log(this.dd, f,a);
+            if(this.dd > 1000) {
+                this.dd = 1000;
+            }
         }
     },
     methods: {
-    routerTest() {
-        const query = {
-            data:'success',
-            status:'N',
-            image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
-            nickname:'전주환',
-            id:2007473952
-        };
-        // const query = {
-        //     status:'N',
-        //     image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
-        //     nickname:'전주환',
-        //     id:2007473952
-        // };
-        routerService.go(ROUTES.MAIN, query);
+        routerTest() {
+            const query = {
+                data:'success',
+                status:'N',
+                image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
+                nickname:'전주환',
+                id:2007473952
+            };
+            // const query = {
+            //     status:'N',
+            //     image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
+            //     nickname:'전주환',
+            //     id:2007473952
+            // };
+            routerService.go(ROUTES.MAIN, query);
+        },
+        payTest() {
+            payService.pay();
+        },
+        imageTest() {
+            // await dialogService.alertCustomComponent('SelectBooks');
+            dialogService.confirm('결제가 완료되었습니다.<br>결제 페이지로 이동하시겠습니까?', () => {
+                routerService.go('/mypage')
+            });
+        },
+        async loginTest() {
+            let test = await dialogService.alertCustomComponent('login');
+            console.log(test);
+        },
+        apiTest: async () => {
+            let test = await bookService.getBookList();
+            console.log(test);
+        },
+        userSet: () => {
+            const user = {
+                need_book_reccomand: false,
+                member_image:'http://k.kakaocdn.net/dn/ckwk6a/btrlKfIWNBE/yheCY2RQVaMT57gJvrrkK1/img_640x640.jpg',
+                member_name:'전주환',
+                member_id: 'mickey1102'
+            };
+            console.log('user info before:',  JSON.parse(localStorage.getItem('user')));
+            localStorage.setItem('user', JSON.stringify(user));
+            let test = JSON.parse(localStorage.getItem('user'));
+            userService.setUser(test);
+            console.log('user info after:',  JSON.parse(localStorage.getItem('user')));
+        },
+        userClear: () => {
+            userService.clearUser()
+        },
     },
-    payTest() {
-        payService.pay();
-    },
-    imageTest() {
-        // await dialogService.alertCustomComponent('SelectBooks');
-        dialogService.confirm('결제가 완료되었습니다.<br>결제 페이지로 이동하시겠습니까?', () => {
-            routerService.go('/mypage')
-        });
-    },
-    async loginTest() {
-        let test = await dialogService.alertCustomComponent('login');
-        console.log(test);
-    },
-    apiTest: async () => {
-        let test = await bookService.getBookList();
-        console.log(test);
-    },
-    userSet: () => {
-        console.log('user info before:',  JSON.parse(localStorage.getItem('user')));
-        let obj = {name:'joohwan', year:30, member_id: 'mickey1102'};
-        localStorage.setItem('user', JSON.stringify(obj));
-        let test = JSON.parse(localStorage.getItem('user'));
-        userService.setUser(test);
-        console.log('user info after:',  JSON.parse(localStorage.getItem('user')));
-    },
-    userClear: () => {
-        userService.clearUser()
-    },
-  },
 }
 </script>
