@@ -95,6 +95,7 @@ router.beforeEach(async (to, from, next) => {
             switch(query.data) {
                 case 'success': 
                     await payService.paySave();
+                    
                     message = '결제가 완료되었습니다.<br>결제 페이지로 이동하시겠습니까?';
                     successHandler = () => {
                         routerService.go(ROUTES.ORDEREDLIST);

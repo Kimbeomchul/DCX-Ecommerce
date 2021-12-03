@@ -36,20 +36,18 @@ export async function paySave() {
         datas: books.map(v => v.item_code).join(','),
         member_id: userService.getUser('member_id'),
         pay_kakao: localStorage.getItem('tid'),
-        savemoney: localStorage.getItem('reward')
     }
-    rewardSave(books);
+    rewardSave();
     return await apiService.toPost(api.PAY_SAVE, params);
 }
 
 /**
  * 적립금 저장
  */
-async function rewardSave(books) {
-    const reward = Math.ceil(books.reduce((acc, cur) => acc + cur.item_price, 0) * 0.01)
+async function rewardSave() {
     const params = {
-        member_savemoney: reward,
-        member_id: userService.getUser('member_id')
+        member_savemoney: localStorage.getItem('reward'),
+        member_id: userService.getUser('member_id'),
     };
 
     return await apiService.toPut(api.REWARD_SAVE, params);
