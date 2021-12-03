@@ -32,7 +32,7 @@ export default new Vuex.Store({
       removeFromZzim: (state, id) => {
         state.zzims.forEach(el => {
           if (id == el.item_code) {
-            //state.zzims.remove(el);
+            state.zzims.splice(el, 1);
           }
         })
       },
@@ -76,7 +76,11 @@ export default new Vuex.Store({
     async ADD_ZZIM(context, id) {
       await addZzim(id)
         .then(response => {
-          context.commit('addToZzim', response);
+          console.log(response);
+          getZzimList()
+            .then(res => {
+              context.commit('addToZzim', res[res.length - 1]);
+            })
         })
     },
     async REMOVE_ZZIM(context, id) {

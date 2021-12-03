@@ -68,9 +68,6 @@
               <v-icon @click="heartClicked()">mdi-heart</v-icon>
             </v-btn>
 
-            <!-- <v-btn icon>
-                <v-icon @click="zzimClicked(book.item_code)">shopping_bag</v-icon>
-            </v-btn> -->
             </v-img>
             <router-link
               v-bind:to="{
@@ -97,7 +94,6 @@
     position:absolute;
     width:100%;
   }
-
   .reds {
     color: red !important;
   }
@@ -109,10 +105,8 @@ import * as bookService from '../services/bookService'
 import * as userService from '../services/userService'
 import * as dialogService from '../services/dialogService'
 import view from '../constants/dialogCustomView'
-
 export default {
   components: {
-
   },
   data: () => ({
     ranked: [ /** 추천 */
@@ -160,6 +154,7 @@ export default {
     }
   },
   async created() {
+    store.dispatch('FETCH_ZZIM');
     store.dispatch('FETCH_BOOKS');
     store.dispatch('SAVE_FILTERBOOK');
     let categories = await bookService.getCategoryList();

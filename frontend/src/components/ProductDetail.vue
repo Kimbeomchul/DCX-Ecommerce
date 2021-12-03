@@ -170,6 +170,7 @@ export default {
 	created() {
 		const bookTitle = this.$route.params.bookTitle;
 		this.$store.dispatch("FETCH_BOOK", bookTitle);
+		this.$store.dispatch("FETCH_ZZIM");
 	}
 }
 </script>
