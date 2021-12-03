@@ -16,7 +16,8 @@ export default Object.freeze({
     GET_BOOK_BY_CODE: 'getItemCode',
     DELETE_BOOK: 'ditem',
     ADD_BOOK: 'aitem',
-    RECOMMAND: 'rec',
+    RECOMMAND: 'http://3.36.39.51:5000/rec/',
+    GET_RECOMMAND_BOOKS: 'reccitem',
     GET_CATEGORY: 'sections',
 
     // 장바구니

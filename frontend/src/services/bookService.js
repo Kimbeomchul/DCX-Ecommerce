@@ -2,6 +2,7 @@ import apiService from "../api/apiService";
 import api from '../constants/api'
 import * as utils from '../util/utils'
 import * as userService from './userService'
+import axios from "axios";
 
 /**
  * 도서 전체 조회
@@ -51,7 +52,7 @@ export async function registerBook(book) {
 }
 
 /**
- * 사용자 희망 도서 선택
+ * 도서 삭제
  * @param {Array} book
  */
 export async function removeBook(itemCode) {
@@ -63,9 +64,29 @@ export async function removeBook(itemCode) {
 }
 
 /**
- * 도서 전체 조회
+ * 도서 카테고리 조회
  * @returns {Array} category
  */
  export async function getCategoryList() {
     return await apiService.toGet(api.GET_CATEGORY);
+}
+
+/**
+ * 추천 도서 조회
+ */
+ export async function getRecommandBooks(books) {
+    let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const categories = ['소설' , '에세이' , '칼럼' , '미술' , '건강' , '취미' , '어린이' , '고전', '과학' , '만화'];
+    
+    books.forEach(v => {
+        const index = categories.indexOf(v.item_section);
+        arr[index]++;
+    })
+
+    const user = userService.getUser('member_id');
+    const params = `${arr.join('')}/${user}`;
+
+     return axios.get(api.RECOMMAND + params).then( async() => {
+         return await apiService.toGet(api.GET_RECOMMAND_BOOKS, {'member_id' :user});
+     });
 }
