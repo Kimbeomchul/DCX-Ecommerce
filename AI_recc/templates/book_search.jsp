@@ -153,7 +153,7 @@
                 for(idx in books){
                     if(temp_list.includes(books[idx].item_title)){
                         inner +=  "<h5>====================================================================================================================</h5>";
-                        inner +=  "<img src='" + books[idx].item_image +"' width='180' height='190' style='float:left';>";
+                        inner +=  "<img src='" + books[idx].item_image +"' width='150' height='190' style='float:left';>";
                         inner +=  "<h5 style='text-align: left;'> </h5>";
                         inner +=  "<h5 style='text-align: left; text-indent:10px;'>  번호 : " + books[idx].item_code +"</h5>";
                         inner +=  "<h5 style='text-align: left; text-indent:10px;'>  장르 : " + books[idx].item_section +"</h5>";

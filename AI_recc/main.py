@@ -1,19 +1,26 @@
 from email.mime import application
+from lib2to3.pgen2 import driver
 
 import pandas as pd
-from flask import Flask, render_template, redirect, request, url_for , flash
+from flask import Flask, render_template, redirect, request, url_for , flash ,session,escape
 import requests
 
 
 app = Flask(__name__)
-
 # Backoffice API
+
 
 @app.route('/', methods=['GET'])
 def m():
+    session.pop('isLogin', None)
     return render_template('login.jsp')
 @app.route('/main', methods=['GET'])
 def mv0():
+
+    if 'isLogin' not in session:
+        return render_template('login.jsp')
+    else:
+        print("IN")
     money = 0
     #아이템 조회
     url = "http://3.36.39.51/allitem"
@@ -47,11 +54,15 @@ def mv0():
 
 @app.route('/mvadd', methods=['GET'])
 def mv1():
+    if 'isLogin' not in session:
+        return render_template('login.jsp')
     return render_template('book_add.jsp')
 
 
 @app.route('/mvser', methods=['GET'])
 def mv2():
+    if 'isLogin' not in session:
+        return render_template('login.jsp')
     url = "http://3.36.39.51/allitem"
     response = requests.get(url)
 
@@ -62,6 +73,8 @@ def mv2():
 
 @app.route('/mvdel', methods=['GET'])
 def mv3():
+    if 'isLogin' not in session:
+        return render_template('login.jsp')
     url = "http://3.36.39.51/allitem"
     response = requests.get(url)
 
@@ -73,6 +86,8 @@ def mv3():
 
 @app.route('/mvusr', methods=['GET'])
 def mv4():
+    if 'isLogin' not in session:
+        return render_template('login.jsp')
     url = "http://3.36.39.51/user"
     response = requests.get(url)
     obj = response.json()
@@ -84,6 +99,8 @@ def mv4():
 
 @app.route('/mvsales', methods=['GET'])
 def mv5():
+    if 'isLogin' not in session:
+        return render_template('login.jsp')
     dics = {}
     money = 0
     #아이템 조회
@@ -114,9 +131,10 @@ def mv5():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
     result = request.form
     if result.get('id') == 'root' and result.get('pw') == 'root':
-
+        session['isLogin'] = 'Y'
         return redirect('/main')
 
     flash("로그인 실패")
@@ -125,7 +143,8 @@ def login():
 
 @app.route('/delete', methods=['GET', 'POST'])
 def delete():
-
+    if 'isLogin' not in session:
+        return render_template('login.jsp')
     result = request.form
     url = "http://3.36.39.51/ditem"
     response = requests.delete(url, data= result)
@@ -144,7 +163,8 @@ def delete():
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
-
+    if 'isLogin' not in session:
+        return render_template('login.jsp')
     result = request.form
     url = "http://3.36.39.51/aitem"
     response = requests.post(url, data= result)
