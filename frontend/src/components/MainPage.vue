@@ -161,7 +161,6 @@ export default {
   },
   async created() {
     store.dispatch('FETCH_BOOKS');
-    store.dispatch('FETCH_ZZIM');
     store.dispatch('SAVE_FILTERBOOK');
     let categories = await bookService.getCategoryList();
     categories.push({ item_section: '전체'});

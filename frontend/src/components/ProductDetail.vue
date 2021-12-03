@@ -14,9 +14,13 @@
 			height="450"
 			:src="bookInfo.item_image"
 		>
-			<v-btn icon>
-				<v-icon>mdi-heart</v-icon>
-			</v-btn>
+			<v-btn v-if="isZzimed(bookInfo.item_code)" @click="removeFromZzim(bookInfo.item_code)" icon>
+              <v-icon class="reds" @click="heartClicked()">mdi-heart</v-icon>
+            </v-btn>
+
+            <v-btn v-else @click="addToZzim(bookInfo.item_code)" icon>
+              <v-icon @click="heartClicked()">mdi-heart</v-icon>
+            </v-btn>
 		</v-img>
 
         <v-card-title>{{ bookInfo.item_title }}</v-card-title>
@@ -80,6 +84,9 @@
     width:100%;
   }
 
+  .reds {
+    color: red !important;
+  }
 </style>
 
 <script>
@@ -89,7 +96,9 @@ import * as dialogService from '../services/dialogService'
 import * as utils from '../util/utils'
 import * as routerService from '../services/routerService'
 import {ROUTES} from '../constants/routes'
-
+import store from '@/store/index.js';
+import * as userService from '../services/userService'
+import view from '../constants/dialogCustomView'
 
 export default {
 	name: "ProductDetail",
@@ -121,7 +130,28 @@ export default {
 		goOrder() {
 			utils.setLocalstorageItem('buyItems', this.$store.state.book);
 			routerService.go(ROUTES.ORDER)
-		}
+		},
+		isZzimed(it_code) {
+			return store.state.zzims.find(zz => zz.item_code == it_code) ? true : false;
+		},
+		addToZzim(id) {
+			const user = userService.getUser();
+			if(!user) {
+				dialogService.alertCustomComponent(view.LOGIN);
+			} else {
+				store.dispatch('ADD_ZZIM', id);
+			}
+		},
+		removeFromZzim(id) {
+			store.dispatch('REMOVE_ZZIM', id);
+		},
+		heartClicked() {
+			if(event.target.classList.contains('reds')){
+				event.target.classList.remove('reds');
+			}else{
+				event.target.classList.add('reds');
+			}
+		},
 	},
 	data: () => ({
 		selection: 1,
