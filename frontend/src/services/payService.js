@@ -49,9 +49,6 @@ async function rewardSave() {
         member_savemoney: localStorage.getItem('rewards'),
         member_id: userService.getUser('member_id'),
     };
-
-    console.log('reward: ', localStorage.getItem('reward'),'params: ', params);
-
     return await apiService.toPut(api.REWARD_SAVE, params);
 }
 

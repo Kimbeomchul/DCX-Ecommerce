@@ -30,7 +30,7 @@
 					<v-col
 						cols="9"
 					>
-						<div>반갑습니다, {{ user.member_name }} 님</div>
+						<div>반갑습니다, {{ user.member_name }}님</div>
 						<div>적립금: {{ user.member_savemoney | currency | won }}</div>
 					</v-col>
 				</v-row>

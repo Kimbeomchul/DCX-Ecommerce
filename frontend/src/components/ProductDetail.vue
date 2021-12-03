@@ -119,7 +119,7 @@ export default {
 			}
 		},
 		goOrder() {
-			utils.setLocalstorageItem('buyItems', this.$store.state.book);
+			utils.setLocalstorageItem('buyItems', [this.$store.state.book]);
 			routerService.go(ROUTES.ORDER)
 		}
 	},
