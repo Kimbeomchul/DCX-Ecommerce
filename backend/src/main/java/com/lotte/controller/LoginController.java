@@ -89,7 +89,11 @@ public class LoginController {
         Login kakao = new Login();
         kakao.setId((Integer) jo2.get("id"));
         kakao.setConnected_time((String) jo2.get("connected_at"));
-        kakao.setEmail((String) jo2.getJSONObject("kakao_account").get("email"));
+        try{
+            kakao.setEmail((String) jo2.getJSONObject("kakao_account").get("email"));
+        }catch(Exception e){
+            kakao.setEmail("");
+        }
         kakao.setNickname((String) jo2.getJSONObject("properties").get("nickname"));
         kakao.setProfile_image((String) jo2.getJSONObject("properties").get("profile_image"));
 
