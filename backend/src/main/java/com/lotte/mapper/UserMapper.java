@@ -63,7 +63,7 @@ public interface UserMapper {
     List<ZzimDTO> getAllZzim(String member_id);
 
     //찜 추가
-    List<ZzimDTO> addZzim(String member_id, int item_code);
+    void addZzim(String member_id, int item_code);
 
     //찜 삭제
     void delZzim(String member_id, int item_code);

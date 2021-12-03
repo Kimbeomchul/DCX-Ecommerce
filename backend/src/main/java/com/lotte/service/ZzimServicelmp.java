@@ -20,8 +20,12 @@ class ZzimServicelmp implements ZzimService{
     }
 
     @Override
-    public List<ZzimDTO> addZzim(String member_id, int item_code) {
-            return UserMapper.addZzim(member_id,item_code);
+    public void addZzim(String member_id, int item_code) {
+        try{
+            UserMapper.addZzim(member_id,item_code);
+        }catch (Exception e){
+            System.out.println("zzim add fail : ( member_id , item_code ) "+ member_id + " " + item_code );
+        }
 
     }
 

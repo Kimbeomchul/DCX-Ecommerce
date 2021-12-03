@@ -25,8 +25,8 @@ public class ZzimController {
     // 찜 아이템 추가
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/azzim", method = RequestMethod.POST)
-    public List<ZzimDTO> addZzim(@RequestParam(value="member_id") String member_id,@RequestParam(value="item_code") int item_code) {
-        return zzimService.addZzim(member_id, item_code);
+    public void addZzim(@RequestParam(value="member_id") String member_id,@RequestParam(value="item_code") int item_code) {
+        zzimService.addZzim(member_id, item_code);
     }
 
     // 찜 아이템 삭제
