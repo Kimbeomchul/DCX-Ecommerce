@@ -5,7 +5,7 @@ import * as utils from '../util/utils'
 
 export async function pay(books) {
     const params = {
-        item_name: `${books[0].item_title}외 ${books.length - 1}건`,
+        item_name: books[0].item_title +  books.length > 1 ? ' 외 ' + books.length + '건' : '',
         item_cost: books.reduce((acc,cur) => acc + cur.item_price, 0)
     }
     

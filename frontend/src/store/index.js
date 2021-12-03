@@ -11,11 +11,12 @@ export default new Vuex.Store({
       filteredBooks: [],
       book: [],
       zzims: [],
-      newCartItems: 0
+      newCartItems: 0,
+      recommandBooks: [],
     },
     mutations: {
-      setRecommandBooks(state, items) {
-        state.recommandBooks = items;
+      recommandBooks(state, books) {
+        state.recommandBooks = books;
       },
       setBookList(state, bookList) {
         state.books = bookList;
@@ -90,6 +91,9 @@ export default new Vuex.Store({
     },
     ADD_NEW_CART_ITEMS(context) {
       context.commit('setNewCartItems', false);
+    },
+    SET_RECOMMAND_BOOKS(context, books) {
+      context.commit('recommandBooks', books);
     },
     }
 });

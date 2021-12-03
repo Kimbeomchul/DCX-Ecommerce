@@ -73,6 +73,9 @@ export default {
             }
         }
     },
+    async created() {
+        await dialogService.alertCustomComponent('SelectBooks');
+    },
     methods: {
         routerTest() {
             const query = {
@@ -93,11 +96,8 @@ export default {
         payTest() {
             payService.pay();
         },
-        imageTest() {
-            // await dialogService.alertCustomComponent('SelectBooks');
-            dialogService.confirm('결제가 완료되었습니다.<br>결제 페이지로 이동하시겠습니까?', () => {
-                routerService.go('/mypage')
-            });
+        async imageTest() {
+            await dialogService.alertCustomComponent('SelectBooks');
         },
         async loginTest() {
             let test = await dialogService.alertCustomComponent('login');

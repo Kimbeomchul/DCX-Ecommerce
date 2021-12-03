@@ -7,23 +7,23 @@
     </h1>
     <v-row>
         <v-col
-        v-for="r in ranked"
-        :key="r.rank"
-        :cols="r.flex"
+        v-for="(book,index) in recommandBooks"
+        :key="index"
+        cols="4"
         >
         <v-card
             class="pa-2"
             outlined
         >
-            <div>{{ r.rank }}위</div>
+            <div>{{Number(index)+1}}위</div>
             <v-img
-            :src="r.src"
+            :src="book.item_image"
             class="white--text align-end"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="200px"
             >
             </v-img>
-            <v-card-title v-text="r.title"></v-card-title>
+            <v-card-title v-text="book.item_title"></v-card-title>
         </v-card>
         </v-col>
     </v-row>
@@ -108,11 +108,7 @@ export default {
 
   },
   data: () => ({
-    ranked: [ /** 추천 */
-      { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', rank: '1', flex: 4},
-      { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', rank: '2', flex: 4},
-      { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', rank: '3', flex: 4},
-    ],
+    recommandBooks: [],
     books: store.state.books,
     books2: store.state.filteredBooks,
     zzims: store.state.zzims,
@@ -135,11 +131,13 @@ export default {
     }
   },
   async created() {
+		this.recommandBooks = this.$store.state.recommandBooks;
+    console.log('test',this.recommandBooks);
     store.dispatch('FETCH_BOOKS');
     store.dispatch('FETCH_ZZIM');
     store.dispatch('SAVE_FILTERBOOK');
     let categories = await bookService.getCategoryList();
-    categories.push({ item_section: '전체'});
+    categories.unshift({ item_section: '전체'});
     this.categories = categories;
   }
 }
