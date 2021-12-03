@@ -8,7 +8,7 @@ public interface ZzimService {
 
     List<ZzimDTO> getAllZzim(String member_id);
 
-    void addZzim(String member_id, int item_code);
+    List<ZzimDTO> addZzim(String member_id, int item_code);
 
     void delZzim(String member_id, int item_code);
 
