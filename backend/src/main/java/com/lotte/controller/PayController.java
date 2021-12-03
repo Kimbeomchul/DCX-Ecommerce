@@ -31,7 +31,6 @@ public class PayController {
             for (int i = 0; i < list1.length; i++) {
                 payService.addPay(member_id, Integer.parseInt(list1[i]), pay_kakao);
             }
-            userService.addsave(savemoney,member_id);
         }catch (Exception e){
             System.out.println("Error with payment : < addPay > "+ e );
         }
