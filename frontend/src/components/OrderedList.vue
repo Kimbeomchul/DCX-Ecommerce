@@ -23,25 +23,25 @@
 
 			<v-divider :key="'A' + order.payKakao" />
 
-      <template v-for="(itemCode, index2) in order.itemCodes">
+      <template v-for="(item, index2) in order.items">
         <v-list-item
         :key="index1 + index2 + index1 + 20 * index2 *20"
         v-bind:to = "{
-            path: `/book/${books[itemCode].item_title}`,
-            params: { bookTitle: `${books[itemCode].item_title}` },
+            path: `/book/${item.item_title}`,
+            params: { bookTitle: `${item.item_title}` },
         }">
           <v-img
-          :src="books[itemCode].item_image"
+          :src="item.item_image"
           max-height="50px"
           max-width="50px"
           style="margin-right:10px;"
           ></v-img>
 
           <v-list-item-content>
-            <v-list-item-title v-html="books[itemCode].item_title"></v-list-item-title>
+            <v-list-item-title v-html="item.item_title"></v-list-item-title>
             <v-list-item-subtitle>
               <span>
-                {{books[itemCode].item_price | currency | won}}
+                {{item.item_price | currency | won}}
               </span>
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -66,7 +66,6 @@
 <script>
 import HeaderWrapper from "@/components/Header";
 import * as payService from '../services/payService';
-import * as bookService from '../services/bookService';
 
 export default {
     components: {
@@ -77,7 +76,6 @@ export default {
       orders: [],
      }),
       async created() {
-        this.books = await bookService.getBookList();
         this.orders = await payService.getOrderList();
       },
   }
