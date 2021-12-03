@@ -33,19 +33,19 @@
     <h1 class="font-weight-black" style="margin-bottom:10px">
         전체 목록
     </h1>
-    <v-row
-        align="center"
-        justify="space-around"
-    >
-        <v-col
-        v-for="category in categories"
-        :key="category.item_section"
-        >
-        <v-btn @click="isCategoryClicked(category.item_section)">
-            <v-card-title v-text="category.item_section"></v-card-title>
-        </v-btn>
-        </v-col>
-    </v-row>
+
+    <v-tabs>
+      <v-row>
+      <v-col
+      v-for="category in categories"
+      :key="category.item_section">
+        <v-tab @click="isCategoryClicked(category.item_section)">
+          {{ category.item_section }}
+        </v-tab>
+      </v-col>
+      </v-row>
+    </v-tabs>
+
     <v-row>
         <v-col
         v-for="book in this.$store.state.filteredBooks"
