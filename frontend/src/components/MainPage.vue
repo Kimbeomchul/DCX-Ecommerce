@@ -33,19 +33,19 @@
     <h1 class="font-weight-black" style="margin-bottom:10px">
         전체 목록
     </h1>
-    <v-row
-        align="center"
-        justify="space-around"
-    >
-        <v-col
-        v-for="category in categories"
-        :key="category.item_section"
-        >
-        <v-btn @click="isCategoryClicked(category.item_section)">
-            <v-card-title v-text="category.item_section"></v-card-title>
-        </v-btn>
-        </v-col>
-    </v-row>
+
+    <v-tabs>
+      <v-row>
+      <v-col
+      v-for="category in categories"
+      :key="category.item_section">
+        <v-tab @click="isCategoryClicked(category.item_section)">
+          {{ category.item_section }}
+        </v-tab>
+      </v-col>
+      </v-row>
+    </v-tabs>
+
     <v-row>
         <v-col
         v-for="book in this.$store.state.filteredBooks"
@@ -60,17 +60,14 @@
             height="200px"
             >
 
-            <v-btn v-if="isZzimed(book.item_code)" icon>
-                <v-icon color="red" @click="zzimClicked()">mdi-heart</v-icon>
+            <v-btn v-if="isZzimed(book.item_code)" @click="removeFromZzim(book.item_code)" icon>
+              <v-icon class="reds" @click="heartClicked()">mdi-heart</v-icon>
             </v-btn>
 
-            <v-btn v-else icon>
-                <v-icon @click="zzimClicked()">mdi-heart</v-icon>
+            <v-btn v-else @click="addToZzim(book.item_code)" icon>
+              <v-icon @click="heartClicked()">mdi-heart</v-icon>
             </v-btn>
 
-            <!-- <v-btn icon>
-                <v-icon @click="zzimClicked(book.item_code)">shopping_bag</v-icon>
-            </v-btn> -->
             </v-img>
             <router-link
               v-bind:to="{
@@ -97,15 +94,19 @@
     position:absolute;
     width:100%;
   }
+  .reds {
+    color: red !important;
+  }
 </style>
 
 <script>
 import store from '@/store/index.js';
 import * as bookService from '../services/bookService'
-
+import * as userService from '../services/userService'
+import * as dialogService from '../services/dialogService'
+import view from '../constants/dialogCustomView'
 export default {
   components: {
-
   },
   data: () => ({
     recommandBooks: [],
@@ -128,14 +129,32 @@ export default {
         const rich = store.state.books.filter(m => m.item_section == category_name);
         store.commit('filterBooks', rich);
       }
+    },
+    addToZzim(id) {
+      const user = userService.getUser();
+      if(!user) {
+        dialogService.alertCustomComponent(view.LOGIN);
+      } else {
+        store.dispatch('ADD_ZZIM', id);
+      }
+    },
+    removeFromZzim(id) {
+      store.dispatch('REMOVE_ZZIM', id);
+    },
+    heartClicked() {
+      if(event.target.classList.contains('reds')){
+        event.target.classList.remove('reds');
+      }else{
+        event.target.classList.add('reds');
+      }
     }
   },
   async created() {
-		this.recommandBooks = this.$store.state.recommandBooks;
-    console.log('test',this.recommandBooks);
-    store.dispatch('FETCH_BOOKS');
     store.dispatch('FETCH_ZZIM');
+    store.dispatch('FETCH_BOOKS');
     store.dispatch('SAVE_FILTERBOOK');
+		this.recommandBooks = this.$store.state.recommandBooks;
+    console.log(this.$store.state.recommandBooks);
     let categories = await bookService.getCategoryList();
     categories.unshift({ item_section: '전체'});
     this.categories = categories;

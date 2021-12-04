@@ -2,6 +2,7 @@ import apiService from '../api/apiService'
 import api from '../constants/api'
 import * as userService from './userService'
 import * as utils from '../util/utils'
+import * as bookService from './bookService'
 
 export async function pay(books) {
     const params = {
@@ -36,22 +37,19 @@ export async function paySave() {
         datas: books.map(v => v.item_code).join(','),
         member_id: userService.getUser('member_id'),
         pay_kakao: localStorage.getItem('tid'),
-        savemoney: localStorage.getItem('reward')
     }
-    rewardSave(books);
+    rewardSave();
     return await apiService.toPost(api.PAY_SAVE, params);
 }
 
 /**
  * 적립금 저장
  */
-async function rewardSave(books) {
-    const reward = Math.ceil(books.reduce((acc, cur) => acc + cur.item_price, 0) * 0.01)
+async function rewardSave() {
     const params = {
-        member_savemoney: reward,
-        member_id: userService.getUser('member_id')
+        member_savemoney: localStorage.getItem('rewards'),
+        member_id: userService.getUser('member_id'),
     };
-
     return await apiService.toPut(api.REWARD_SAVE, params);
 }
 
@@ -59,9 +57,10 @@ async function rewardSave(books) {
  * 결제 내역 조회
  */
 export async function getOrderList() {
-    const params = {member_id: userService.getUser('member_id')}
+    const params = {member_id: userService.getUser('member_id')};
     const orderInfos = await apiService.toGet(api.PAY_LIST, params);
     const payKakaoNoList = [...new Set(orderInfos.map(v => v.pay_kakao))];
+    const books = await bookService.getBookList();
     
     const orderList = payKakaoNoList.map(v => {
         return {payKakao: v}
@@ -69,10 +68,12 @@ export async function getOrderList() {
 
     orderInfos.forEach(v => {
         const index = orderList.findIndex(w => w.payKakao === v.pay_kakao);
-        if(orderList[index]['itemCodes']) {
-            orderList[index]['itemCodes'].push(v.item_code);
+        const item = books.find(w => w.item_code === v.item_code);
+
+        if(orderList[index]['items']) {
+            orderList[index]['items'].push(item);
         } else {
-            orderList[index]['itemCodes'] = [v.item_code];
+            orderList[index]['items'] = [item];
         }
     })
 

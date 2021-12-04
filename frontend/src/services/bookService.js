@@ -3,6 +3,7 @@ import api from '../constants/api'
 import * as utils from '../util/utils'
 import * as userService from './userService'
 import axios from "axios";
+import store from "../store/index";
 
 /**
  * 도서 전체 조회
@@ -17,7 +18,8 @@ export async function getBookList() {
  * @returns {Object} book
  */
 export async function getBookRandom() {
-    return await apiService.toGet(api.GET_BOOK_RANDOM);
+    const books =  await apiService.toGet(api.GET_BOOK_RANDOM);
+    return books.filter((v,i) => i < 9);
 }
 
 /**
@@ -88,4 +90,9 @@ export async function removeBook(itemCode) {
      return axios.get(api.RECOMMAND + params).then( async() => {
          return await apiService.toGet(api.GET_RECOMMAND_BOOKS, {'member_id' :user});
      });
+}
+
+export function getRecommandBooksFromLocal() {
+    const books = store.state.recommandBooks;
+    return books.length > 0 ? books : utils.getLocalstorageItem('recommandBooks');
 }

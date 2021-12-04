@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { getBookByTitle, getBookList } from '../services/bookService';
-import { getZzimList } from '../services/zzimService';
+import { getZzimList, addZzim, deleteZzim } from '../services/zzimService';
+import * as utils from '../util/utils'
 
 Vue.use(Vuex);
 
@@ -15,7 +16,7 @@ export default new Vuex.Store({
       recommandBooks: [],
     },
     mutations: {
-      recommandBooks(state, books) {
+      setRecommandBooks(state, books) {
         state.recommandBooks = books;
       },
       setBookList(state, bookList) {
@@ -33,67 +34,69 @@ export default new Vuex.Store({
       filterBooks(state, filteredBooks) {
         state.filteredBooks = filteredBooks;
       },
+      removeFromZzim: (state, id) => {
+        state.zzims.forEach(el => {
+          if (id == el.item_code) {
+            state.zzims.splice(el, 1);
+          }
+        })
+      },
+      addToZzim: (state, zzim) => {
+        state.zzims.push(zzim);
+      },
       setNewCartItems(state, reset = true) {
         state.newCartItems = reset ? 0 : state.newCartItems + 1
-        console.log(reset, state.newCartItems);
       }
     },
     actions: {
       SET_RECOMMAND_BOOKS(context, books) {
+        utils.setLocalstorageItem('recommandBooks', books);
         context.commit('setRecommandBooks', books);
       },
-    async FETCH_BOOKS(context) {
-        await getBookList()
-            .then(response => {
-            console.log(response);
-            context.commit('setBookList', response);
-        })
-    },
-    async FETCH_BOOK(context, title) {
-        await getBookByTitle(title)
+      async FETCH_BOOKS(context) {
+          await getBookList()
+              .then(response => {
+              context.commit('setBookList', response);
+          })
+      },
+      async FETCH_BOOK(context, title) {
+          await getBookByTitle(title)
+            .then((response) => {
+              context.commit('setBook', response[0]);
+            })
+      },
+      async FETCH_ZZIM(context) {
+        await getZzimList()
           .then((response) => {
-            console.log(response);
             context.commit('setZzimList', response);
           })
-    },
-    async FETCH_ZZIM(context) {
-      await getZzimList()
-        .then((response) => {
-          console.log(response);
-          context.commit('setZzimList', response);
-        })
-    },
-    async SAVE_FILTERBOOK(context) {
-      await getBookList()
-            .then(response => {
-            console.log(response);
-            context.commit('setFilteredBooks', response);
-        })
-    },
-    async ADD_ZZIM(context, id) {
-      await addZzim(id)
-        .then(response => {
-          console.log(response);
-          getZzimList()
-            .then(res => {
-              context.commit('addToZzim', res[res.length - 1]);
-            })
-        })
-    },
-    async REMOVE_ZZIM(context, id) {
-      await deleteZzim(id)
-        .then(() => {
-          context.commit('removeFromZzim', id);
-        })
-    },
-    INIT_NEW_CART_ITEMS(context) {
-      context.commit('setNewCartItems');
-    },
-    ADD_NEW_CART_ITEMS(context) {
-      context.commit('setNewCartItems', false);
-    },
-    SET_RECOMMAND_BOOKS(context, books) {
-      context.commit('recommandBooks', books);
-    },
+      },
+      async SAVE_FILTERBOOK(context) {
+        await getBookList()
+              .then(response => {
+              context.commit('setFilteredBooks', response);
+          })
+      },
+      async ADD_ZZIM(context, id) {
+        await addZzim(id)
+          .then(() => {
+            getZzimList()
+              .then(res => {
+                context.commit('addToZzim', res[res.length - 1]);
+              })
+          })
+      },
+      async REMOVE_ZZIM(context, id) {
+        await deleteZzim(id)
+          .then(() => {
+            context.commit('removeFromZzim', id);
+          })
+      },
+      INIT_NEW_CART_ITEMS(context) {
+        context.commit('setNewCartItems');
+      },
+      ADD_NEW_CART_ITEMS(context) {
+        context.commit('setNewCartItems', false);
+      },
     }
 });

@@ -209,7 +209,7 @@ export default {
         const address = this.address + this.extraAddress + this.detailAddress;
         const phoneNumber = this.phoneNumber.join('');
         const fail = await userService.saveUserInfo(address, phoneNumber);
-        utils.setLocalstorageItem('rewards', this.reward - this.useReward);
+        utils.setLocalstorageItem('rewards', this.user.member_savemoney + this.reward - this.useReward);
         if(!fail) {
           await payService.pay(this.books);
         }

@@ -67,3 +67,9 @@ import store from '@/store/index.js';
         }
     }
 </script>
+
+<style scoped>
+.selected {
+opacity: 0.5
+}
+</style>

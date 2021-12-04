@@ -16,18 +16,18 @@
 		<v-divider :key="index"></v-divider>
 
 		<v-list-item
-		:key="index"
+		:key="item.zzim_no"
 		>
 			<v-img
-			:src="$store.state.books[item.item_code].item_image"
+			:src="zzimedImage(item.item_code)"
 			max-height="50px"
 			max-width="50px"
 			style="margin-right:10px;"
 			></v-img>
 
 			<v-list-item-content>
-				<v-list-item-title @click="tclicked">{{ $store.state.books[item.item_code].item_title }}</v-list-item-title>
-				<v-list-item-subtitle v-html="item.subtitle">{{ $store.state.books[item.item_code].item_price }}</v-list-item-subtitle>
+				<v-list-item-title @click="tclicked">{{ isZzimed(item.item_code).item_title }}</v-list-item-title>
+				<v-list-item-subtitle v-html="item.subtitle">{{ isZzimed(item.item_code).item_price }}</v-list-item-subtitle>
 			</v-list-item-content>
 		</v-list-item>
 	</template>
@@ -46,10 +46,10 @@
     position:absolute;
     width:100%;
   }
-
 </style>
 
 <script>
+import store from '@/store/index.js';
 import HeaderWrapper from "@/components/Header";
 
 export default {
@@ -57,18 +57,26 @@ export default {
     HeaderWrapper
   },
   data: () => ({
-    zzims: this.$store.state.zzims,
-    books: this.$store.state.books
+    zzims: store.state.zzims,
+    books: store.state.books
   }),
   methods: {
     tclicked() {
-      console.log(this.zzims);
-      console.log(this.$store.state.books[1].item_title);
-    }
+      //console.log(store.state.zzims);
+      //console.log(store.state.books[1].item_title);
+    },
+    isZzimed(it_code) {
+      if (this.$store.state.books.find(bk => bk.item_code == it_code) !== undefined)
+        return this.$store.state.books.find(bk => bk.item_code == it_code);
+    },
+    zzimedImage(it_code) {
+      if (this.$store.state.books.find(bk => bk.item_code == it_code) !== undefined)
+        return this.$store.state.books.find(bk => bk.item_code == it_code).item_image;
+    },
   },
   created() {
-    this.$store.dispatch('FETCH_ZZIM');
-    this.$store.dispatch('FETCH_BOOKS');
+    store.dispatch('FETCH_ZZIM');
+    store.dispatch('FETCH_BOOKS');
   }
   }
 </script>

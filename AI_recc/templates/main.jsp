@@ -23,10 +23,10 @@
     var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: ['12월', '1월', '2월', '3월', '4월', '5월'],
+			labels: ['11월','12월', '1월', '2월', '3월', '4월'],
 			datasets: [{
 				label: '# of Votes',
-				data: [data, 0, 0, 0, 0, 0],
+				data: [32,data, 0, 0, 0, 0],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
