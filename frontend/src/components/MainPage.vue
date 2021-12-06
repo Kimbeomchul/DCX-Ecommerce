@@ -2,25 +2,21 @@
 <div id="app">
   <v-app id="inspire" style="padding-top:60px">
   <SelectVue v-on:closed="getRecommandBooks" />
-    <v-container v-if="user" fluid>
-    <h3 class="font-weight-black">
-        {{user.member_name}}님이 관심있어할만한책이지만 안볼수도있지만 재미없을수도있지만 추천하는책
-    </h3>
+    <v-container v-if="recommandBooks.length > 0" fluid>
+    <h1 class="font-weight-black">
+        {{user.member_name}}님을 위한 추천 도서
+    </h1>
     <v-row>
         <v-col
         v-for="(book,index) in recommandBooks"
         :key="index"
         cols="4"
-        v-bind:to = "{
-            path: `/book/${book.item_title}`,
-            params: { bookTitle: `${book.item_title}` },
-        }"
+        @click="goBookDetail(book)"
         >
         <v-card
             class="pa-2"
             outlined
         >
-            <div>{{Number(index)+1}}위</div>
             <v-img
             :src="book.item_image"
             class="white--text align-end"
@@ -111,6 +107,7 @@ import * as userService from '../services/userService'
 import * as dialogService from '../services/dialogService'
 import view from '../constants/dialogCustomView'
 import SelectVue from '../components/SelectBooks.vue'
+import * as routerService from '../services/routerService'
 
 export default {
   components: {
@@ -126,11 +123,13 @@ export default {
     user: {},
   }),
   methods: {
+    goBookDetail(book) {
+      const path = `/book/${book.item_title}`;
+      const params =  { bookTitle: `${book.item_title}` };
+      routerService.go(path, null, params)
+    },
     async getRecommandBooks() {
       this.recommandBooks = await bookService.getRecommandBooks();
-    },
-    zzimClicked() {
-      
     },
     isZzimed(it_code) {
       return store.state.zzims.find(zz => zz.item_code == it_code) ? true : false;
