@@ -71,6 +71,7 @@
 
             </v-img>
             <router-link
+              style="text-decoration: none; color: inherit;"
               v-bind:to="{
                 path: `/book/${book.item_title}`,
                 params: { bookTitle: `${book.item_title}` },
