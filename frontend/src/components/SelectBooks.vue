@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="500px" >
+  <v-dialog v-model="dialog" width="500px" persistent>
     <v-row>
       <v-col
         v-for="(book,index) in books"
@@ -12,7 +12,6 @@
           :src="book.item_image"
           aspect-ratio="1"
           class="grey lighten-2"
-          :class="book.class"
           @click="select(book)"
         >
           <template v-slot:placeholder>
@@ -39,18 +38,13 @@ import * as userService from '../services/userService'
 
 export default {
   name: 'SelectBooks',
-  props: ["data"],
   data() {
       return {
-          limit: 1,
+          limit: 5,
           books: [],
           dialog: false,
+          user: {},
       }
-  },
-  watch: {
-    dialog(newData) {
-      console.log('watch newData: ', newData);
-    }
   },
   methods: {
     async select(book) {
@@ -60,17 +54,20 @@ export default {
 
       if(selectedBooks.length >= this.limit) {
         await bookService.sendWantBooks(selectedBooks);
-        const user = userService.getUser();
-        user.need_book_reccomand = false;
-        userService.setUser(user);
+        this.user.need_book_reccomand = false;
+        userService.setUser(this.user);
         this.$emit('closed');
         this.dialog = false;
       }
     }
   },
   async created() {
-    this.dialog = this.data;
-    this.books = await bookService.getBookRandom();
+    this.user = userService.getUser();
+
+    if(this.user && this.user.need_book_reccomand) {
+      this.dialog = true
+      this.books = await bookService.getBookRandom();
+    }
   }
 }
 </script>

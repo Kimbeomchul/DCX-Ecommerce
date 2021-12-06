@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <v-app id="inspire" style="padding-top:60px">
-    <SelectVue v-bind:data="dialog" v-on:closed="getRecommandBooks" />
+  <SelectVue v-on:closed="getRecommandBooks" />
     <v-container v-if="user" fluid>
     <h3 class="font-weight-black">
         {{user.member_name}}님이 관심있어할만한책이지만 안볼수도있지만 재미없을수도있지만 추천하는책
@@ -170,11 +170,9 @@ export default {
     this.user = userService.getUser();
     if(this.user) {
       store.dispatch('FETCH_ZZIM');
-      if(this.user.need_book_reccomand) {
-        this.dialog = true;
-      } else {
+      if(!this.user.need_book_reccomand) {
         await this.getRecommandBooks();
-      }
+      } 
     }
   }
 }

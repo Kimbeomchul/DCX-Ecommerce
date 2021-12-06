@@ -116,6 +116,11 @@ export default {
 	},
 	methods: {
 		async addCart() {
+
+			if(!this.user) {
+				dialogService.alertCustomComponent(view.LOGIN);
+				return;
+			}
 			const cartList = await basketService.getBasket();
 			const index = cartList.findIndex(v => this.bookInfo.item_code === v.item_code);
 			if(index !== -1) {
@@ -156,6 +161,7 @@ export default {
 	data: () => ({
 		selection: 1,
 		padless: false,
+		user: {},
 	}),
 	computed: {
 		localAttrs () {
@@ -170,7 +176,10 @@ export default {
 	created() {
 		const bookTitle = this.$route.params.bookTitle;
 		this.$store.dispatch("FETCH_BOOK", bookTitle);
-		this.$store.dispatch("FETCH_ZZIM");
+		this.user = userService.getUser();
+		if(this.user) {
+			this.$store.dispatch("FETCH_ZZIM");
+		}
 	}
 }
 </script>

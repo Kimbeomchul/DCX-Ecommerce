@@ -78,7 +78,6 @@ export default {
     methods: {
         routerTest() {
             const query = {
-                data:'success',
                 status:'N',
                 image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
                 nickname:'전주환',
