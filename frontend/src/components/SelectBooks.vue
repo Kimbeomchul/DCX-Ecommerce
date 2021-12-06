@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="500px" persistent>
+  <v-dialog v-model="dialog" width="500px" >
     <v-row>
       <v-col
         v-for="(book,index) in books"
@@ -69,12 +69,8 @@ export default {
     }
   },
   async created() {
-    console.log('created this.dialg, this.data',this.dialog, this.data);
     this.dialog = this.data;
-      this.books = await bookService.getBookRandom();
-      this.books.forEach(v => {
-          v.selected = false;
-      })
+    this.books = await bookService.getBookRandom();
   }
 }
 </script>

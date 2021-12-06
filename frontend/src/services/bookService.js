@@ -18,6 +18,7 @@ export async function getBookList() {
  */
 export async function getBookRandom() {
     const books =  await apiService.toGet(api.GET_BOOK_RANDOM);
+    books.forEach(v => v.selected = false);
     return books.filter((v,i) => i < 9);
 }
 
