@@ -78,17 +78,11 @@ export default {
     methods: {
         routerTest() {
             const query = {
-                status:'N',
-                image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
+                status:'Y',
+                image:'http://k.kakaocdn.net/dn/ckwk6a/btrlKfIWNBE/yheCY2RQVaMT57gJvrrkK1/img_640x640.jpg',
                 nickname:'전주환',
                 id:2007473952
             };
-            // const query = {
-            //     status:'N',
-            //     image:'http%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fckwk6a%2FbtrlKfIWNBE%2FyheCY2RQVaMT57gJvrrkK1%2Fimg_640x640.jpg',
-            //     nickname:'전주환',
-            //     id:2007473952
-            // };
             routerService.go(ROUTES.MAIN, query);
         },
         payTest() {

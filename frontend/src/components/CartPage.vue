@@ -27,11 +27,11 @@
           :src="book.item_image"
           max-height="50px"
           max-width="50px"
-          style="margin-right:10px;"
+          style="margin-right:10px; cursor: pointer"
           @click="goBookDetail(book)"
           ></v-img>
 
-          <v-list-item-content @click="goBookDetail(book)">
+          <v-list-item-content @click="goBookDetail(book)" style="cursor: pointer">
             <v-list-item-title v-html="book.item_title"></v-list-item-title>
             <v-list-item-subtitle >
               <span class="text--primary">

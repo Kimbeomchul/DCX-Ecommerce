@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="dialog" persistent>
     <div>
       <h2 style="text-align:center; font-family:monospace; background-color: cadetblue; margin-bottom: 5px">
         선호 도서 선택 ({{count}}/5)
@@ -67,7 +67,7 @@ export default {
       return {
           limit: 5,
           books: [],
-          dialog: true,
+          dialog: false,
           user: {},
           clicked: false,
           count: 0,
@@ -103,7 +103,6 @@ export default {
 <style scoped>
 >>> .v-dialog {
   background-color:ghostwhite;
-  overflow-y: hidden;
 }
 
 .v-card {
