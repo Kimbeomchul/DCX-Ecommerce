@@ -10,6 +10,10 @@
         SELECT * FROM item
     </select>
 
+    <select id="searchUser" resultType="com.lotte.dto.UserDTO">
+        SELECT * FROM members WHERE member_id = #{member_id}
+    </select>
+
     <select id="getItemCode" resultType="com.lotte.dto.ItemDTO">
         SELECT * FROM item WHERE item_code IN
         <foreach collection="array" item="arr" open="(" close=")" separator=",">

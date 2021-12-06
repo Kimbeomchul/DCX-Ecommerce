@@ -25,6 +25,8 @@ public interface UserMapper {
     void addphone(String member_phone , String member_address, String member_id);
 
     void addsave(int member_savemoney, String member_id);
+
+    List<UserDTO> searchUser(String member_id);
     //======================== 아이템 ==============================//
 
     // 아이템 카운트

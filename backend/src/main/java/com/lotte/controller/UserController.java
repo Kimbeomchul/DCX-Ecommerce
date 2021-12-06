@@ -28,10 +28,18 @@ public class UserController {
 
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @RequestMapping(value = "/search_user", method = RequestMethod.PUT)
+    public List<UserDTO> searchUser(@RequestParam(value="member_id") String member_id) {
+        return userService.searchUser(member_id);
+    }
+
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = "/addphone", method = RequestMethod.PUT)
     public void addPhone(@RequestParam(value="member_phone") String member_phone , @RequestParam(value="member_address") String member_address, @RequestParam(value="member_id") String member_id) {
         userService.addphone(member_phone,member_address,member_id);
     }
+
 
 
 

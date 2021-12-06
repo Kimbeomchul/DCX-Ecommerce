@@ -16,4 +16,6 @@ public interface UserService {
     void addsave(int member_savemoney , String member_id);
 
     int count_user();
+
+    List<UserDTO> searchUser(String member_id);
 }

@@ -40,6 +40,11 @@ class UserServicelmp implements UserService{
         return UserMapper.count_user();
     }
 
+    @Override
+    public List<UserDTO> searchUser(String member_id) {
+        return UserMapper.searchUser(member_id);
+    }
+
 
 }
 
