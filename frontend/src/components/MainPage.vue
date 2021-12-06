@@ -2,9 +2,11 @@
 <div id="app">
   <v-app id="inspire" style="padding-top:60px">
   <SelectVue v-on:closed="getRecommandBooks" />
-    <v-container v-if="recommandBooks.length > 0" fluid>
+    <v-container v-if="recommandBooks.length > 0" fluid style="cursor: pointer">
     <h1 class="font-weight-black">
         {{user.member_name}}님을 위한 추천 도서
+    <v-divider style="margin:0px 0px 10px"/>
+
     </h1>
     <v-row>
         <v-col
@@ -13,10 +15,7 @@
         cols="4"
         @click="goBookDetail(book)"
         >
-        <v-card
-            class="pa-2"
-            outlined
-        >
+        <v-card>
             <v-img
             :src="book.item_image"
             class="white--text align-end"
@@ -25,19 +24,26 @@
             >
             </v-img>
             <v-card-title v-text="book.item_title"></v-card-title>
+            <v-card-text>{{ book.item_price }} 원</v-card-text>
+            <v-card-actions>
+            <v-spacer></v-spacer>
+            </v-card-actions>
         </v-card>
         </v-col>
     </v-row>
     </v-container>
 
     <v-container>
-    <h1 class="font-weight-black" style="margin-bottom:10px">
+    <h1 class="font-weight-black">
         전체 목록
     </h1>
+    <v-divider style="margin-top:0px"/>
+
 
     <v-tabs>
       <v-row>
       <v-col
+      style="margin:auto"
       v-for="category in categories"
       :key="category.item_section">
         <v-tab @click="isCategoryClicked(category.item_section)">

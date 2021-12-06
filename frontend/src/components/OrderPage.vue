@@ -9,15 +9,13 @@
       max-height="2000"
     >
       <v-container fluid style="padding-top:60px;">
-        <h3 class="font-weight-black" style="margin-top:10px">
+        <h3 class="font-weight-black" style="margin:10px 0 10px">
           구매자 정보
         </h3>
-
-        <v-form ref="form">
+        <v-form ref="form" >
           <div @click="execDaumPostcode()">
-            <v-text-field v-model="postcode" placeholder="우편번호"></v-text-field>
-            <v-btn>우편번호 찾기</v-btn>
           <v-text-field v-model="address" placeholder="주소"><br></v-text-field>
+          <v-text-field v-model="extraAddress" placeholder="건물명"><br></v-text-field>
           </div>
           <v-text-field v-model="detailAddress" placeholder="상세주소"></v-text-field>
           <v-row>
@@ -155,20 +153,13 @@ export default {
         return {
           useReward: 0,
           user: {},
-          postcode: '06001',
-          address: '강남대로',
-          extraAddress: '어디든',
-          detailAddress: '나의 무대',
-          phoneNumber: ['010','1234','1234'],
+          address: '',
+          extraAddress: '',
+          detailAddress: '',
+          phoneNumber: ['','',''],
           books: [],
         };
     },
-  async created() {
-    this.user = await userService.getUserFromDB();
-    console.log(this.user);
-    this.books = this.books.concat(utils.getLocalstorageItem('buyItems'));
-
-  },
   watch: {
     useReward() {
       // -값 들어왓을때 유효성 테스트해야됨 ㅋㅋ;;;
@@ -197,7 +188,37 @@ export default {
       return this.books.reduce((acc, cur) => acc + cur.item_price, 0);
     }
   },
+  async created() {
+  this.user = await userService.getUserFromDB();
+  this.setUserInfo(this.user.member_address);
+  this.books = this.books.concat(utils.getLocalstorageItem('buyItems'));
+  },
 	methods: {
+    setUserInfo() {
+      const address = this.user.member_address;
+      const phoneNumber = this.user.member_phone;
+      if(phoneNumber) {
+        this.phoneNumber[0] = phoneNumber.slice(0, 3);
+        this.phoneNumber[1] = phoneNumber.slice(3, 7);
+        this.phoneNumber[2] = phoneNumber.slice(7);
+      }
+
+      if(address) {
+        let index = address.indexOf('  ');
+  
+        if(index !== -1) {
+          this.address = address.slice(0, index);
+          this.detailAddress = address.slice(index + 2);
+        } else {
+          let startIndex = address.indexOf('(');
+          let endIndex = address.indexOf(')');
+  
+          this.address = address.slice(0, startIndex - 1);
+          this.extraAddress = address.slice(startIndex, endIndex + 1);
+          this.detailAddress = address.slice(endIndex + 2);
+        }
+      }
+    },
     spendAllReward() {
       this.useReward = this.user.member_savemoney;
     },
@@ -206,7 +227,7 @@ export default {
     },
     async goPay() {
       if(this.address && this.detailAddress) {
-        const address = this.address + this.extraAddress + this.detailAddress;
+        const address = `${this.address} ${this.extraAddress} ${this.detailAddress}`;
         const phoneNumber = this.phoneNumber.join('');
         const fail = await userService.saveUserInfo(address, phoneNumber);
         utils.setLocalstorageItem('rewards', this.user.member_savemoney + this.reward - this.useReward);
@@ -222,7 +243,6 @@ export default {
           oncomplete: (data) => {
             if (this.extraAddress !== "") {
                 this.extraAddress = "";
-                console.log(data);
             }
             if (data.userSelectedType === "R") {
                 // 사용자가 도로명 주소를 선택했을 경우
