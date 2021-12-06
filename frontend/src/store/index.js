@@ -12,12 +12,8 @@ export default new Vuex.Store({
       book: [],
       zzims: [],
       newCartItems: 0,
-      recommandBooks: [],
     },
     mutations: {
-      recommandBooks(state, books) {
-        state.recommandBooks = books;
-      },
       setBookList(state, bookList) {
         state.books = bookList;
       },
@@ -45,62 +41,53 @@ export default new Vuex.Store({
       },
       setNewCartItems(state, reset = true) {
         state.newCartItems = reset ? 0 : state.newCartItems + 1
-        console.log(reset, state.newCartItems);
       }
     },
     actions: {
-    async FETCH_BOOKS(context) {
-        await getBookList()
-            .then(response => {
-            console.log(response);
-            context.commit('setBookList', response);
-        })
-    },
-    async FETCH_BOOK(context, title) {
-        await getBookByTitle(title)
-          .then((response) => {
-            console.log(response);
-            context.commit('setBook', response[0]);
+      async FETCH_BOOKS(context) {
+          await getBookList()
+              .then(response => {
+              context.commit('setBookList', response);
           })
-    },
-    async FETCH_ZZIM(context) {
-      await getZzimList()
-        .then((response) => {
-          console.log(response);
-          context.commit('setZzimList', response);
-        })
-    },
-    async SAVE_FILTERBOOK(context) {
-      await getBookList()
-            .then(response => {
-            console.log(response);
-            context.commit('setFilteredBooks', response);
-        })
-    },
-    async ADD_ZZIM(context, id) {
-      await addZzim(id)
-        .then(response => {
-          console.log(response);
-          getZzimList()
-            .then(res => {
-              context.commit('addToZzim', res[res.length - 1]);
+      },
+      async FETCH_BOOK(context, title) {
+          await getBookByTitle(title)
+            .then((response) => {
+              context.commit('setBook', response[0]);
             })
-        })
-    },
-    async REMOVE_ZZIM(context, id) {
-      await deleteZzim(id)
-        .then(() => {
-          context.commit('removeFromZzim', id);
-        })
-    },
-    INIT_NEW_CART_ITEMS(context) {
-      context.commit('setNewCartItems');
-    },
-    ADD_NEW_CART_ITEMS(context) {
-      context.commit('setNewCartItems', false);
-    },
-    SET_RECOMMAND_BOOKS(context, books) {
-      context.commit('recommandBooks', books);
-    },
+      },
+      async FETCH_ZZIM(context) {
+        await getZzimList()
+          .then((response) => {
+            context.commit('setZzimList', response);
+          })
+      },
+      async SAVE_FILTERBOOK(context) {
+        await getBookList()
+              .then(response => {
+              context.commit('setFilteredBooks', response);
+          })
+      },
+      async ADD_ZZIM(context, id) {
+        await addZzim(id)
+          .then(() => {
+            getZzimList()
+              .then(res => {
+                context.commit('addToZzim', res[res.length - 1]);
+              })
+          })
+      },
+      async REMOVE_ZZIM(context, id) {
+        await deleteZzim(id)
+          .then(() => {
+            context.commit('removeFromZzim', id);
+          })
+      },
+      INIT_NEW_CART_ITEMS(context) {
+        context.commit('setNewCartItems');
+      },
+      ADD_NEW_CART_ITEMS(context) {
+        context.commit('setNewCartItems', false);
+      },
     }
 });

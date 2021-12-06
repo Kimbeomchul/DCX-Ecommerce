@@ -116,7 +116,7 @@ router.beforeEach(async (to, from, next) => {
                 member_id: query.id,
                 member_image: query.image,
                 member_name: query.nickname,
-                need_book_reccomand: !query.status
+                need_book_reccomand: query.status === 'N'
             });
         }
     }

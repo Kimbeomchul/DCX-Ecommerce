@@ -1,7 +1,8 @@
 <template>
 <div id="app">
-  <v-app id="inspire">
-    <v-container fluid style="padding-top:60px;">
+  <v-app id="inspire" style="padding-top:60px">
+    <SelectVue v-bind:data="dialog" v-on:closed="getRecommandBooks" />
+    <v-container v-if="user" fluid>
     <h1 class="font-weight-black">
         인기 많은 책
     </h1>
@@ -10,6 +11,10 @@
         v-for="(book,index) in recommandBooks"
         :key="index"
         cols="4"
+        v-bind:to = "{
+            path: `/book/${book.item_title}`,
+            params: { bookTitle: `${book.item_title}` },
+        }"
         >
         <v-card
             class="pa-2"
@@ -105,17 +110,25 @@ import * as bookService from '../services/bookService'
 import * as userService from '../services/userService'
 import * as dialogService from '../services/dialogService'
 import view from '../constants/dialogCustomView'
+import SelectVue from '../components/SelectBooks.vue'
+
 export default {
   components: {
+    SelectVue
   },
   data: () => ({
+    dialog:false,
     recommandBooks: [],
     books: store.state.books,
     books2: store.state.filteredBooks,
     zzims: store.state.zzims,
     categories: [],
+    user: {},
   }),
   methods: {
+    async getRecommandBooks() {
+      this.recommandBooks = await bookService.getRecommandBooks();
+    },
     zzimClicked() {
       
     },
@@ -131,8 +144,7 @@ export default {
       }
     },
     addToZzim(id) {
-      const user = userService.getUser();
-      if(!user) {
+      if(!this.user) {
         dialogService.alertCustomComponent(view.LOGIN);
       } else {
         store.dispatch('ADD_ZZIM', id);
@@ -150,14 +162,20 @@ export default {
     }
   },
   async created() {
-    store.dispatch('FETCH_ZZIM');
-		this.recommandBooks = this.$store.state.recommandBooks;
-    console.log('test',this.recommandBooks);
     store.dispatch('FETCH_BOOKS');
     store.dispatch('SAVE_FILTERBOOK');
     let categories = await bookService.getCategoryList();
     categories.unshift({ item_section: '전체'});
     this.categories = categories;
+    this.user = userService.getUser();
+    if(this.user) {
+      store.dispatch('FETCH_ZZIM');
+      if(this.user.need_book_reccomand) {
+        this.dialog = true;
+      } else {
+        await this.getRecommandBooks();
+      }
+    }
   }
 }
 </script>

@@ -33,7 +33,7 @@
 
           <v-list-item-content @click="goBookDetail(book)">
             <v-list-item-title v-html="book.item_title"></v-list-item-title>
-            <v-list-item-subtitle>
+            <v-list-item-subtitle >
               <span class="text--primary">
                 {{book.item_price | currency | won}}
               </span>

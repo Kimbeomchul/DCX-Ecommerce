@@ -68,7 +68,6 @@ export default {
 	},
 	async created() {
 		this.user = await userService.getUserFromDB();
-		console.log(this.user);
 	},
 	data: () => ({
 		user: {},
