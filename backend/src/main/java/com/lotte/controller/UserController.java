@@ -28,9 +28,9 @@ public class UserController {
 
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/search_user", method = RequestMethod.PUT)
-    public List<UserDTO> searchUser(@RequestParam(value="member_id") String member_id) {
-        return userService.searchUser(member_id);
+    @RequestMapping(value = "/search_user", method = RequestMethod.GET)
+    public List<UserDTO> searchUser(@RequestParam(value="member") String member) {
+        return userService.searchUser(member);
     }
 
 
