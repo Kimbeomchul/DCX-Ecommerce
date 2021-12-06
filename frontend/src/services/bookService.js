@@ -3,7 +3,6 @@ import api from '../constants/api'
 import * as utils from '../util/utils'
 import * as userService from './userService'
 import axios from "axios";
-import store from "../store/index";
 
 /**
  * 도서 전체 조회
@@ -75,7 +74,7 @@ export async function removeBook(itemCode) {
 /**
  * 추천 도서 조회
  */
- export async function getRecommandBooks(books) {
+ export async function sendWantBooks(books) {
     let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const categories = ['소설' , '에세이' , '칼럼' , '미술' , '건강' , '취미' , '어린이' , '고전', '과학' , '만화'];
     
@@ -84,15 +83,15 @@ export async function removeBook(itemCode) {
         arr[index]++;
     })
 
-    const user = userService.getUser('member_id');
-    const params = `${arr.join('')}/${user}`;
+    const userId = userService.getUser('member_id');
+    const params = `${arr.join('')}/${userId}`;
 
-     return axios.get(api.RECOMMAND + params).then( async() => {
-         return await apiService.toGet(api.GET_RECOMMAND_BOOKS, {'member_id' :user});
-     });
-}
-
-export function getRecommandBooksFromLocal() {
-    const books = store.state.recommandBooks;
-    return books.length > 0 ? books : utils.getLocalstorageItem('recommandBooks');
+     return axios.get(api.RECOMMAND + params);
+    }
+    
+    export async function getRecommandBooks() {
+        const params = {
+            member_id: userService.getUser('member_id')
+        };
+    return await apiService.toGet(api.GET_RECOMMAND_BOOKS, params);
 }

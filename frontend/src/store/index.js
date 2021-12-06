@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { getBookByTitle, getBookList } from '../services/bookService';
 import { getZzimList, addZzim, deleteZzim } from '../services/zzimService';
-import * as utils from '../util/utils'
 
 Vue.use(Vuex);
 
@@ -13,12 +12,8 @@ export default new Vuex.Store({
       book: [],
       zzims: [],
       newCartItems: 0,
-      recommandBooks: [],
     },
     mutations: {
-      setRecommandBooks(state, books) {
-        state.recommandBooks = books;
-      },
       setBookList(state, bookList) {
         state.books = bookList;
       },
@@ -49,10 +44,6 @@ export default new Vuex.Store({
       }
     },
     actions: {
-      SET_RECOMMAND_BOOKS(context, books) {
-        utils.setLocalstorageItem('recommandBooks', books);
-        context.commit('setRecommandBooks', books);
-      },
       async FETCH_BOOKS(context) {
           await getBookList()
               .then(response => {
