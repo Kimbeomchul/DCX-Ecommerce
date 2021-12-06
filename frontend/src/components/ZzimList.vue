@@ -22,13 +22,20 @@
 			:src="zzimedImage(item.item_code)"
 			max-height="50px"
 			max-width="50px"
-			style="margin-right:10px;"
+			style="margin-right:10px; cursor: pointer"
+      @click="goBookDetail(item.item_code)"
 			></v-img>
 
-			<v-list-item-content>
+			<v-list-item-content 
+      @click="goBookDetail(item.item_code)"
+      style="cursor: pointer"
+      >
 				<v-list-item-title @click="tclicked">{{ isZzimed(item.item_code).item_title }}</v-list-item-title>
-				<v-list-item-subtitle v-html="item.subtitle">{{ isZzimed(item.item_code).item_price }}</v-list-item-subtitle>
+				<v-list-item-subtitle>{{ isZzimed(item.item_code).item_price | currency | won}}</v-list-item-subtitle>
 			</v-list-item-content>
+      <v-list-item-action>
+        <v-icon @click="removeItem(item.item_code)">mdi-trash-can</v-icon>
+    </v-list-item-action>
 		</v-list-item>
 	</template>
     </v-list>
@@ -51,6 +58,8 @@
 <script>
 import store from '@/store/index.js';
 import HeaderWrapper from "@/components/Header";
+import * as zzimService from '../services/zzimService'
+import * as routerService from '../services/routerService'
 
 export default {
   components: {
@@ -61,6 +70,20 @@ export default {
     books: store.state.books
   }),
   methods: {
+    goBookDetail(itemCode) {
+      const book = this.isZzimed(itemCode);
+      const path = `/book/${book.item_title}`;
+      const params =  { bookTitle: `${book.item_title}` };
+      routerService.go(path, null, params)
+    },
+    init() {
+      store.dispatch('FETCH_ZZIM');
+      store.dispatch('FETCH_BOOKS');
+    },
+    async removeItem(itemCode) {
+      await zzimService.deleteZzim(itemCode);
+      this.init();
+    },
     tclicked() {
       //console.log(store.state.zzims);
       //console.log(store.state.books[1].item_title);
@@ -75,8 +98,7 @@ export default {
     },
   },
   created() {
-    store.dispatch('FETCH_ZZIM');
-    store.dispatch('FETCH_BOOKS');
+    this.init();
   }
   }
 </script>
