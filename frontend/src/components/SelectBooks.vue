@@ -35,6 +35,8 @@
 
 <script>
 import * as bookService from '../services/bookService';
+import * as userService from '../services/userService'
+
 export default {
   name: 'SelectBooks',
   props: ["data"],
@@ -45,6 +47,11 @@ export default {
           dialog: false,
       }
   },
+  watch: {
+    dialog(newData) {
+      console.log('watch newData: ', newData);
+    }
+  },
   methods: {
     async select(book) {
       book.selected = !book.selected;
@@ -53,12 +60,17 @@ export default {
 
       if(selectedBooks.length >= this.limit) {
         await bookService.sendWantBooks(selectedBooks);
+        const user = userService.getUser();
+        user.need_book_reccomand = false;
+        userService.setUser(user);
         this.$emit('closed');
         this.dialog = false;
       }
     }
   },
   async created() {
+    console.log('created this.dialg, this.data',this.dialog, this.data);
+    this.dialog = this.data;
       this.books = await bookService.getBookRandom();
       this.books.forEach(v => {
           v.selected = false;

@@ -3,9 +3,9 @@
   <v-app id="inspire" style="padding-top:60px">
     <SelectVue v-bind:data="dialog" v-on:closed="getRecommandBooks" />
     <v-container v-if="user" fluid>
-    <h1 class="font-weight-black">
-        인기 많은 책
-    </h1>
+    <h3 class="font-weight-black">
+        {{user.member_name}}님이 관심있어할만한책이지만 안볼수도있지만 재미없을수도있지만 추천하는책
+    </h3>
     <v-row>
         <v-col
         v-for="(book,index) in recommandBooks"
