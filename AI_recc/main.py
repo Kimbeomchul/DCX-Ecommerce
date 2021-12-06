@@ -4,12 +4,13 @@ from lib2to3.pgen2 import driver
 import pandas as pd
 from flask import Flask, render_template, redirect, request, url_for , flash ,session,escape
 import requests
+from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
 # Backoffice API
 
-
+CORS(app, resources={r'*': {'origins': '*'}})
 @app.route('/', methods=['GET'])
 def m():
     session.pop('isLogin', None)
@@ -218,9 +219,9 @@ def commerce(data, id):
     }
     response = requests.post(url, data = body)
     print("response status %r" % response.status_code)
-    print("response text %r" % response.text)
+    print("response text %r" % response.json)
 
-    return ''
+    return response.text
 
 
 
