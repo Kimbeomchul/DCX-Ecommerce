@@ -74,7 +74,6 @@ export default {
         }
     },
     async created() {
-        await dialogService.alertCustomComponent('SelectBooks');
     },
     methods: {
         routerTest() {
@@ -109,10 +108,10 @@ export default {
         },
         userSet: () => {
             const user = {
-                need_book_reccomand: false,
+                need_book_reccomand: true,
                 member_image:'http://k.kakaocdn.net/dn/ckwk6a/btrlKfIWNBE/yheCY2RQVaMT57gJvrrkK1/img_640x640.jpg',
                 member_name:'전주환',
-                member_id: 'mickey1102'
+                member_id: '2007473952'
             };
             console.log('user info before:',  JSON.parse(localStorage.getItem('user')));
             localStorage.setItem('user', JSON.stringify(user));

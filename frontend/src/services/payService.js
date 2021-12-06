@@ -77,6 +77,6 @@ export async function getOrderList() {
             orderList[index]['items'] = [item];
         }
     })
-
+    orderList.sort((a,b) => Number(b.payKakao) - Number(a.payKakao))
     return orderList;
 }
