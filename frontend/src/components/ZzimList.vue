@@ -1,7 +1,6 @@
 <template>
 <div id="app">
   <v-app id="inspire">
-    <HeaderWrapper />
 
     <v-sheet
       id="scrolling-techniques-7"
@@ -57,13 +56,11 @@
 
 <script>
 import store from '@/store/index.js';
-import HeaderWrapper from "@/components/Header";
 import * as zzimService from '../services/zzimService'
 import * as routerService from '../services/routerService'
 
 export default {
   components: {
-    HeaderWrapper
   },
   data: () => ({
     zzims: store.state.zzims,

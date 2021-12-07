@@ -1,8 +1,6 @@
 <template>
 <div id="app">
   <v-app id="inspire">
-    <HeaderWrapper />
-
     <v-sheet
       id="scrolling-techniques-7"
       class="overflow-y-auto"
@@ -87,7 +85,6 @@
 </style>
 
 <script>
-import HeaderWrapper from "@/components/Header";
 import * as basketService from '../services/basketService'
 import * as routerService from '../services/routerService'
 import {ROUTES} from '../constants/routes'
@@ -95,7 +92,6 @@ import * as utils from '../util/utils'
 
 export default {
   components: {
-    HeaderWrapper
   },
   async created() {
     await this.init();

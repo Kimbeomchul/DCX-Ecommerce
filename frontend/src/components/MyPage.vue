@@ -1,7 +1,6 @@
 <template>
 <div id="mypage">
 	<v-app id="inspire">
-		<HeaderWrapper />
 		<v-avatar>
 			<img
 				:src="user.member_image"
@@ -58,13 +57,11 @@
 </template>
 
 <script>
-import HeaderWrapper from "@/components/Header";
 import * as userService from '../services/userService'
 
 export default {
 	name: "MyPage",
 	components: {
-		HeaderWrapper
 	},
 	async created() {
 		this.user = await userService.getUserFromDB();

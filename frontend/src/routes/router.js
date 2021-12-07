@@ -19,6 +19,9 @@ import * as payService from '../services/payService'
 import view from '../constants/dialogCustomView'
 import * as utils from '../util/utils'
 
+import {EventBus} from '../main'
+
+
 Vue.use(VueRouter);
 
 //라우트 정보
@@ -27,8 +30,8 @@ const routes = [
         path: '/',
         name: '/',
         component: Main
-    }
-    ,{
+    },
+    {
         path: '/login',
         name: 'login',
         component: Login
@@ -65,7 +68,8 @@ const routes = [
     },
     {
         path: '/book/:bookTitle',
-        component: ProductDetail,
+        name: 'productDetail',
+        component: ProductDetail
     },
     {
         path: '/order',
@@ -86,6 +90,7 @@ const router = new VueRouter({
 // 2.1 기 로그인 시, 계속 진행
 // 2.2 비 로그인 시, 로그인 팝업 및 페이지 진입 실패
 router.beforeEach(async (to, from, next) => {
+    EventBus.$emit('change');
     if(to.path === '/' && !utils.isEmptyObject(to.query)) {
         const query = to.query;
         
@@ -121,7 +126,7 @@ router.beforeEach(async (to, from, next) => {
         }
     }
 
-    if(LOGIN_NEED.includes(to.path)) {
+    if(LOGIN_NEED.includes(to.name)) {
         const user = userService.getUser();
         if(!user) {
             dialogService.alertCustomComponent(view.LOGIN);

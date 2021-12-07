@@ -1,7 +1,6 @@
 <template>
 <div id="product-detail">
 	<v-app id="inspire">
-		<HeaderWrapper />
 
 	<v-sheet
       id="scrolling-techniques-7"
@@ -90,7 +89,6 @@
 </style>
 
 <script>
-import HeaderWrapper from "@/components/Header";
 import * as basketService from '../services/basketService'
 import * as dialogService from '../services/dialogService'
 import * as utils from '../util/utils'
@@ -103,7 +101,6 @@ import view from '../constants/dialogCustomView'
 export default {
 	name: "ProductDetail",
 	components: {
-		HeaderWrapper
 	},
 	beforeRouteUpdate(to, from ,next) {
 		const path = to.path.split('/').pop();

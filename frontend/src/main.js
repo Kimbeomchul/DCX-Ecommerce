@@ -31,6 +31,8 @@ Vue.use(VuejsDialog,{
 Vue.dialog.registerComponent(view.LOGIN, Login);
 Vue.dialog.registerComponent(view.SELECT_BOOKS, SelectBooks);
 
+export const EventBus = new Vue();
+
 new Vue({
   el: '#app',
   vuetify,

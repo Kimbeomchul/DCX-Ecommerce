@@ -1,8 +1,6 @@
 <template>
 <div id="app">
   <v-app id="inspire">
-    <HeaderWrapper />
-
     <v-sheet
       id="scrolling-techniques-7"
       class="overflow-y-auto"
@@ -114,11 +112,8 @@
 </style>
 
 <script>
-import HeaderWrapper from "@/components/Header";
-
 export default {
     components: {
-      HeaderWrapper
     },
     data: () => ({
 		valid: true,

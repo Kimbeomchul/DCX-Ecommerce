@@ -24,7 +24,7 @@
             >
             </v-img>
             <v-card-title v-text="book.item_title"></v-card-title>
-            <v-card-text>{{ book.item_price }} 원</v-card-text>
+            <v-card-text>{{ book.item_price |currency | won}}</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
             </v-card-actions>
@@ -84,7 +84,7 @@
               }"
             >
             <v-card-title v-text="book.item_title"></v-card-title>
-            <v-card-text>{{ book.item_price }} 원</v-card-text>
+            <v-card-text>{{ book.item_price |currency | won}}</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
             </v-card-actions>
