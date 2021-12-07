@@ -16,15 +16,15 @@ public class SwaggerConfig {
 
     private ApiInfo commonInfo(){
         return new ApiInfoBuilder()
-                .title("User API")
-                .version("1.0")
+                .title("DCX API")
+                .version("1.8")
                 .build();
     }
 
     @Bean
     public Docket allAPi(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("USER")
+                .groupName("commerce")
                 .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.any())

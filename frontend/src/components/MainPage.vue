@@ -160,9 +160,16 @@ export default {
       store.dispatch('REMOVE_ZZIM', id);
     },
     heartClicked() {
+      let message = '';
       if(event.target.classList.contains('reds')){
+        // '찜을 취소합니다' 팝업띄우기
+        message = '찜을 취소합니다';
+        dialogService.alert(message);
         event.target.classList.remove('reds');
       }else{
+        // '해당 도서를 찜했습니다' 팝업띄우기
+        message = '해당 도서를 찜했습니다';
+        dialogService.alert(message);
         event.target.classList.add('reds');
       }
     }
