@@ -97,6 +97,7 @@ router.beforeEach(async (to, from, next) => {
         if(query.data) {
             let message = '';
             let successHandler;
+            routerService.go('/',{})
             switch(query.data) {
                 case 'success': 
                     await payService.paySave();

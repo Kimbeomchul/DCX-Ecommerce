@@ -60,6 +60,7 @@
 <script>
 import * as bookService from '../services/bookService';
 import * as userService from '../services/userService'
+import * as routerService from '../services/routerService'
 
 export default {
   name: 'SelectBooks',
@@ -85,6 +86,7 @@ export default {
         this.user.need_book_reccomand = false;
         userService.setUser(this.user);
         this.$emit('closed');
+        routerService.go('/',{})
         this.dialog = false;
       }
     }

@@ -1,7 +1,6 @@
 <template>
 <div id="app">
   <v-app id="inspire">
-    <HeaderWrapper />
 
     <v-sheet
       id="scrolling-techniques-7"
@@ -64,12 +63,10 @@
 </style>
 
 <script>
-import HeaderWrapper from "@/components/Header";
 import * as payService from '../services/payService';
 
 export default {
     components: {
-      HeaderWrapper
     },
     data: () => ({
       books: [],
