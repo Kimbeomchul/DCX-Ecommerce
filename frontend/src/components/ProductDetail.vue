@@ -22,7 +22,7 @@
             </v-btn>
 		</v-img>
 
-        <v-card-title>{{ bookInfo.item_title }}</v-card-title>
+        <v-card-title style="font-weight: bold">{{ bookInfo.item_title }}</v-card-title>
 
 		<v-card-text>
 			<div>{{ bookInfo.item_price }} 원</div>

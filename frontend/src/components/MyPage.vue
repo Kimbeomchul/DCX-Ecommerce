@@ -26,7 +26,7 @@
 							>
 						</v-avatar>
 					</v-col>
-					<v-col
+					<v-col style="font-weight: bold"
 						cols="9"
 					>
 						<div>반갑습니다, {{ user.member_name }}님</div>
@@ -38,7 +38,7 @@
 
 				<v-list flat>
 					<v-list-item-group>
-						<v-list-item
+						<v-list-item style="font-weight: bold"
 							v-for="item in items"
 							:key="item.title"
 							color="primary"

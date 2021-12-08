@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" persistent>
     <div>
-      <h2 style="text-align:center; font-family:monospace; background-color: cadetblue; margin-bottom: 5px">
+      <h2 style="text-align:center; font-family:monospace; background-color: cornflowerblue; margin-bottom: 5px">
         선호 도서 선택 ({{count}}/5)
       </h2>
     </div>
@@ -15,7 +15,7 @@
 
       <v-hover v-slot="{ hover }">
         <v-card :class="{ 'on-hover': hover }">
-          <div :style="{'height':'10px', 'background-color': book.selected ? 'darkcyan': 'white'}">
+          <div :style="{'height':'10px', 'background-color': book.selected ? 'lightcoral': 'white'}">
           </div>
           <v-img
             :key="index"

@@ -31,7 +31,7 @@
       @click="goBookDetail(item.item_code)"
       style="cursor: pointer"
       >
-				<v-list-item-title @click="tclicked">{{ isZzimed(item.item_code).item_title }}</v-list-item-title>
+				<v-list-item-title style="font-weight: bold" @click="tclicked">{{ isZzimed(item.item_code).item_title }}</v-list-item-title>
 				<v-list-item-subtitle>{{ isZzimed(item.item_code).item_price | currency | won}}</v-list-item-subtitle>
 			</v-list-item-content>
       <v-list-item-action>
