@@ -23,6 +23,9 @@ export default new Vuex.Store({
       setZzimList(state, zzimList) {
         state.zzims = zzimList;
       },
+      clearZzimList(state) {
+        state.zzims = [];
+      },
       setFilteredBooks(state, filteredBookList) {
         state.filteredBooks = filteredBookList;
       },

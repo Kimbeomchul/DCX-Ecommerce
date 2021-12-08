@@ -60,7 +60,8 @@
 <script>
 import * as userService from '../services/userService';
 import * as dialogService from '../services/dialogService';
-import * as routerService from '../services/routerService'
+import * as routerService from '../services/routerService';
+import store from '@/store/index.js';
 
 export default {
 	name: "MyPage",
@@ -76,6 +77,8 @@ export default {
 				localStorage.clear();
 				dialogService.alert('로그아웃 되었습니다.');
 				routerService.go('/');
+				store.state.zzims = [];
+				store.commit('clearZzimList');
 			}
 		}
 	},
