@@ -62,6 +62,7 @@
 			>
 				<h4>총 {{ total_price | currency }} 원</h4>
 				<v-btn
+          :disabled="buying.length === 0"
 					color="primary"
 					elevation="2"
 					width="90%"

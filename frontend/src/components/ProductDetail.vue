@@ -130,6 +130,10 @@ export default {
 			}
 		},
 		goOrder() {
+			if(!this.user) {
+				dialogService.alertCustomComponent(view.LOGIN);
+				return;
+			}
 			utils.setLocalstorageItem('buyItems', [this.$store.state.book]);
 			routerService.go(ROUTES.ORDER)
 		},
