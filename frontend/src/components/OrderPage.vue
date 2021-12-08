@@ -16,6 +16,9 @@
           <v-text-field v-model="address" placeholder="주소"><br></v-text-field>
           <v-text-field v-model="extraAddress" placeholder="건물명"><br></v-text-field>
           </div>
+          <div ref="embed" style="display:none;border:1px solid;width:500px;margin:5px 0;position:relative">
+            <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" @click="foldDaumPostcode" alt="접기 버튼">
+          </div>
           <v-text-field v-model="detailAddress" placeholder="상세주소"></v-text-field>
           <v-row>
             <v-col
@@ -82,7 +85,7 @@
                       <td class="text-left"><h3>{{extraReward | currency | won}}</h3></td>
                     </tr>
                     <tr>
-                      <td class="text-left"><h3>사용 적립금</h3></td>
+                      <td class="text-left"><h3>사용 가능 적립금</h3></td>
                       <td class="text-left">
                         <v-row style="margin:8px 0;">
                           <input class="input_number" type="number" v-model="useReward" @click="initTextField">
@@ -232,6 +235,9 @@ export default {
           await dialogService.alert('구매자 정보를 입력해주세요');
       }
     },
+    foldDaumPostcode() {
+      this.$refs.embed.style.display = 'none';
+    },
     execDaumPostcode() {
       new window.daum.Postcode({
           oncomplete: (data) => {
@@ -261,7 +267,7 @@ export default {
                 }
                 // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
                 if (this.extraAddress !== "") {
-                this.extraAddress = `(${this.extraAddress})`;
+                  this.extraAddress = `(${this.extraAddress})`;
                 }
             } else {
                 this.extraAddress = "";
@@ -269,7 +275,9 @@ export default {
             // 우편번호를 입력한다.
             this.postcode = data.zonecode;
             },
-        }).open();
+
+        }).embed(this.$refs.embed);
+        this.$refs.embed.style.display = 'block';
       },
     },
   }
