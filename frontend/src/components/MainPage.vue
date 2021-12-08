@@ -115,6 +115,7 @@ import * as dialogService from '../services/dialogService'
 import view from '../constants/dialogCustomView'
 import SelectVue from '../components/SelectBooks.vue'
 import * as routerService from '../services/routerService'
+import * as utils from '../util/utils'
 
 export default {
   components: {
@@ -163,14 +164,18 @@ export default {
       let message = '';
       if(event.target.classList.contains('reds')){
         // '찜을 취소합니다' 팝업띄우기
-        message = '찜을 취소합니다';
-        dialogService.alert(message);
-        event.target.classList.remove('reds');
+        if(!utils.isEmptyObject(this.user)) {
+          message = '찜을 취소합니다';
+          dialogService.alert(message);
+          event.target.classList.remove('reds');
+        }
       }else{
         // '해당 도서를 찜했습니다' 팝업띄우기
-        message = '해당 도서를 찜했습니다';
-        dialogService.alert(message);
-        event.target.classList.add('reds');
+        if(!utils.isEmptyObject(this.user)) {
+          message = '해당 도서를 찜했습니다';
+          dialogService.alert(message);
+          event.target.classList.add('reds');
+        }
       }
     }
   },

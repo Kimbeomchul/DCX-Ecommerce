@@ -137,8 +137,7 @@ export default {
 			return store.state.zzims.find(zz => zz.item_code == it_code) ? true : false;
 		},
 		addToZzim(id) {
-			const user = userService.getUser();
-			if(!user) {
+			if(utils.isEmptyObject(this.user)) {
 				dialogService.alertCustomComponent(view.LOGIN);
 			} else {
 				store.dispatch('ADD_ZZIM', id);
@@ -148,10 +147,12 @@ export default {
 			store.dispatch('REMOVE_ZZIM', id);
 		},
 		heartClicked() {
-			if(event.target.classList.contains('reds')){
-				event.target.classList.remove('reds');
-			}else{
-				event.target.classList.add('reds');
+			if(!utils.isEmptyObject(this.user)) {
+				if(event.target.classList.contains('reds')){
+					event.target.classList.remove('reds');
+				}else{
+					event.target.classList.add('reds');
+				}
 			}
 		},
 	},
