@@ -120,6 +120,9 @@
 {%endif%}
 {%endwith%}
 
+
+
+
   <!-- Favicon -->
   <link href="{{ url_for('static', filename='assets/img/11.jpeg') }}" rel="icon" type="image/jpeg">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>

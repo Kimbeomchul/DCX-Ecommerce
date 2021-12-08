@@ -23,7 +23,7 @@
     var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: ['11월','12월', '1월', '2월', '3월', '4월'],
+			labels: ['11월','12월', '1월', '2월', '3월'],
 			datasets: [{
 				label: '# of Votes',
 				data: [32,data, 0, 0, 0, 0],
@@ -331,7 +331,7 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 84.10%</span>
                     <span class="text-nowrap">Reload</span>
                   </p>
                 </div>
