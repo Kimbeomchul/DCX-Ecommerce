@@ -1,31 +1,33 @@
 <template>
 <div id="header">
 	<v-card>
+		
 		<v-app-bar
 		absolute
 		color="white"
 		elevate-on-scroll
 		scroll-target="#scrolling-techniques-7"
-		>
+		style="justify:center;">
 		<v-btn v-if="canGoBackNames.includes($route.name)"
 		icon
 		@click="goBack">
 			<v-icon>arrow_back_ios_new</v-icon>
 		</v-btn>
-		<v-spacer />
-		<v-toolbar-title>
-			<router-link to="/">
+		
+		<v-container style="width:120%">
+		<v-toolbar-title class="d-flex flex-row-reverse">
+			<router-link 
+			to="/">
 				<v-img
 				src="@/assets/lotte.png"
-				width="25%"
+				width="50px"
 				/>
 			</router-link>
 		</v-toolbar-title>
+		</v-container>
 
-
-
-		<v-container v-if="isSearch" style="margin:auto; width:30%; ">
-			<v-text-field v-model="inputText">
+		<v-container v-if="isSearch" style="margin: auto 0;">
+			<v-text-field v-model="inputText" placeholder="검색">
 			</v-text-field>
 
 			<v-card v-if="books.length > 0" style="max-height:400px; overflow-y: scroll; border: solid cornflowerblue; min-width:160px">
@@ -50,6 +52,9 @@
 				</v-list>
 			</v-card>
 		</v-container>
+		<v-container v-else style="visibility:hidden;margin: auto 0;">
+			
+		</v-container>
 
 		<v-btn
 		icon
@@ -72,7 +77,7 @@
 			<v-icon>shopping_bag</v-icon>
 		</v-badge>
 		</v-btn>
-		</v-app-bar>
+	</v-app-bar>
 	</v-card>
 </div>
 </template>

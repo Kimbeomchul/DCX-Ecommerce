@@ -134,7 +134,6 @@
     position:absolute;
     width:100%;
   }
-
 </style>
 
 <script>
@@ -142,7 +141,6 @@ import * as userService from '../services/userService'
 import * as payService from '../services/payService'
 import * as utils from '../util/utils'
 import * as dialogService from '../services/dialogService'
-
 export default {
     components: {
     },
@@ -199,7 +197,6 @@ export default {
         this.phoneNumber[1] = phoneNumber.slice(3, 7);
         this.phoneNumber[2] = phoneNumber.slice(7);
       }
-
       if(address) {
         let index = address.indexOf('  ');
   
