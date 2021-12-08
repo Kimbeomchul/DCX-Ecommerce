@@ -247,6 +247,7 @@ export default {
             if (data.userSelectedType === "R") {
                 // 사용자가 도로명 주소를 선택했을 경우
                 this.address = data.roadAddress;
+               
             } else {
                 // 사용자가 지번 주소를 선택했을 경우(J)
                 this.address = data.jibunAddress;
@@ -274,8 +275,8 @@ export default {
             }
             // 우편번호를 입력한다.
             this.postcode = data.zonecode;
-            },
-
+            this.$refs.embed.style.display = 'none';
+          },
         }).embed(this.$refs.embed);
         this.$refs.embed.style.display = 'block';
       },
