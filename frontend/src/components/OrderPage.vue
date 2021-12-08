@@ -82,7 +82,7 @@
                       <td class="text-left"><h3>{{extraReward | currency | won}}</h3></td>
                     </tr>
                     <tr>
-                      <td class="text-left"><h3>사용 가능 적립금</h3></td>
+                      <td class="text-left"><h3>사용 적립금</h3></td>
                       <td class="text-left">
                         <v-row style="margin:8px 0;">
                           <input class="input_number" type="number" v-model="useReward" @click="initTextField">

@@ -14,3 +14,13 @@ export function currency(data) {
     return data ? data.toLocaleString() : 0;
 }
 
+/**
+ * @param 함께여서 다해이야 메롱 
+ * @returns 함께여서 다행..
+ */
+export function limitName(data, limit) {
+    if(data.length > limit) {
+        return data.slice(0, limit) + '..';
+    }
+    return data;
+}

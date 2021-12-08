@@ -43,6 +43,7 @@
 							:key="item.title"
 							color="primary"
 							:to="item.to"
+							@click="logout(item.to)"
 						>
 							<v-list-item-content>
 								<v-list-item-title v-text="item.title"></v-list-item-title>
@@ -57,7 +58,9 @@
 </template>
 
 <script>
-import * as userService from '../services/userService'
+import * as userService from '../services/userService';
+import * as dialogService from '../services/dialogService';
+import * as routerService from '../services/routerService'
 
 export default {
 	name: "MyPage",
@@ -66,12 +69,22 @@ export default {
 	async created() {
 		this.user = await userService.getUserFromDB();
 	},
+	methods: {
+		logout(to) {
+			if(!to) {
+				userService.clearUser();
+				dialogService.alert('로그아웃 되었습니다.');
+				routerService.go('/');
+			}
+		}
+	},
 	data: () => ({
 		user: {},
 		items: [
 			{ title: '찜목록', to: '/zzim' },
 			{ title: '주문 내역', to: '/orderedList' },
 			{ title: '장바구니', to: '/cart' },
+			{ title: '로그아웃' },
 		],
 
 	}),

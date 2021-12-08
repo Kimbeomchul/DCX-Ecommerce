@@ -64,7 +64,7 @@
 					width="90%"
           @click="goOrder"
 				>
-					바로 구매하기
+					구매하기
 				</v-btn>
 			</v-card-text>
 		</v-card>
@@ -99,6 +99,10 @@ export default {
   methods: {
     async init() {
       this.books = await basketService.getBasket();
+      (this.books.forEach(v => 
+      {
+        console.log(v.basket_no);
+      }));
       this.buying = this.books;
       this.$store.dispatch('INIT_NEW_CART_ITEMS');
     },

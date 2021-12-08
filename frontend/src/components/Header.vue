@@ -14,7 +14,7 @@
 			<v-icon>arrow_back_ios_new</v-icon>
 		</v-btn>
 		
-		<v-container style="width:120%">
+		<v-container style="width:180%">
 		<v-toolbar-title class="d-flex flex-row-reverse">
 			<router-link 
 			to="/">
@@ -26,11 +26,11 @@
 		</v-toolbar-title>
 		</v-container>
 
-		<v-container v-if="isSearch" style="margin: auto 0;">
+		<v-container v-if="isSearch" style="margin: auto 0; max-width: 750px">
 			<v-text-field v-model="inputText" placeholder="검색">
 			</v-text-field>
 
-			<v-card v-if="books.length > 0" style="max-height:400px; overflow-y: scroll; border: solid cornflowerblue; min-width:160px">
+			<v-card v-if="books.length > 0" style="max-height:400px; overflow-y: scroll; border: solid cornflowerblue; min-width:160px;">
 				<v-list three-line>
 					<template v-for="(book, index) in books">
 						<v-divider :key="index" />
@@ -39,7 +39,7 @@
 								<v-img :src="book.item_image" max-height="50px" max-width="50px"
 									style="margin-right:10px; cursor: pointer" @click="goBookDetail(book)"></v-img>
 								<v-list-item-content @click="goBookDetail(book)" style="cursor: pointer">
-									<v-list-item-title v-html="book.item_title"></v-list-item-title>
+									<v-list-item-title> {{book.item_title | limitName(9)}}</v-list-item-title>
 									<v-list-item-subtitle>
 										<span class="text--primary">
 											{{book.item_price | currency | won}}
@@ -99,7 +99,6 @@ export default {
 	},
 	methods: {
 		goBack() {
-			console.log(this.$route);
 			routerService.goback();
 		},
 		goBookDetail(book) {
@@ -115,10 +114,12 @@ export default {
 			this.books = [];
 		},
 		bookSearch(searchTitle) {
+			searchTitle = searchTitle.toUpperCase();
 			const trimSearchTitle = searchTitle.replace(' ', '');
 
 			return this.allBooks.filter(v => {
-				const trimTitle = v.item_title.replace(' ','');
+				const itemTitle = v.item_title.toUpperCase();
+				const trimTitle = itemTitle.replaceAll(' ','');
 				if(trimSearchTitle === trimTitle) {
 					return true;
 				}
@@ -138,7 +139,6 @@ export default {
 			} else {
 				this.books = [];
 			}
-			// console.log(newVal, this.books);
 		}
 	},
 	data: () => {

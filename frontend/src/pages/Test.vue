@@ -77,11 +77,15 @@ export default {
     },
     methods: {
         routerTest() {
+            // const query = {
+            //     status:'Y',
+            //     image:'http://k.kakaocdn.net/dn/ckwk6a/btrlKfIWNBE/yheCY2RQVaMT57gJvrrkK1/img_640x640.jpg',
+            //     nickname:'전주환',
+            //     id:2007473952
+            // };
             const query = {
-                status:'Y',
-                image:'http://k.kakaocdn.net/dn/ckwk6a/btrlKfIWNBE/yheCY2RQVaMT57gJvrrkK1/img_640x640.jpg',
-                nickname:'전주환',
-                id:2007473952
+                data: 'success',
+                pg_token: '873c16c201844cfdb61a'
             };
             routerService.go(ROUTES.MAIN, query);
         },
