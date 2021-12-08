@@ -9,6 +9,9 @@
     <v-container fluid style="padding-top:60px;">
 
     <h3>장바구니</h3>
+
+    <Empty v-if="books.length === 0" iconName="mdi-cart-remove" message="장바구니가 비었습니다." />
+
     <v-list three-line>
     <template v-for="(book, index) in books">
       <v-divider :key="index" />
@@ -89,9 +92,11 @@ import * as basketService from '../services/basketService'
 import * as routerService from '../services/routerService'
 import {ROUTES} from '../constants/routes'
 import * as utils from '../util/utils'
+import Empty from '../components/empty.vue'
 
 export default {
   components: {
+    Empty
   },
   async created() {
     await this.init();
@@ -99,10 +104,6 @@ export default {
   methods: {
     async init() {
       this.books = await basketService.getBasket();
-      (this.books.forEach(v => 
-      {
-        console.log(v.basket_no);
-      }));
       this.buying = this.books;
       this.$store.dispatch('INIT_NEW_CART_ITEMS');
     },

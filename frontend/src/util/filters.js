@@ -19,6 +19,10 @@ export function currency(data) {
  * @returns 함께여서 다행..
  */
 export function limitName(data, limit) {
+    if(data !== data.toUpperCase()) {
+        limit *= 2;
+    }
+
     if(data.length > limit) {
         return data.slice(0, limit) + '..';
     }

@@ -10,6 +10,8 @@
     <v-container fluid style="padding-top:60px;">
 
 	<h3>찜목록</h3>
+  <Empty v-if="this.$store.state.zzims.length === 0" iconName="mdi-heart-broken" message="찜한 도서가 없습니다." />
+
 	<v-list three-line>
 	<template v-for="(item, index) in this.$store.state.zzims">
 		<v-divider :key="index"></v-divider>
@@ -58,9 +60,11 @@
 import store from '@/store/index.js';
 import * as zzimService from '../services/zzimService'
 import * as routerService from '../services/routerService'
+import Empty from '../components/empty.vue'
 
 export default {
   components: {
+    Empty
   },
   data: () => ({
     zzims: store.state.zzims,

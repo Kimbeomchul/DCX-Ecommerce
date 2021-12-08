@@ -23,8 +23,8 @@
             height="200px"
             >
             </v-img>
-            <v-card-title v-text="book.item_title"></v-card-title>
-            <v-card-text>{{ book.item_price |currency | won}}</v-card-text>
+            <v-card-title>{{ book.item_title | limitName(10) }}</v-card-title>
+            <v-card-text>{{ book.item_price | currency | won}}</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
             </v-card-actions>

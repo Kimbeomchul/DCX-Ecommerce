@@ -144,6 +144,7 @@ import * as userService from '../services/userService'
 import * as payService from '../services/payService'
 import * as utils from '../util/utils'
 import * as dialogService from '../services/dialogService'
+import * as routerService from '../services/routerService'
 export default {
     components: {
     },
@@ -229,7 +230,16 @@ export default {
         const fail = await userService.saveUserInfo(address, phoneNumber);
         utils.setLocalstorageItem('rewards', this.user.member_savemoney + this.reward - this.useReward);
         if(!fail) {
-          await payService.pay(this.books);
+          if(this.total !== 0) {
+            await payService.pay(this.books);
+          } else {
+            const query = {
+              data: 'success',
+            };
+            const tid = 'T' + utils.getRandomInt(10000000000000000000, 99999999999999999999);
+            localStorage.setItem('tid', tid);
+            routerService.go('/', query);
+          }
         }
       } else {
           await dialogService.alert('구매자 정보를 입력해주세요');

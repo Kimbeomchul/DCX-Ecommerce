@@ -73,6 +73,7 @@ export default {
 		logout(to) {
 			if(!to) {
 				userService.clearUser();
+				localStorage.clear();
 				dialogService.alert('로그아웃 되었습니다.');
 				routerService.go('/');
 			}

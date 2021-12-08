@@ -10,6 +10,8 @@
     <v-container fluid style="padding-top:60px;">
 
 	<h3>구매내역</h3>
+  <Empty v-if="orders.length === 0" iconName="mdi-cash-100" message="주문 내역이 없습니다." />
+
 	<v-list
 	subheader
 	three-line
@@ -64,9 +66,11 @@
 
 <script>
 import * as payService from '../services/payService';
+import Empty from '../components/empty.vue'
 
 export default {
     components: {
+      Empty
     },
     data: () => ({
       books: [],
