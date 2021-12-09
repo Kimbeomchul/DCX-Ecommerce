@@ -11,6 +11,7 @@
 	<v-container fluid style="padding-top:60px;">
 		<v-img
 			height="450"
+			contain
 			:src="bookInfo.item_image"
 		>
 			<v-btn v-if="isZzimed(bookInfo.item_code)" @click="removeFromZzim(bookInfo.item_code)" icon>
