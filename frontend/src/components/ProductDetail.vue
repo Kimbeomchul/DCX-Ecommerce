@@ -25,7 +25,7 @@
         <v-card-title style="font-weight: bold">{{ bookInfo.item_title }}</v-card-title>
 
 		<v-card-text>
-			<div>{{ bookInfo.item_price }} 원</div>
+			<div>{{ bookInfo.item_price |currency | won}}</div>
 		</v-card-text>
 
 		<v-divider class="mx-4"></v-divider>
