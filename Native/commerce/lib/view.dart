@@ -16,6 +16,7 @@ class _ViewState extends State<View> {
         child: WebView(
           initialUrl: 'http://3.35.120.54:8080/',
           javascriptMode: JavascriptMode.unrestricted,
+
         ),
       ),
     );
