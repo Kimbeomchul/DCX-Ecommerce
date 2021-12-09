@@ -20,17 +20,13 @@ function successHandler(response) {
 }
 
 function errorHandler(response, errorAlert = true) {
-    let errorMessage = '';
-    const defaultErrorMessage = '서버와의 통신이 원활하지 않습니다. 잠시 후 다시 시도 해주세요';
+    let errorMessage = '서버와의 통신이 원활하지 않습니다.<br>잠시 후 다시 시도 해주세요.';
 
     switch (response.status) {
         case 401:
-            errorMessage = '권한이 없습니다. 다시 로그인해주세요';
+            errorMessage = '권한이 없습니다.<br> 다시 로그인해주세요';
             routerService.go(ROUTES.MAIN);
             break;
-
-        default:
-            errorMessage = response.message ? response.message : defaultErrorMessage;
     }
 
     if(errorAlert) {
