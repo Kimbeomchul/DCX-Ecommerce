@@ -1,9 +1,12 @@
 <template>
   <v-dialog v-model="dialog" persistent>
-    <div>
-      <h2 style="text-align:center; font-family:monospace; background-color: cornflowerblue; margin-bottom: 5px">
+    <div class="select-title">
+      <h2 class="inline">
         선호 도서 선택 ({{count}}/5)
       </h2>
+      <v-button style="margin-left:10px" @click="getBookRandom">
+        <v-icon>refresh</v-icon>
+      </v-button>
     </div>
     <v-row>
       <v-col
@@ -75,6 +78,10 @@ export default {
       }
   },
   methods: {
+    async getBookRandom() {
+      this.books = await bookService.getBookRandom();
+      this.count = 0;
+    },
     async select(book) {
       book.selected = !book.selected;
 
@@ -93,8 +100,8 @@ export default {
   },
   async created() {
     this.user = userService.getUser();
+    await this.getBookRandom();
 
-      this.books = await bookService.getBookRandom();
     if(this.user && this.user.need_book_reccomand) {
       this.dialog = true
     }
@@ -103,6 +110,17 @@ export default {
 </script>
 
 <style scoped>
+.select-title {
+text-align:center; 
+font-family:monospace; 
+background-color: cornflowerblue; 
+margin-bottom: 5px;
+}
+
+.select-title .inline {
+  display: inline-block;
+}
+
 >>> .v-dialog {
   background-color:ghostwhite;
 }

@@ -145,6 +145,7 @@ import * as payService from '../services/payService'
 import * as utils from '../util/utils'
 import * as dialogService from '../services/dialogService'
 import * as routerService from '../services/routerService'
+
 export default {
     components: {
     },
@@ -300,5 +301,7 @@ export default {
   box-sizing: border-box;
   border: none;
   border-bottom: 2px solid red;
+  font-size: 1.17em;
+  font-weight: bold;
 }
 </style>

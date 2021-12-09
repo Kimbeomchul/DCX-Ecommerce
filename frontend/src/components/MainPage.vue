@@ -23,8 +23,16 @@
             height="200px"
             >
             </v-img>
-            <v-card-title style="font-weight: bold">{{ book.item_title | limitName(10) }}</v-card-title>
-            <v-card-text>{{ book.item_price | currency | won}}</v-card-text>
+
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-card-title v-on="on" style="font-weight: bold">{{ book.item_title | limitName(10) }}</v-card-title>
+                <v-card-text>{{ book.item_price | currency | won}}</v-card-text>
+              </template>
+              <span>{{book.item_title}}</span>
+              <!-- <span v-if="test(book.item_title)">{{book.item_title}}</span> -->
+            </v-tooltip>
+
             <v-card-actions>
             <v-spacer></v-spacer>
             </v-card-actions>
@@ -83,7 +91,7 @@
                 params: { bookTitle: `${book.item_title}` },
               }"
             >
-            <v-card-title style="font-weight: bold" v-text="book.item_title"></v-card-title>
+            <v-card-title style="font-weight: bold">{{ book.item_title | limitName(22) }}</v-card-title>
             <v-card-text>{{ book.item_price |currency | won}}</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
