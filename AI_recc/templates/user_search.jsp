@@ -94,6 +94,18 @@
       width: 500px;
     }
   </style>
+
+
+
+{%with messages = get_flashed_messages()%}
+{%if messages %}
+<script type="text/javascript">
+  alert("{{messages[-1]}}");
+
+</script>
+{%endif%}
+{%endwith%}
+
     <meta charset="UTF-8">
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

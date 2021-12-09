@@ -105,6 +105,16 @@
 </head>
 
 
+
+{%with messages = get_flashed_messages()%}
+{%if messages %}
+<script type="text/javascript">
+  alert("{{messages[-1]}}");
+
+</script>
+{%endif%}
+{%endwith%}
+
 <script type="text/javascript">
     var books = {{data}};
     var list_data = [];

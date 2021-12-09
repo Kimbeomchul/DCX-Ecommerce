@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="kr">
 
+
+{%with messages = get_flashed_messages()%}
+{%if messages %}
+<script type="text/javascript">
+  alert("{{messages[-1]}}");
+
+</script>
+{%endif%}
+{%endwith%}
+
 <script type="text/javascript">
 
 
@@ -23,10 +33,10 @@
     var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: ['11월','12월', '1월', '2월', '3월'],
+			labels: ['11월','12월', '1월', '2월', '3월','4월','5월'],
 			datasets: [{
-				label: '# of Votes',
-				data: [32,data, 0, 0, 0, 0],
+				label: 'Sales',
+				data: [32, data, 0, 0, 0, 0, 0, 0],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',

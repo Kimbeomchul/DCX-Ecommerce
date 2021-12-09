@@ -160,7 +160,7 @@ def delete():
     if status == 200:
         flash("책삭제 성공 ")
 
-    return render_template('main.jsp')
+    return redirect("/main")
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
@@ -177,11 +177,11 @@ def add():
 
     if response.raise_for_status() or status == 500:
         flash("책등록에 실패했습니다.")
-        return render_template('main.jsp')
-
+        return redirect("/main")
 
     flash("책등록 성공 ")
-    return render_template('main.jsp')
+    return redirect("/main")
+
 
 
 
