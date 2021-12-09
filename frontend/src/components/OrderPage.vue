@@ -88,7 +88,7 @@
                       <td class="text-left"><h3>사용 가능 적립금</h3></td>
                       <td class="text-left">
                         <v-row style="margin:8px 0;">
-                          <input class="input_number" type="number" v-model="useReward" @click="initTextField">
+                          <input class="input_number" type="number" v-model.number="useReward" @click="initTextField">
                           <v-btn style="margin-left:10px" color="primary" small @click="spendAllReward">
                               모두사용
                           </v-btn>
