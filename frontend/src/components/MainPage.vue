@@ -26,8 +26,8 @@
 
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
-                <v-card-title v-on="on" style="font-weight: bold">{{ book.item_title | limitName(10) }}</v-card-title>
                 <v-card-text>{{ book.item_price | currency | won}}</v-card-text>
+                <v-card-title v-on="on" style="font-weight: bold">{{ book.item_title | limitName(10) }}</v-card-title>
               </template>
               <span>{{book.item_title}}</span>
               <!-- <span v-if="test(book.item_title)">{{book.item_title}}</span> -->
@@ -94,12 +94,14 @@
             <v-card-title style="font-weight: bold" v-text="book.item_title"></v-card-title>
             <v-card-text style="display:inline;">{{ book.item_price | currency | won}}</v-card-text>
             </router-link>
-            <v-btn v-if="isCarted(book.item_code)" @click="addCart(book.item_code, $event)">
-              <v-icon>shopping_cart</v-icon>
-            </v-btn>
-            <v-btn v-else class="disable" @click="addCart(book.item_code, $event)">
-              <v-icon>shopping_cart</v-icon>
-            </v-btn>
+            <div style="position: absolute; right: 10px; bottom: 10px">
+              <v-btn v-if="isCarted(book.item_code)" @click="addCart(book.item_code, $event)">
+                <v-icon>shopping_bag</v-icon>
+              </v-btn>
+              <v-btn v-else class="disable" @click="addCart(book.item_code, $event)">
+                <v-icon>shopping_bag</v-icon>
+              </v-btn>
+            </div>
             <v-card-actions>
             <v-spacer></v-spacer>
             </v-card-actions>
@@ -120,7 +122,7 @@
     color: red !important;
   }
   .disable {
-    opacity: 0.65; 
+    color: darkgray;
     cursor: not-allowed;
   }
 </style>

@@ -75,10 +75,11 @@ export default {
 			if(!to) {
 				userService.clearUser();
 				localStorage.clear();
-				dialogService.alert('로그아웃 되었습니다.');
-				routerService.go('/');
-				store.state.zzims = [];
-				store.commit('clearZzimList');
+				dialogService.confirm('정말 로그아웃 하시겠습니까?', () => {
+					routerService.go('/');
+					store.state.zzims = [];
+					store.commit('clearZzimList');
+				});
 			}
 		}
 	},
