@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { getBookByTitle, getBookList } from '../services/bookService';
 import { getZzimList, addZzim, deleteZzim } from '../services/zzimService';
+import { addBasket } from '../services/basketService';
+
 
 Vue.use(Vuex);
 
@@ -89,8 +91,11 @@ export default new Vuex.Store({
       INIT_NEW_CART_ITEMS(context) {
         context.commit('setNewCartItems');
       },
-      ADD_NEW_CART_ITEMS(context) {
-        context.commit('setNewCartItems', false);
+      async ADD_NEW_CART_ITEMS(context, item_code) {
+        await addBasket(item_code)
+          .then(() => {
+            context.commit('setNewCartItems', false);
+          })
       },
     }
 });

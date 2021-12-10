@@ -76,11 +76,11 @@
             >
 
             <v-btn v-if="isZzimed(book.item_code)" @click="removeFromZzim(book.item_code)" icon>
-              <v-icon class="reds" @click="heartClicked()">mdi-heart</v-icon>
+              <v-icon class="reds" @click="heartClicked($event)">mdi-heart</v-icon>
             </v-btn>
 
             <v-btn v-else @click="addToZzim(book.item_code)" icon>
-              <v-icon @click="heartClicked()">mdi-heart</v-icon>
+              <v-icon @click="heartClicked($event)">mdi-heart</v-icon>
             </v-btn>
 
             </v-img>
@@ -91,12 +91,18 @@
                 params: { bookTitle: `${book.item_title}` },
               }"
             >
-            <v-card-title style="font-weight: bold">{{ book.item_title | limitName(22) }}</v-card-title>
-            <v-card-text>{{ book.item_price |currency | won}}</v-card-text>
+            <v-card-title style="font-weight: bold" v-text="book.item_title"></v-card-title>
+            <v-card-text style="display:inline;">{{ book.item_price | currency | won}}</v-card-text>
+            </router-link>
+            <v-btn v-if="isCarted(book.item_code)" @click="addCart(book.item_code, $event)">
+              <v-icon>shopping_cart</v-icon>
+            </v-btn>
+            <v-btn v-else class="disable" @click="addCart(book.item_code, $event)">
+              <v-icon>shopping_cart</v-icon>
+            </v-btn>
             <v-card-actions>
             <v-spacer></v-spacer>
             </v-card-actions>
-            </router-link>
         </v-card>
         </v-col>
     </v-row>
@@ -113,10 +119,15 @@
   .reds {
     color: red !important;
   }
+  .disable {
+    opacity: 0.65; 
+    cursor: not-allowed;
+  }
 </style>
 
 <script>
 import store from '@/store/index.js';
+import * as basketService from '../services/basketService'
 import * as bookService from '../services/bookService'
 import * as userService from '../services/userService'
 import * as dialogService from '../services/dialogService'
@@ -137,6 +148,7 @@ export default {
     zzims: store.state.zzims,
     categories: [],
     user: {},
+    cartItems: [],
   }),
   methods: {
     goBookDetail(book) {
@@ -168,7 +180,7 @@ export default {
     removeFromZzim(id) {
       store.dispatch('REMOVE_ZZIM', id);
     },
-    heartClicked() {
+    heartClicked(event) {
       let message = '';
       if(event.target.classList.contains('reds')){
         // '찜을 취소합니다' 팝업띄우기
@@ -177,15 +189,41 @@ export default {
           dialogService.alert(message);
           event.target.classList.remove('reds');
         }
-      }else{
+      }else {
         // '해당 도서를 찜했습니다' 팝업띄우기
-        if(!utils.isEmptyObject(this.user)) {
-          message = '해당 도서를 찜했습니다';
-          dialogService.alert(message);
-          event.target.classList.add('reds');
+        if(!event.target.classList.contains('reds')) {
+          if(!utils.isEmptyObject(this.user)) {
+            message = '해당 도서를 찜했습니다';
+            dialogService.alert(message);
+            event.target.classList.add('reds');
+          }
         }
       }
-    }
+    },
+    isCarted(item_code) {
+			const index = this.cartItems.findIndex(v => item_code === v.item_code);
+        if(index !== -1) {
+          return false;
+        } else {
+          return true;
+        }
+    },
+    addCart(item_code, event) {
+			if(!this.user) {
+				dialogService.alertCustomComponent(view.LOGIN);
+				return;
+			}
+			const cartList = this.cartItems;
+			const index = cartList.findIndex(v => item_code === v.item_code);
+			if(index !== -1) {
+				dialogService.alert('이미 추가된 도서 입니다.');
+				return ;
+			} else {
+        event.target.classList.add('disable');
+				store.dispatch('ADD_NEW_CART_ITEMS', item_code);
+				dialogService.alert('추가되었습니다');
+			}
+		},
   },
   async created() {
     store.dispatch('FETCH_BOOKS');
@@ -198,8 +236,10 @@ export default {
       store.dispatch('FETCH_ZZIM');
       if(!this.user.need_book_reccomand) {
         await this.getRecommandBooks();
-      } 
+      const cartList = await basketService.getBasket();
+      this.cartItems = cartList;
+    } 
     }
-  }
+  },
 }
 </script>
