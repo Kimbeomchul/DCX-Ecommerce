@@ -73,9 +73,9 @@ export default {
 	methods: {
 		logout(to) {
 			if(!to) {
-				userService.clearUser();
-				localStorage.clear();
 				dialogService.confirm('정말 로그아웃 하시겠습니까?', () => {
+					userService.clearUser();
+					localStorage.clear();
 					routerService.go('/');
 					store.state.zzims = [];
 					store.commit('clearZzimList');

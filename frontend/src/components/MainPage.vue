@@ -26,7 +26,7 @@
 
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
-                <v-card-text>{{ book.item_price | currency | won}}</v-card-text>
+                <v-card-text style="font-weight: bold">{{ book.item_price | currency | won}}</v-card-text>
                 <v-card-title v-on="on" style="font-weight: bold">{{ book.item_title | limitName(10) }}</v-card-title>
               </template>
               <span>{{book.item_title}}</span>
