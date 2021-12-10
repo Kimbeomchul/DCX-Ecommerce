@@ -54,7 +54,7 @@
       style="margin:auto"
       v-for="category in categories"
       :key="category.item_section">
-        <v-tab @click="isCategoryClicked(category.item_section)">
+        <v-tab style="font-weight:bold" @click="isCategoryClicked(category.item_section)">
           {{ category.item_section }}
         </v-tab>
       </v-col>

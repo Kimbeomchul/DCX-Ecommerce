@@ -90,6 +90,10 @@ const router = new VueRouter({
 // 2.1 기 로그인 시, 계속 진행
 // 2.2 비 로그인 시, 로그인 팝업 및 페이지 진입 실패
 router.beforeEach(async (to, from, next) => {
+    if(routes.findIndex(v => v.name === to.name) === -1) {
+        routerService.go(ROUTES.MAIN);
+        next(false);
+    }
     EventBus.$emit('change');
     if(to.path === '/' && !utils.isEmptyObject(to.query)) {
         const query = to.query;
@@ -107,6 +111,7 @@ router.beforeEach(async (to, from, next) => {
                         routerService.go(ROUTES.ORDEREDLIST);
                     }
                     dialogService.confirm(message, successHandler);
+                    next(false);
                     break;
                 case 'fail':
                     message = '결제 실패하였습니다.';
