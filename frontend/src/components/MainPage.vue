@@ -94,6 +94,10 @@
             <v-card-title style="font-weight: bold" v-text="book.item_title"></v-card-title>
             <v-card-text style="display:inline;">{{ book.item_price | currency | won}}</v-card-text>
             </router-link>
+            <div style="position: absolute; right: 10px; bottom: 10px">
+              <v-icon v-if="isCarted(book.item_code)" @click="addCart(book.item_code, $event)">shopping_bag</v-icon>
+              <v-icon v-else class="disable" @click="addCart(book.item_code, $event)">shopping_bag</v-icon>
+            </div>
             <v-card-actions>
             <v-spacer></v-spacer>
             </v-card-actions>
@@ -193,7 +197,33 @@ export default {
           }
         }
       }
-    }
+    },
+    isCarted(item_code) {
+			const index = this.cartItems.findIndex(v => item_code === v.item_code);
+        if(index !== -1) {
+          return false;
+        } else {
+          return true;
+        }
+    },
+    async addCart(item_code, event) {
+			if(!this.user) {
+				dialogService.alertCustomComponent(view.LOGIN);
+				return;
+			}
+			const cartList = await basketService.getBasket();
+			const index = cartList.findIndex(v => item_code === v.item_code);
+			if(index !== -1) {
+				dialogService.alert('이미 추가된 도서 입니다.');
+				return ;
+			} else {
+        await this.$nextTick();
+        event.target.classList.add('disable');
+        await this.$nextTick();
+				store.dispatch('ADD_NEW_CART_ITEMS', item_code);
+				dialogService.alert('추가되었습니다');
+			}
+		},
   },
   async created() {
     store.dispatch('FETCH_BOOKS');
