@@ -19,7 +19,7 @@
 
     // 판매량 집계
     function countSales(){
-        fetch("http://3.36.39.51/allpaylist")
+        fetch("http://3.36.39.51/pay/all")
           .then((response) => response.json())
           .then((data) => charts(Object.keys(data).length));
         }

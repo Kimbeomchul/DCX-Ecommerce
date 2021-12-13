@@ -73,7 +73,7 @@ body {
   font-weight: bold;
   border:none;
   cursor:pointer;
-  transition: 0.4s;
+  transition: 0.5s;
   display:inline;
 }
 

@@ -24,12 +24,12 @@ def mv0():
         print("IN")
     money = 0
     #아이템 조회
-    url = "http://3.36.39.51/allitem"
+    url = "http://3.36.39.51/item/all"
     response = requests.get(url)
     items = response.json()
 
     # 판매금액 조회용
-    url = "http://3.36.39.51/allpaylist"
+    url = "http://3.36.39.51/pay/all"
     response = requests.get(url)
     pay = response.json()
 
@@ -40,12 +40,12 @@ def mv0():
                 money += j.get('item_price')
 
     # 책권수 조회
-    url = "http://3.36.39.51/item_count"
+    url = "http://3.36.39.51/item/count"
     response = requests.get(url)
     count_book = response.json()
 
     # 유저수 조회
-    url = "http://3.36.39.51/count_user"
+    url = "http://3.36.39.51/users/count"
     response = requests.get(url)
     count_user = response.json()
 
@@ -64,7 +64,7 @@ def mv1():
 def mv2():
     if 'isLogin' not in session:
         return render_template('login.jsp')
-    url = "http://3.36.39.51/allitem"
+    url = "http://3.36.39.51/item/all"
     response = requests.get(url)
 
     obj = response.json()
@@ -76,7 +76,7 @@ def mv2():
 def mv3():
     if 'isLogin' not in session:
         return render_template('login.jsp')
-    url = "http://3.36.39.51/allitem"
+    url = "http://3.36.39.51/item/all"
     response = requests.get(url)
 
     obj = response.json()
@@ -89,7 +89,7 @@ def mv3():
 def mv4():
     if 'isLogin' not in session:
         return render_template('login.jsp')
-    url = "http://3.36.39.51/user"
+    url = "http://3.36.39.51/users/all"
     response = requests.get(url)
     obj = response.json()
     print(obj)
@@ -105,12 +105,12 @@ def mv5():
     dics = {}
     money = 0
     #아이템 조회
-    url = "http://3.36.39.51/allitem"
+    url = "http://3.36.39.51/item/all"
     response = requests.get(url)
     items = response.json()
 
     # 판매금액 조회용
-    url = "http://3.36.39.51/allpaylist"
+    url = "http://3.36.39.51/pay/all"
     response = requests.get(url)
     pay = response.json()
 
@@ -147,7 +147,7 @@ def delete():
     if 'isLogin' not in session:
         return render_template('login.jsp')
     result = request.form
-    url = "http://3.36.39.51/ditem"
+    url = "http://3.36.39.51/item/code"
     response = requests.delete(url, data= result)
 
     obj = response.request
@@ -167,7 +167,7 @@ def add():
     if 'isLogin' not in session:
         return render_template('login.jsp')
     result = request.form
-    url = "http://3.36.39.51/aitem"
+    url = "http://3.36.39.51/item/code"
     response = requests.post(url, data= result)
 
     obj = response.request
@@ -210,7 +210,7 @@ def commerce(data, id):
     cluster_result = kmeans.predict(x)
 
 
-    API_HOST = "http://3.36.39.51/addrecc"
+    API_HOST = "http://3.36.39.51/recc/result"
     url = API_HOST
     headers = {'Content-Type': 'application/json', 'charset': 'UTF-8', 'Accept': '*/*'}
     body = {
