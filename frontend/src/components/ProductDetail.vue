@@ -127,9 +127,8 @@ export default {
 				dialogService.alert('이미 추가된 도서 입니다.');
 				return ;
 			} else {
-				await basketService.addBasket(this.$store.state.book.item_code);
-				store.dispatch('ADD_NEW_CART_ITEMS');
-				dialogService.alert('추가되었습니다.');
+				store.dispatch('ADD_NEW_CART_ITEMS', this.bookInfo.item_code);
+				dialogService.alert('추가되었습니다');
 			}
 		},
 		goOrder() {
@@ -188,7 +187,9 @@ export default {
 		this.user = userService.getUser();
 		if(this.user) {
 			this.$store.dispatch("FETCH_ZZIM");
+			await this.$nextTick();
 			this.countZzim = await zzimService.countZzim(this.bookInfo.item_code);
+			await this.$nextTick();
 		}
 	}
 }
