@@ -7,39 +7,39 @@ export default Object.freeze({
     // 로그인
     // KAKAO_LOGIN_URL: 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://3.35.120.54:8080/',
     KAKAO_LOGIN_URL: 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0283e78b831185c25b7ed36ea030a098&redirect_uri=http://3.36.39.51/auth/kakao/callback',
-    KAKAO_LOGOUT: 'kapi.kakao.com//v1/user/unlink',
+    KAKAO_LOGOUT: 'kapi.kakao.com/v1/user/unlink',
     
     // 도서
-    GET_BOOK_LIST: 'allitem',
-    GET_BOOK_RANDOM: 'selectitem',
-    GET_BOOK_BY_TITLE: 'searchid',
-    GET_BOOK_BY_CODE: 'getItemCode',
-    DELETE_BOOK: 'ditem',
-    ADD_BOOK: 'aitem',
+    GET_BOOK_LIST: 'item/all',
+    GET_BOOK_RANDOM: 'item/recc',
+    GET_BOOK_BY_TITLE: 'item/title',
+    GET_BOOK_BY_CODE: 'item/code',
+    DELETE_BOOK: 'item/code',
+    ADD_BOOK: 'item/code',
     RECOMMAND: 'http://3.36.39.51:5000/rec/',
-    GET_RECOMMAND_BOOKS: 'reccitem',
-    GET_CATEGORY: 'sections',
+    GET_RECOMMAND_BOOKS: 'recc/result',
+    GET_CATEGORY: 'item/genre',
 
     // 장바구니
-    GET_BASKET_LIST: 'allbasket',
-    SEARCH_BASKET: 'searchbasket',
-    ADD_BASKET: 'abasket',
-    DELETE_BASKET: 'dbasket',
-    DELETE_BASKET_LIST: 'dabasket',
+    GET_BASKET_LIST: 'basket/all',
+    SEARCH_BASKET: 'basket/search',
+    ADD_BASKET: 'basket/item',
+    DELETE_BASKET: 'basket/item',
+    DELETE_BASKET_LIST: 'basket/all',
 
     // 사용자
-    GET_USER_LIST: 'user',
-    SAVE_USER_INFO: 'addphone',
+    GET_USER_LIST: 'users/all',
+    SAVE_USER_INFO: 'users/info',
 
     // 찜
-    GET_ZZIM_LIST: 'allzzim',
-    ADD_ZZIM: 'azzim',
-    DELETE_ZZIM: 'dzzim',
+    GET_ZZIM_LIST: 'zzim/item',
+    ADD_ZZIM: 'zzim/item',
+    DELETE_ZZIM: 'zzim/item',
+    COUNT_ZZIM: 'zzim/count',
 
     // 구매
     PAY: 'pay',
-    PAY_LIST: 'paylist',
-    PAY_SAVE: 'paysave',
-    GET_PAY_LIST: 'paylist',
-    REWARD_SAVE: 'addsave',
+    PAY_LIST: 'pay/item',
+    PAY_SAVE: 'pay/item',
+    REWARD_SAVE: 'users/reward',
 })
