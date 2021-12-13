@@ -19,15 +19,6 @@ export async function pay(books) {
 }
 
 /**
- * 결제내역 조회
- * @param userId
- */
-export async function payList() {
-    const user = userService.getUser('member_id');
-    return await apiService.toGet(api.GET_PAY_LIST, user);
-}
-
-/**
  * 결제 저장
  * @param userId
  */

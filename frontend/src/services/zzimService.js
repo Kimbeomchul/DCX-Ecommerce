@@ -38,3 +38,14 @@ export async function deleteZzim(itemCode) {
     };
     return await apiService.toDelete(api.DELETE_ZZIM, params);
 }
+
+/**
+ * 아이템 찜 횟수
+ * @param {String} itemCode
+ */
+export async function countZzim(itemCode) {
+    const params = {
+        item_code: itemCode,
+    };
+    return await apiService.toGet(api.COUNT_ZZIM, params);
+}

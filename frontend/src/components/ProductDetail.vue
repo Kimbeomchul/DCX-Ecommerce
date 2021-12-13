@@ -24,6 +24,7 @@
 		</v-img>
 
         <v-card-title style="font-weight: bold">{{ bookInfo.item_title }}</v-card-title>
+        <v-card-text style="font-weight: bold">{{ countZzim  }}명이 이 책을 좋아합니다.</v-card-text>
 
 		<v-card-text>
 			<div>{{ bookInfo.item_price |currency | won}}</div>
@@ -98,6 +99,7 @@ import {ROUTES} from '../constants/routes'
 import store from '@/store/index.js';
 import * as userService from '../services/userService'
 import view from '../constants/dialogCustomView'
+import * as zzimService from '../services/zzimService'
 
 export default {
 	name: "ProductDetail",
@@ -141,15 +143,18 @@ export default {
 		isZzimed(it_code) {
 			return store.state.zzims.find(zz => zz.item_code == it_code) ? true : false;
 		},
-		addToZzim(id) {
+		async addToZzim(id) {
 			if(utils.isEmptyObject(this.user)) {
 				dialogService.alertCustomComponent(view.LOGIN);
 			} else {
 				store.dispatch('ADD_ZZIM', id);
+				this.countZzim = await zzimService.countZzim(this.bookInfo.item_code);
+
 			}
 		},
-		removeFromZzim(id) {
+		async removeFromZzim(id) {
 			store.dispatch('REMOVE_ZZIM', id);
+			this.countZzim = await zzimService.countZzim(this.bookInfo.item_code);
 		},
 		heartClicked() {
 			if(!utils.isEmptyObject(this.user)) {
@@ -165,6 +170,7 @@ export default {
 		selection: 1,
 		padless: false,
 		user: {},
+		countZzim: 0,
 	}),
 	computed: {
 		localAttrs () {
@@ -176,12 +182,13 @@ export default {
 			return this.$store.state.book;
 		}
 	},
-	created() {
+	async created() {
 		const bookTitle = this.$route.params.bookTitle;
 		this.$store.dispatch("FETCH_BOOK", bookTitle);
 		this.user = userService.getUser();
 		if(this.user) {
 			this.$store.dispatch("FETCH_ZZIM");
+			this.countZzim = await zzimService.countZzim(this.bookInfo.item_code);
 		}
 	}
 }
