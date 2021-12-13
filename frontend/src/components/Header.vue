@@ -56,7 +56,7 @@
 			
 		</v-container>
 
-		<v-btn
+		<v-btn v-if="canSearch.includes($route.name)"
 		icon
 		@click="isSearch = !isSearch">
 			<v-icon>search</v-icon>
@@ -86,12 +86,13 @@
 import * as bookService from '../services/bookService'
 import * as routerService from '../services/routerService'
 import { EventBus } from '../main'
-import { CAN_GO_BACK_NAME } from '../constants/routes'
+import { CAN_GO_BACK_NAME, CAN_SEARCH } from '../constants/routes'
 
 export default {
 	name: "HeaderWrapper",
 	async created() {
 		this.canGoBackNames = CAN_GO_BACK_NAME;
+		this.canSearch = CAN_SEARCH;
 		EventBus.$on('change', () => {
 			this.dataInit();
 		})
@@ -148,7 +149,8 @@ export default {
 			searchBooks: [],
 			inputText: '',
 			books: [],
-			canGoBackNames: []
+			canGoBackNames: [],
+			canSearch: [],
 		}
 	},
 }
