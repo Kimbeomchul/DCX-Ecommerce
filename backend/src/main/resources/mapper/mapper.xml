@@ -21,6 +21,10 @@
         </foreach>
     </select>
 
+    <select id="zzimCount" resultType="int">
+        SELECT count(item_code) FROM zzim WHERE item_code = #{item_code};
+    </select>
+
     <select id="getItemIdList" resultType="com.lotte.dto.ItemDTO">
         SELECT * FROM item WHERE item_title = #{item_title}
     </select>
