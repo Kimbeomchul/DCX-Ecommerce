@@ -44,8 +44,8 @@ class _SplashScreenState extends State<SplashScreen> {
             top: 0.0,
             left: 0.0,
             child: Container(
-              width: 30,
-              height: 30,
+              width: width,
+              height: height,
               child: Scaffold(
                 backgroundColor: Colors.transparent,
                 body: Padding(

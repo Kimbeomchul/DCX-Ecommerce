@@ -37,5 +37,13 @@ class ZzimServicelmp implements ZzimService{
             System.out.println("zzim delete fail : ( member_id , item_code ) "+ member_id + " " + item_code );
         }
     }
+
+    @Override
+    public int zzimCount(int item_code) {
+        return UserMapper.zzimCount(item_code);
+    }
+
+
+
 }
 

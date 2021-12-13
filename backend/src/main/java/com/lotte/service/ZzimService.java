@@ -12,6 +12,7 @@ public interface ZzimService {
 
     void delZzim(String member_id, int item_code);
 
+    int zzimCount(int item_code);
 
 
 }

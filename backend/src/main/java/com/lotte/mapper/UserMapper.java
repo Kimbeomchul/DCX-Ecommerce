@@ -70,6 +70,9 @@ public interface UserMapper {
     //찜 삭제
     void delZzim(String member_id, int item_code);
 
+    // 카운트
+    int zzimCount(int item_code);
+
     //======================== 구매 ==============================//
 
     void addPay(String member_id, int item_code, String pay_kakao);

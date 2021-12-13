@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/pay")
 public class PayController {
 
     private final PayService payService;
@@ -19,7 +20,7 @@ public class PayController {
 
     // 결제내역 저장
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/paysave", method = RequestMethod.POST)
+    @RequestMapping(value = "/item", method = RequestMethod.POST)
     public void addPay(@RequestParam(value="datas") String datas,@RequestParam(value="member_id") String member_id , @RequestParam(value="pay_kakao") String pay_kakao) {
 
 
@@ -37,7 +38,7 @@ public class PayController {
 
     // 결제내역 조회
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/paylist", method = RequestMethod.GET)
+    @RequestMapping(value = "/item", method = RequestMethod.GET)
     public List<PayDTO> payList(@RequestParam(value="member_id") String member_id) {
 
         return payService.showPay(member_id);
@@ -45,7 +46,7 @@ public class PayController {
 
     // 결제내역 전체조회
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/allpaylist", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<PayDTO> payAllList() {
         return payService.showAllPay();
     }

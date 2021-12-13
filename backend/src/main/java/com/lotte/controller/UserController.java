@@ -8,34 +8,35 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
 
 //     모든 User정보 불러오기
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<UserDTO> getUser() {
         return userService.getUserList();
     }
 
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/count_user", method = RequestMethod.GET)
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
     public int count_user() {
         return userService.count_user();
     }
 
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/search_user", method = RequestMethod.GET)
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
     public List<UserDTO> searchUser(@RequestParam(value="member") String member) {
         return userService.searchUser(member);
     }
 
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/addphone", method = RequestMethod.PUT)
+    @RequestMapping(value = "/info", method = RequestMethod.PUT)
     public void addPhone(@RequestParam(value="member_phone") String member_phone , @RequestParam(value="member_address") String member_address, @RequestParam(value="member_id") String member_id) {
         userService.addphone(member_phone,member_address,member_id);
     }

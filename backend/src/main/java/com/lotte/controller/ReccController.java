@@ -1,20 +1,15 @@
 package com.lotte.controller;
 
 import com.lotte.dto.ItemDTO;
-import com.lotte.dto.PayDTO;
-import com.lotte.dto.ZzimDTO;
 import com.lotte.service.ItemService;
-import com.lotte.service.PayService;
 import com.lotte.service.UserService;
-import com.lotte.service.ZzimService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/recc")
 public class ReccController {
 
 
@@ -24,7 +19,7 @@ public class ReccController {
 
     // 추천알고리즘
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/addrecc", method = RequestMethod.POST)
+    @RequestMapping(value = "/result", method = RequestMethod.POST)
     public void addrecc(@RequestParam(value="recc") String recc, @RequestParam(value="member_id") String member_id) {
         System.out.println(member_id);
         System.out.println(recc);
@@ -35,7 +30,7 @@ public class ReccController {
 
     // 추천아이템 불러오기
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/reccitem", method = RequestMethod.GET)
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
     public List<ItemDTO> getReccItem(@RequestParam(value="member_id") String member_id) {
         String recc_code = itemService.getReccItem(member_id);
         System.out.println("RECC : " + recc_code);
