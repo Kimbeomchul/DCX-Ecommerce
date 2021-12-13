@@ -98,7 +98,6 @@ import {ROUTES} from '../constants/routes'
 import store from '@/store/index.js';
 import * as userService from '../services/userService'
 import view from '../constants/dialogCustomView'
-import * as zzimService from '../services/zzimService'
 
 export default {
 	name: "ProductDetail",
@@ -146,13 +145,11 @@ export default {
 				dialogService.alertCustomComponent(view.LOGIN);
 			} else {
 				store.dispatch('ADD_ZZIM', id);
-				this.countZzim = await zzimService.countZzim(this.bookInfo.item_code);
 
 			}
 		},
 		async removeFromZzim(id) {
 			store.dispatch('REMOVE_ZZIM', id);
-			this.countZzim = await zzimService.countZzim(this.bookInfo.item_code);
 		},
 		heartClicked() {
 			if(!utils.isEmptyObject(this.user)) {
@@ -178,9 +175,6 @@ export default {
 		bookInfo() {
 			return store.state.book;
 		},
-		countZzim() {
-			return store.state.zzimCount
-		}
 	},
 	async created() {
 		const bookTitle = this.$route.params.bookTitle;
