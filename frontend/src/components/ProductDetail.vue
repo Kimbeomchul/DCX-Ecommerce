@@ -24,7 +24,6 @@
 		</v-img>
 
         <v-card-title style="font-weight: bold">{{ bookInfo.item_title }}</v-card-title>
-        <v-card-text style="font-weight: bold">{{ countZzim  }}명이 이 책을 좋아합니다.</v-card-text>
 
 		<v-card-text>
 			<div>{{ bookInfo.item_price |currency | won}}</div>
@@ -169,7 +168,6 @@ export default {
 		selection: 1,
 		padless: false,
 		user: {},
-		countZzim: 0,
 	}),
 	computed: {
 		localAttrs () {
@@ -178,18 +176,22 @@ export default {
 			return attrs
 		},
 		bookInfo() {
-			return this.$store.state.book;
+			return store.state.book;
+		},
+		countZzim() {
+			return store.state.zzimCount
 		}
 	},
 	async created() {
 		const bookTitle = this.$route.params.bookTitle;
-		this.$store.dispatch("FETCH_BOOK", bookTitle);
+		store.dispatch("FETCH_BOOK", bookTitle);
 		this.user = userService.getUser();
 		if(this.user) {
-			this.$store.dispatch("FETCH_ZZIM");
-			await this.$nextTick();
-			this.countZzim = await zzimService.countZzim(this.bookInfo.item_code);
-			await this.$nextTick();
+			store.dispatch("FETCH_ZZIM");
+			//store.dispatch("GET_ZZIM", bookId);
+			//await this.$nextTick();
+			//this.countZzim = await zzimService.countZzim(this.bookInfo.item_code);
+			//await this.$nextTick();
 		}
 	}
 }

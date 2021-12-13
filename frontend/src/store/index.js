@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { getBookByTitle, getBookList } from '../services/bookService';
-import { getZzimList, addZzim, deleteZzim } from '../services/zzimService';
+import { getZzimList, addZzim, deleteZzim, countZzim } from '../services/zzimService';
 import { addBasket } from '../services/basketService';
 
 
@@ -14,6 +14,7 @@ export default new Vuex.Store({
       book: [],
       zzims: [],
       newCartItems: 0,
+      zzimCount: 0,
     },
     mutations: {
       setBookList(state, bookList) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
       },
       setBook(state, book) {
         state.book = book;
+      },
+      setZzimCount(state, zzim) {
+        state.zzimCount = zzim;
       },
       setZzimList(state, zzimList) {
         state.zzims = zzimList;
@@ -71,6 +75,12 @@ export default new Vuex.Store({
         await getBookList()
               .then(response => {
               context.commit('setFilteredBooks', response);
+          })
+      },
+      async GET_ZZIM(context, id) {
+        await countZzim(id)
+          .then((response) => {
+            context.commit('setZzimCount', response);
           })
       },
       async ADD_ZZIM(context, id) {
