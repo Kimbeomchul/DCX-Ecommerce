@@ -45,7 +45,7 @@ public class UserController {
 
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @RequestMapping(value = "/addsave", method = RequestMethod.PUT)
+    @RequestMapping(value = "/reward", method = RequestMethod.PUT)
     public void addsave(@RequestParam(value="member_savemoney") int member_savemoney , @RequestParam(value="member_id") String member_id) {
         userService.addsave(member_savemoney ,member_id);
     }
